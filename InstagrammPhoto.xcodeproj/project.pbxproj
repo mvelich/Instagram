@@ -96,6 +96,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2034DE202576D240004591ED /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				51247B562560A0DA00CAA41B /* Main.storyboard */,
+				51247B542560A0DA00CAA41B /* WelcomeController.swift */,
+				5107CFDB2560AB7900A7DD05 /* RegistrationController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		2034DE212576D2A9004591ED /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				51BAF8B6256410D9004EAAEE /* TabBarController.swift */,
+				51BAF8B02564064E004EAAEE /* TapeController.swift */,
+				51BAF8B225640668004EAAEE /* AccountController.swift */,
+				51F2E203256C783E004471D7 /* AddFriendsController.swift */,
+				2034DE222576D3E7004591ED /* Cells */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		2034DE222576D3E7004591ED /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				51F2E205256C8191004471D7 /* PostThumbImageCell.swift */,
+				5112722D257124600010351D /* TapeTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		2034DE232576D41B004591ED /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				51247B502560A0DA00CAA41B /* AppDelegate.swift */,
+				51247B522560A0DA00CAA41B /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		2034DE282576D8F6004591ED /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				51BAF8BA2565E0DC004EAAEE /* InstagramResponseParser.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		2034DE292576D96F004591ED /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				51247B592560A0E300CAA41B /* Assets.xcassets */,
+				51247B5E2560A0E300CAA41B /* Info.plist */,
+				51C317FE25751239000AD65E /* GoogleService-Info.plist */,
+				51247B5B2560A0E300CAA41B /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		34ACEF114AEE7DD4200D4082 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,18 +187,12 @@
 		51247B4F2560A0DA00CAA41B /* InstagrammPhoto */ = {
 			isa = PBXGroup;
 			children = (
-				51247B502560A0DA00CAA41B /* AppDelegate.swift */,
-				51247B522560A0DA00CAA41B /* SceneDelegate.swift */,
-				51F2E205256C8191004471D7 /* PostThumbImageCell.swift */,
-				5112722D257124600010351D /* TapeTableViewCell.swift */,
-				51C31802257658EA000AD65E /* Extensions */,
+				2034DE232576D41B004591ED /* Application */,
 				51247B732560A10C00CAA41B /* Model */,
-				51247B722560A10200CAA41B /* View */,
-				51247B742560A11400CAA41B /* Controller */,
-				51247B592560A0E300CAA41B /* Assets.xcassets */,
-				51247B5B2560A0E300CAA41B /* LaunchScreen.storyboard */,
-				51C317FE25751239000AD65E /* GoogleService-Info.plist */,
-				51247B5E2560A0E300CAA41B /* Info.plist */,
+				51247B742560A11400CAA41B /* UI */,
+				2034DE282576D8F6004591ED /* Common */,
+				51C31802257658EA000AD65E /* Extensions */,
+				2034DE292576D96F004591ED /* Resources */,
 			);
 			path = InstagrammPhoto;
 			sourceTree = "<group>";
@@ -153,36 +206,23 @@
 			path = InstagrammPhotoTests;
 			sourceTree = "<group>";
 		};
-		51247B722560A10200CAA41B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				51247B562560A0DA00CAA41B /* Main.storyboard */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		51247B732560A10C00CAA41B /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				513C16162560B3CB00092875 /* User.swift */,
 				513C161A2560C12B00092875 /* DatabaseLogicHandler.swift */,
 				51BAF8B82565DE8A004EAAEE /* Photo.swift */,
-				51BAF8BA2565E0DC004EAAEE /* InstagramResponseParser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		51247B742560A11400CAA41B /* Controller */ = {
+		51247B742560A11400CAA41B /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				51247B542560A0DA00CAA41B /* WelcomeController.swift */,
-				5107CFDB2560AB7900A7DD05 /* RegistrationController.swift */,
-				51BAF8B02564064E004EAAEE /* TapeController.swift */,
-				51BAF8B225640668004EAAEE /* AccountController.swift */,
-				51BAF8B6256410D9004EAAEE /* TabBarController.swift */,
-				51F2E203256C783E004471D7 /* AddFriendsController.swift */,
+				2034DE202576D240004591ED /* Login */,
+				2034DE212576D2A9004591ED /* Tabs */,
 			);
-			path = Controller;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		51C31802257658EA000AD65E /* Extensions */ = {
