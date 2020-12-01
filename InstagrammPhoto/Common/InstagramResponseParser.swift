@@ -24,8 +24,8 @@ class InstagramResponseParser {
                 do {
                     let json = try JSONDecoder().decode(RawServerResponse.Root.self, from: response.data!)
                     
-                   // print(json.graphql?.user?.edgeOwner?.edges?[2].node)
-                   // print(json.graphql?.user?.edgeOwner?.edges?.count)
+                    // print(json.graphql?.user?.edgeOwner?.edges?[2].node)
+                    // print(json.graphql?.user?.edgeOwner?.edges?.count)
                     
                     
                     print(" \(self.databaseLogicHandler.currentUserName.hashValue) not empty")

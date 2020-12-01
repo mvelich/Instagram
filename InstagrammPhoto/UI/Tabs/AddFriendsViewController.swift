@@ -1,5 +1,5 @@
 //
-//  AddFriendsController.swift
+//  AddFriendsViewController.swift
 //  InstagrammPhoto
 //
 //  Created by Maksim Velich on 11/24/20.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class AddFriendsController: UIViewController {
-     let databaseLogicHandler = DatabaseLogicHandler()
+class AddFriendsViewController: UIViewController {
+    let databaseLogicHandler = DatabaseLogicHandler()
     
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
@@ -25,14 +25,14 @@ class AddFriendsController: UIViewController {
     }
 }
 
-extension AddFriendsController: UITextFieldDelegate {
+extension AddFriendsViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-          textField.endEditing(true)
-          return true
-      }
-      
-      func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-          return true
-      }
+        textField.endEditing(true)
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
 }

@@ -1,5 +1,5 @@
 //
-//  RegistrationController.swift
+//  SignUpViewController.swift
 //  InstagrammPhoto
 //
 //  Created by Maksim Velich on 11/15/20.
@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import Firebase
 
-class RegistrationController: UIViewController {
+class SignUpViewController: UIViewController {
     let redBorder = UIColor.red
     
     @IBOutlet weak var usernameField: UITextField!
@@ -101,7 +101,7 @@ class RegistrationController: UIViewController {
     }
 }
 
-extension RegistrationController: UITextFieldDelegate {
+extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)

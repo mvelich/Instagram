@@ -1,5 +1,5 @@
 //
-//  TapeController.swift
+//  TapeViewController.swift
 //  InstagrammPhoto
 //
 //  Created by Maksim Velich on 11/17/20.
@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class TapeController: UIViewController {
+class TapeViewController: UIViewController {
     @IBOutlet weak var tapeTableView: UITableView!
     
     let identifier = "myCell"
@@ -23,7 +23,7 @@ class TapeController: UIViewController {
     
 }
 
-extension TapeController: UITableViewDataSource, UITableViewDelegate {
+extension TapeViewController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

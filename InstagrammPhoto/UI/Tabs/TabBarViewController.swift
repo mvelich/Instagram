@@ -1,5 +1,5 @@
 //
-//  TabBarController.swift
+//  TabBarViewController.swift
 //  InstagrammPhoto
 //
 //  Created by Maksim Velich on 11/17/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
+class TabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Welcome Controller-->
+        <!--Sign In View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="WelcomeController" id="BYZ-38-t0r" customClass="WelcomeController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewController" id="BYZ-38-t0r" customClass="SignInViewController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -70,7 +70,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0mf-sr-c1A">
-                                <rect key="frame" x="100" y="853" width="214" height="27"/>
+                                <rect key="frame" x="100" y="851" width="214" height="27"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lt1-Vh-AcE">
                                         <rect key="frame" x="0.0" y="0.0" width="139" height="27"/>
@@ -97,7 +97,6 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0mf-sr-c1A" secondAttribute="trailing" constant="100" id="3tT-TQ-rux"/>
                             <constraint firstItem="hTO-hg-Nyo" firstAttribute="top" secondItem="jic-dm-sTu" secondAttribute="bottom" constant="18" id="3y2-Vr-idr"/>
-                            <constraint firstAttribute="bottom" secondItem="0mf-sr-c1A" secondAttribute="bottom" constant="16" id="4TL-Ta-Cpu"/>
                             <constraint firstItem="jic-dm-sTu" firstAttribute="top" secondItem="DVr-7I-DR0" secondAttribute="bottom" constant="32" id="BzT-vC-vdz"/>
                             <constraint firstItem="0mf-sr-c1A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="Gbp-pZ-Gto"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5sM-Cl-X1q" secondAttribute="trailing" constant="16" id="IOa-mv-Ihe"/>
@@ -109,6 +108,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hTO-hg-Nyo" secondAttribute="trailing" constant="16" id="enw-cA-oND"/>
                             <constraint firstItem="hTO-hg-Nyo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="kmm-ga-dNi"/>
                             <constraint firstItem="5sM-Cl-X1q" firstAttribute="top" secondItem="hTO-hg-Nyo" secondAttribute="bottom" constant="81" id="oPJ-cr-Ono"/>
+                            <constraint firstItem="0mf-sr-c1A" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="16" id="rQG-t7-YJr"/>
                             <constraint firstItem="0mf-sr-c1A" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5sM-Cl-X1q" secondAttribute="bottom" constant="16" id="yJG-yx-nL3"/>
                             <constraint firstItem="jic-dm-sTu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="zuK-9K-ejW"/>
                         </constraints>
@@ -120,17 +120,16 @@
                         <outlet property="passwordField" destination="wha-Y8-JbX" id="U6h-v0-WfT"/>
                         <outlet property="signUpButton" destination="5sM-Cl-X1q" id="ImE-6x-B1t"/>
                         <outlet property="usernameField" destination="jAx-E9-Kmb" id="QXu-Ns-FN6"/>
-                        <segue destination="Pne-zj-Wcc" kind="presentation" identifier="userLoggedIn" modalPresentationStyle="fullScreen" id="LV0-fo-1xR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-396" y="121"/>
         </scene>
-        <!--Registration Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="vHJ-95-BaM">
             <objects>
-                <viewController storyboardIdentifier="RegistrationController" id="JdF-Dn-3w0" customClass="RegistrationController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" id="JdF-Dn-3w0" customClass="SignUpViewController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="22g-m0-t90">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -290,10 +289,10 @@
             </objects>
             <point key="canvasLocation" x="1092.753623188406" y="657.58928571428567"/>
         </scene>
-        <!--Tape Controller-->
+        <!--Tape View Controller-->
         <scene sceneID="Yln-7r-Dri">
             <objects>
-                <viewController id="FBF-33-mUT" customClass="TapeController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FBF-33-mUT" customClass="TapeViewController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PaS-cG-YRy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -437,10 +436,10 @@
             </objects>
             <point key="canvasLocation" x="2782.608695652174" y="120.53571428571428"/>
         </scene>
-        <!--Account Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="ndk-ws-RY9">
             <objects>
-                <viewController id="lzR-i9-m7e" customClass="AccountController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="lzR-i9-m7e" customClass="ProfileViewController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xee-iJ-4wH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -610,6 +609,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EmV-jM-Pif">
+                                <rect key="frame" x="339" y="37" width="59" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="logOutPressed:" destination="lzR-i9-m7e" eventType="touchUpInside" id="9X6-j2-x1Q"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4C3-Rk-DNf"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
@@ -638,6 +648,7 @@
                         <color key="badgeColor" systemColor="darkTextColor"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="logOutButton" destination="EmV-jM-Pif" id="ljS-gd-oXw"/>
                         <outlet property="profileImage" destination="uLV-FF-vL3" id="JUA-L2-qoC"/>
                         <outlet property="profilePhotosView" destination="hd8-iN-zGO" id="c4L-My-KBf"/>
                     </connections>
@@ -646,10 +657,10 @@
             </objects>
             <point key="canvasLocation" x="2730.434782608696" y="-1495.3125"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="Grx-dG-kps">
             <objects>
-                <tabBarController id="Pne-zj-Wcc" customClass="TabBarController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="Pne-zj-Wcc" customClass="TabBarViewController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wiA-A3-sR8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -665,10 +676,10 @@
             </objects>
             <point key="canvasLocation" x="794" y="-656"/>
         </scene>
-        <!--Add Friends Controller-->
+        <!--Add Friends View Controller-->
         <scene sceneID="o60-rT-RRB">
             <objects>
-                <viewController id="FIH-xT-6J9" customClass="AddFriendsController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FIH-xT-6J9" customClass="AddFriendsViewController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aho-Uh-caG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

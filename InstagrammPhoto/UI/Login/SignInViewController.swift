@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class WelcomeController: UIViewController {
+class SignInViewController: UIViewController {
     let instagramResponse = InstagramResponseParser()
     
     @IBOutlet weak var mainInstLogo: UIImageView!
@@ -46,9 +46,13 @@ class WelcomeController: UIViewController {
                     self.informLabel.text = "Name or password are incorrect!"
                     self.informLabel.textColor = .red
                 } else {
-                    self.performSegue(withIdentifier: "userLoggedIn", sender: self)
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let tabBarController = storyboard.instantiateViewController(identifier: "TabBarViewController")
+                    
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(tabBarController)
+                    
                 }
-                
             }
         } else {
             performSegue(withIdentifier: "userRegistration", sender: self)
@@ -58,14 +62,16 @@ class WelcomeController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "userLoggedIn" {
             
-           // instagramResponse.getInstagrammResponse(userNickName: databaseLogicHandler.currentUserAccountNickName)
-           // print(databaseLogicHandler.currentUserAccountNickName + "welcome controller")
+            // Insted OF THIS METHOD add ability to pass data to another root controller after login.
+            
+            // instagramResponse.getInstagrammResponse(userNickName: databaseLogicHandler.currentUserAccountNickName)
+            // print(databaseLogicHandler.currentUserAccountNickName + "welcome controller")
         }
     }
     
 }
 
-extension WelcomeController: UITextFieldDelegate {
+extension SignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
         return true
