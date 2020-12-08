@@ -40,7 +40,7 @@ extension TapeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 650
+        return 700
     }
     
     // MARK: UITableViewDelegate

@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  UserTapePhotos.swift
 //  InstagrammPhoto
 //
 //  Created by Maksim Velich on 5.12.20.
@@ -7,9 +7,3 @@
 //
 
 import Foundation
-
-struct User {
-    var followers: [String]
-    var following: [String]
-    var photos: [UserPhoto]
-}

@@ -7,8 +7,16 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import FirebaseAuth
+import FirebaseStorage
 
 class ProfileViewController: UIViewController {
+    let db = Firestore.firestore()
+    let currentUserUid = Auth.auth().currentUser?.uid
+    
+    @IBOutlet weak var profileName: UILabel!
+    @IBOutlet weak var userStatus: UILabel!
     @IBOutlet weak var profilePhotosView: UICollectionView!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var logOutButton: UIButton!
@@ -16,8 +24,15 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         profileImage.setRounded()
+        setInitialUserData()
     }
     
+    @IBAction func editProfilePressed(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                guard let editProfileViewController = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController") as? EditProfileViewController else { return }
+        
+                present(editProfileViewController, animated: true, completion: nil)
+    }
     
     @IBAction func logOutPressed(_ sender: UIButton) {
         
@@ -25,6 +40,10 @@ class ProfileViewController: UIViewController {
         let signInViewController = storyboard.instantiateViewController(identifier: "SignInViewController")
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(signInViewController)
+    }
+    
+    @IBAction func unwind( _ seg: UIStoryboardSegue) {
+        
     }
 }
 
@@ -59,5 +78,22 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 1.5
+    }
+}
+
+extension ProfileViewController {
+    func setInitialUserData() {
+        db.collection("users").document(currentUserUid!).getDocument() { (document, err) in
+            if let err = err {
+                print("Error getting document: \(err)")
+            } else {
+                self.userStatus.text = (document?.get("user_status") as! String)
+                self.profileName.text = (document?.get("nick_name") as! String)
+                let url = URL(string: document?.get("profile_image") as! String)
+                if let data = try? Data(contentsOf: url!) {
+                    self.profileImage.image = UIImage(data: data)
+                    }
+            }
+        }
     }
 }

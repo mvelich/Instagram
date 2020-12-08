@@ -5,13 +5,13 @@ target 'InstagrammPhoto' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'RealmSwift'
   pod 'Alamofire', '~> 5.2'
   pod 'SwiftyJSON'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'Firebase/Core'
   pod 'FirebaseFirestoreSwift'
+  pod 'Firebase/Storage'
 
   target 'InstagrammPhotoTests' do
     inherit! :search_paths

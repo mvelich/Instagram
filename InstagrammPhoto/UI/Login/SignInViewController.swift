@@ -27,7 +27,7 @@ class SignInViewController: UIViewController {
         passwordField.addTarget(self, action: #selector(textFieldsIsNotEmpty),
                                 for: .editingChanged)
         
-        usernameField.attributedPlaceholder = NSAttributedString(string: "Enter username", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+        usernameField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
         passwordField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
         
         logInButton.isEnabled = false
@@ -38,7 +38,7 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func userChoicePressed(_ sender: UIButton) {
-        if sender.currentTitle == "Log In" {
+        if sender.currentTitle == "Sign In" {
             
             Auth.auth().signIn(withEmail: usernameField.text!, password: passwordField.text!) { (result, error) in
                 
@@ -58,17 +58,6 @@ class SignInViewController: UIViewController {
             performSegue(withIdentifier: "userRegistration", sender: self)
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "userLoggedIn" {
-            
-            // Insted OF THIS METHOD add ability to pass data to another root controller after login.
-            
-            // instagramResponse.getInstagrammResponse(userNickName: databaseLogicHandler.currentUserAccountNickName)
-            // print(databaseLogicHandler.currentUserAccountNickName + "welcome controller")
-        }
-    }
-    
 }
 
 extension SignInViewController: UITextFieldDelegate {

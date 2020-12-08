@@ -6,66 +6,37 @@
 //  Copyright © 2020 Maksim Velich. All rights reserved.
 //
 
-import Foundation
-import RealmSwift
+import Firebase
 
 class DatabaseLogicHandler {
+    let db = Firestore.firestore()
+    let currentUserUid = Auth.auth().currentUser?.uid    
     
-    let realm = try! Realm()
-    var currentUserAccountNickName = ""
-    var currentUserName = ""
-    
-    func addNewUser(user: User) {
-        let allUsers = getAllUser()
-        var isUserExist = false
-        
-        for userRealm in allUsers {
-            if userRealm.name == user.name {
-                isUserExist = true
+    func getUserAllPhotos() {
+        db.collection("users").document(currentUserUid!).collection("photos").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
             } else {
-                isUserExist = false
-            }
-        }
-        
-        if isUserExist {
-            print("user already exist")
-        } else {
-            try! realm.write{
-                realm.add(user)
+                for document in querySnapshot!.documents {
+                    print(document.data())
+                }
             }
         }
     }
     
-    func getAllUser() -> [User] {
-        let allUsers = realm.objects(User.self)
-        return Array(allUsers)
-    }
-    
-    func getCurrentUser(userName: String) -> User? {
-        let usersArray = getAllUser()
-        for user in usersArray {
-            if user.name == userName {
-                return user
-            }
-        }
-        return nil
-    }
-    
-    func accessToLogin(userName: String, userPassword: String) -> Bool{
-        
-        let allUsers = getAllUser()
-        var accessToLogin = false
-        
-        for userRealm in allUsers {
-            if userRealm.name == userName && userRealm.password == userPassword {
-                accessToLogin = true
-                currentUserName = userRealm.name
-                currentUserAccountNickName = userRealm.nickname
+    func addPhotoToUser(_ photoUrl: String) {
+        db.collection("users").document(currentUserUid!).collection("photos").document().setData([
+            "url": "\(photoUrl)",
+            "likeNumber": "0",
+            "locationName": "default",
+            "photo_description": "default"
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
             } else {
-                accessToLogin = false
+                print("Document successfully written!")
             }
         }
-        return accessToLogin
     }
 }
 

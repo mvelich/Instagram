@@ -31,7 +31,7 @@ class SignUpViewController: UIViewController {
         accountNickName.addTarget(self, action: #selector(textFieldsIsNotEmpty),
                                   for: .editingChanged)
         
-        usernameField.attributedPlaceholder = NSAttributedString(string: "Username*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+        usernameField.attributedPlaceholder = NSAttributedString(string: "Email*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
         passwordField.attributedPlaceholder = NSAttributedString(string: "Password*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
         repeatPasswordField.attributedPlaceholder = NSAttributedString(string: "Repeat Password*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
         accountNickName.attributedPlaceholder = NSAttributedString(string: "Account nickname*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
@@ -45,6 +45,7 @@ class SignUpViewController: UIViewController {
         accountNickName?.delegate = self
         
         passwordField.autocorrectionType = .no
+        informMessage.isHidden = true
     }
     
     
@@ -56,18 +57,21 @@ class SignUpViewController: UIViewController {
     @IBAction func registrationButtonPressed(_ sender: UIButton) {
         
         guard usernameField.text?.isEmailValid() == true else {
+            informMessage.isHidden = false
             informMessage.text = "Wrong email address!"
             informMessage.textColor = .red
             return
         }
         
         guard passwordField.text?.isPasswordValid() == true else {
+            informMessage.isHidden = false
             informMessage.text = "Password should contains min 6 symbols"
             informMessage.textColor = .red
             return
         }
         
         guard passwordField.text == repeatPasswordField.text else {
+            informMessage.isHidden = false
             informMessage.text = "Passwords don't matched!"
             informMessage.textColor = .red
             return

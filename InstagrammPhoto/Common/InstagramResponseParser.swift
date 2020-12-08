@@ -28,8 +28,6 @@ class InstagramResponseParser {
                     // print(json.graphql?.user?.edgeOwner?.edges?.count)
                     
                     
-                    print(" \(self.databaseLogicHandler.currentUserName.hashValue) not empty")
-                    
                 } catch let error as NSError {
                     print("Failed to load: \(error.localizedDescription)")
                 }
