@@ -851,6 +851,7 @@
                                     <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
                                 <connections>
+                                    <action selector="doneButtonPressed:" destination="PSO-46-WMK" eventType="touchUpInside" id="Bwr-nK-jPe"/>
                                     <segue destination="bkZ-0o-4Fa" kind="unwind" unwindAction="unwind:" id="Y9N-65-kUH"/>
                                 </connections>
                             </button>
@@ -868,6 +869,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="CHx-ZE-dXk"/>
                     <connections>
+                        <outlet property="doneButton" destination="0GC-2Z-TWj" id="f3l-I6-S22"/>
                         <outlet property="profileImageView" destination="4XP-GO-vQ5" id="vKu-da-J2o"/>
                         <outlet property="userStatusField" destination="3II-8w-cQM" id="aeZ-R3-0Xh"/>
                     </connections>

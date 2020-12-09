@@ -13,7 +13,7 @@ import FirebaseAuth
 import FirebaseStorage
 
 class EditProfileViewController: UIViewController {
-    let semaphore = DispatchSemaphore(value: 0)
+    let spinner = UIActivityIndicatorView(style: .large)
     let db = Firestore.firestore()
     let currentUserUid = Auth.auth().currentUser?.uid
     let profileImagesStorageRef = Storage.storage().reference().child("profile_images")
@@ -22,22 +22,56 @@ class EditProfileViewController: UIViewController {
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userStatusField: UITextField!
-    
+    @IBOutlet weak var doneButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
         profileImageView.setRounded()
+        spinner.backgroundColor = UIColor(white: 0, alpha: 0.8)
+        spinner.color = .red
+        self.view.addSubview(spinner)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        updateUserProfileData()
-        // change this code to progress loader after
-        let seconds = 5.0
-        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-            let profileVc = segue.destination as! ProfileViewController
-            profileVc.setInitialUserData()
+        let profileVc = segue.destination as! ProfileViewController
+        
+        guard self.userStatusField.text != "" && self.profileImageView.image != nil else {
+            dismiss(animated: true, completion: nil)
+            return
         }
+        
+        if self.userStatusField.text != "" && self.profileImageView.image != nil {
+            let data = self.profileImageView.image!.pngData()
+            let imageLocation = self.profileImagesStorageRef.child("\(self.imageName)")
+            imageLocation.putData(data!, metadata: nil) { (_, error) in
+                
+                imageLocation.downloadURL { (url, error) in
+                    guard let downloadURL = url else {
+                        print("There is no download URL")
+                        return
+                    }
+                    
+                    self.db.collection("users").document(self.currentUserUid!).updateData([
+                        "user_status": "\(self.userStatusField.text!)",
+                        "profile_image": "\(downloadURL)"
+                    ]) { err in
+                        if let err = err {
+                            print("Error updating document: \(err)")
+                        } else {
+                            print("Document successfully updated!")
+                        }
+                        
+                        profileVc.setInitialUserData()
+                    }
+                }
+            }
+        } else {
+            dismiss(animated: true, completion: nil)
+            print("Check if you select both: picture and status")
+        }
+        
+        profileVc.showSpinner()
     }
     
     @IBAction func selectImagePressed(_ sender: UIButton) {
@@ -84,19 +118,12 @@ class EditProfileViewController: UIViewController {
         }
     }
     
-    func uploadUserImage() {
-        let data = profileImageView.image!.pngData()
-        let imageLocation = profileImagesStorageRef.child("\(imageName)")
-        imageLocation.putData(data!, metadata: nil) { (metadata, error) in
-            guard let metadata = metadata else {
-                print("Error druing miage upload")
-                return
-            }
-        }
-    }
-    
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func doneButtonPressed(_ sender: UIButton) {
+        
     }
 }
 
@@ -109,41 +136,5 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[.editedImage] as? UIImage else { return }
         self.profileImageView.image = image
-    }
-    
-    //MARK:Database logic handle
-    func updateUserProfileData() {
-            if self.userStatusField.text != "" && self.profileImageView.image != nil {
-            // uploadUserImage()
-                let data = self.profileImageView.image!.pngData()
-                let imageLocation = self.profileImagesStorageRef.child("\(self.imageName)")
-            imageLocation.putData(data!, metadata: nil) { (metadata, error) in
-                guard let metadata = metadata else {
-                    print("Error druing miage upload")
-                    return
-                }
-                
-                imageLocation.downloadURL { (url, error) in
-                    guard let downloadURL = url else {
-                        print("There is no download URL")
-                        return
-                    }
-                    
-                    self.db.collection("users").document(self.currentUserUid!).updateData([
-                        "user_status": "\(self.userStatusField.text!)",
-                        "profile_image": "\(downloadURL)"
-                    ]) { err in
-                        if let err = err {
-                            print("Error updating document: \(err)")
-                        } else {
-                            print("Document successfully updated!")
-                        }
-                    }
-                }
-            }
-            
-        } else {
-            print("Check if you select both: picture and status")
-        }
     }
 }
