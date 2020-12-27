@@ -24,10 +24,6 @@ class InstagramResponseParser {
                 do {
                     let json = try JSONDecoder().decode(RawServerResponse.Root.self, from: response.data!)
                     
-                    // print(json.graphql?.user?.edgeOwner?.edges?[2].node)
-                    // print(json.graphql?.user?.edgeOwner?.edges?.count)
-                    
-                    
                 } catch let error as NSError {
                     print("Failed to load: \(error.localizedDescription)")
                 }
@@ -37,9 +33,6 @@ class InstagramResponseParser {
             }
         }
     }
-    
-    // here should be methods which get data from responseParser and add to Realm database
-    
 }
 
 fileprivate struct RawServerResponse: Decodable {

@@ -1,85 +1,67 @@
 //
-//  EditProfileViewController.swift
+//  AddPhotoViewController.swift
 //  InstagrammPhoto
 //
-//  Created by Maksim Velich on 5.12.20.
+//  Created by Maksim Velich on 27.12.20.
 //  Copyright © 2020 Maksim Velich. All rights reserved.
 //
 
 import Foundation
 import UIKit
 import Firebase
-import FirebaseAuth
 import FirebaseStorage
 
-class EditProfileViewController: UIViewController {
-    let db = Firestore.firestore()
-    let currentUserUid = Auth.auth().currentUser?.uid
-    let profileImagesStorageRef = Storage.storage().reference().child("profile_images")
+class AddPhotoViewController: UIViewController {
     var imagePicker = UIImagePickerController()
     let imageName = UUID().uuidString
-    var currentProfileStatus: String?
+    let currentUserUid = Auth.auth().currentUser?.uid
+    let db = Firestore.firestore()
+    let profileImagesStorageRef = Storage.storage().reference()
     
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var userStatusField: UITextField!
-    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var newImageView: UIImageView!
+    @IBOutlet weak var locationNameField: UITextField!
+    @IBOutlet weak var descriptionField: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userStatusField.text = currentProfileStatus
         imagePicker.delegate = self
-        profileImageView.setRounded()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let profileVc = segue.destination as! ProfileViewController
-        
-        guard self.userStatusField.text != currentProfileStatus  || self.profileImageView.image != nil else {
+        guard self.newImageView.image != nil else{
             dismiss(animated: true, completion: nil)
             return
         }
         
-        if self.profileImageView.image != nil {
-            let data = self.profileImageView.image!.pngData()
-            let imageLocation = self.profileImagesStorageRef.child("\(self.imageName)")
-            imageLocation.putData(data!, metadata: nil) { (_, error) in
+        let profileVc = segue.destination as! ProfileViewController
+        let data = self.newImageView.image!.pngData()
+        let imageLocation = self.profileImagesStorageRef.child("\(self.imageName)")
+        imageLocation.putData(data!, metadata: nil) { (_, error) in
+            
+            imageLocation.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    print("There is no download URL")
+                    return
+                }
                 
-                imageLocation.downloadURL { (url, error) in
-                    guard let downloadURL = url else {
-                        print("There is no download URL")
-                        return
-                    }
-                    
-                    self.db.collection("users").document(self.currentUserUid!).updateData([
-                        "user_status": "\(self.userStatusField.text!)",
-                        "profile_image": "\(downloadURL)"
-                    ]) { err in
-                        if let err = err {
-                            print("Error updating document: \(err)")
-                        } else {
-                            print("Document successfully updated!")
-                        }
-                        profileVc.setInitialUserData()
+                self.db.collection("users").document(self.currentUserUid!).collection("photos").addDocument(data: [
+                    "image": "\(downloadURL)",
+                    "location": "\(self.locationNameField.text ?? "")",
+                    "description": "\(self.descriptionField.text ?? "")"
+                ]) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        profileVc.updateProfilePhotos()
                     }
                 }
-            }
-        } else {
-            self.db.collection("users").document(self.currentUserUid!).updateData([
-                "user_status": "\(self.userStatusField.text!)",
-            ]) { err in
-                if let err = err {
-                    print("Error updating document: \(err)")
-                } else {
-                    print("Document successfully updated!")
-                }
-                profileVc.setInitialUserData()
             }
         }
-        
         profileVc.showSpinner()
     }
     
-    @IBAction func selectImagePressed(_ sender: UIButton) {
+    @IBAction func selectButtonPressed(_ sender: UIButton) {
         
         let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
@@ -93,6 +75,10 @@ class EditProfileViewController: UIViewController {
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     func openCamera() {
@@ -118,17 +104,9 @@ class EditProfileViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
-    @IBAction func cancelButtonPressed(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func doneButtonPressed(_ sender: UIButton) {
-        
-    }
 }
 
-extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension AddPhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //MARK:UIImagePickerControllerDelegate
     
@@ -136,6 +114,6 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[.editedImage] as? UIImage else { return }
-        self.profileImageView.image = image
+        self.newImageView.image = image
     }
 }

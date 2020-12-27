@@ -15,17 +15,31 @@ class ProfileViewController: UIViewController {
     let db = Firestore.firestore()
     let currentUserUid = Auth.auth().currentUser?.uid
     let spinner = UIActivityIndicatorView(style: .large)
+    var imagesArray = [String]()
     
+    @IBOutlet weak var photoGridCollectionView: UICollectionView!
     @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var userStatus: UILabel!
-    @IBOutlet weak var profilePhotosView: UICollectionView!
+    @IBOutlet weak var postNumberLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var logOutButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoGridCollectionView.dataSource = self
+        photoGridCollectionView.delegate = self
         profileImage.setRounded()
         setInitialUserData()
+        updateProfilePhotos()
+        showSpinner()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let editProfileVc = segue.destination as? EditProfileViewController {
+            if let status = userStatus.text {
+                editProfileVc.currentProfileStatus = status
+            }
+        }
     }
     
     func showSpinner() {
@@ -41,10 +55,11 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func editProfilePressed(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let editProfileViewController = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController") as? EditProfileViewController else { return }
-        
-        present(editProfileViewController, animated: true, completion: nil)
+        self.performSegue(withIdentifier: "EditProfileViewController", sender: self)
+    }
+    
+    @IBAction func addPhotoPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "AddPhotoViewController", sender: self)
     }
     
     @IBAction func logOutPressed(_ sender: UIButton) {
@@ -62,35 +77,35 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return imagesArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostThumbImageCell", for: indexPath) as! PostThumbImageCell
-        cell.backgroundColor = UIColor.red
-        // cell.photoImage.image
+        let url = URL(string: imagesArray[indexPath.item])
+        cell.photoImage.loadUsingUrl(url: url!)
         return cell
     }
 }
 
 extension ProfileViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let columns: CGFloat = 3
-        let spacing: CGFloat = 1.5
-        let totalHorizontalSpacing = (columns - 1) * spacing
-        
-        let itemWidth = (UIScreen.main.bounds.width - totalHorizontalSpacing) / columns
-        let itemSize = CGSize(width: itemWidth, height: itemWidth)
-        
-        return itemSize
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let columns: CGFloat = 3
+//        let spacing: CGFloat = 1.5
+//        let totalHorizontalSpacing = (columns - 1) * spacing
+//
+//        let itemWidth = (UIScreen.main.bounds.width - totalHorizontalSpacing) / columns
+//        let itemSize = CGSize(width: itemWidth, height: itemWidth)
+//
+//        return itemSize
+//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1.5
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 1.5
+        return 2
     }
 }
 
@@ -103,8 +118,24 @@ extension ProfileViewController {
                 self.userStatus.text = (document?.get("user_status") as! String)
                 self.profileName.text = (document?.get("nick_name") as! String)
                 let url = URL(string: document?.get("profile_image") as! String)
-                if let data = try? Data(contentsOf: url!) {
-                    self.profileImage.image = UIImage(data: data)
+                self.profileImage.loadUsingUrl(url: url!)
+                
+            }
+        }
+    }
+    
+    func updateProfilePhotos() {
+        db.collection("users").document(currentUserUid!).collection("photos").getDocuments{ (querySnapshot, err) in
+            if let err = err {
+                print("Error getting document: \(err)")
+            } else {
+                self.imagesArray = []
+                for document in querySnapshot!.documents {
+                    self.imagesArray.append(document.get("image") as! String)
+                }
+                DispatchQueue.main.async {
+                    self.postNumberLabel.text = String(self.imagesArray.count)
+                    self.photoGridCollectionView.reloadData()
                 }
             }
         }

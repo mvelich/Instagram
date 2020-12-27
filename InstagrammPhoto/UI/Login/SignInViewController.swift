@@ -19,7 +19,6 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var informLabel: UILabel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         usernameField.addTarget(self, action: #selector(textFieldsIsNotEmpty),
@@ -51,7 +50,6 @@ class SignInViewController: UIViewController {
                     let tabBarController = storyboard.instantiateViewController(identifier: "TabBarViewController")
                     
                     (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(tabBarController)
-                    
                 }
             }
         } else {
