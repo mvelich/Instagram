@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIImageView {
+    // remove add kingfisher
     
     func loadUsingUrl(url: URL) {
            DispatchQueue.global().async { [weak self] in
