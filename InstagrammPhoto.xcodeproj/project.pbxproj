@@ -10,7 +10,6 @@
 		5107CFDC2560AB7900A7DD05 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5107CFDB2560AB7900A7DD05 /* SignUpViewController.swift */; };
 		5112722E257124600010351D /* TapeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5112722D257124600010351D /* TapeTableViewCell.swift */; };
 		511BE74D257B21BD00F30A08 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BE74C257B21BC00F30A08 /* User.swift */; };
-		511BE755257B239300F30A08 /* UserTapePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BE754257B239300F30A08 /* UserTapePhoto.swift */; };
 		511BE75B257B23B200F30A08 /* UserPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BE75A257B23B200F30A08 /* UserPhoto.swift */; };
 		511BE77C257BC62800F30A08 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BE77B257BC62800F30A08 /* EditProfileViewController.swift */; };
 		511BE8352598A92A00F30A08 /* AddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BE8342598A92900F30A08 /* AddPhotoViewController.swift */; };
@@ -50,7 +49,6 @@
 		5107CFDB2560AB7900A7DD05 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		5112722D257124600010351D /* TapeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeTableViewCell.swift; sourceTree = "<group>"; };
 		511BE74C257B21BC00F30A08 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		511BE754257B239300F30A08 /* UserTapePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTapePhoto.swift; sourceTree = "<group>"; };
 		511BE75A257B23B200F30A08 /* UserPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhoto.swift; sourceTree = "<group>"; };
 		511BE77B257BC62800F30A08 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		511BE8342598A92900F30A08 /* AddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
@@ -218,7 +216,6 @@
 			children = (
 				513C161A2560C12B00092875 /* DatabaseLogicHandler.swift */,
 				511BE74C257B21BC00F30A08 /* User.swift */,
-				511BE754257B239300F30A08 /* UserTapePhoto.swift */,
 				511BE75A257B23B200F30A08 /* UserPhoto.swift */,
 			);
 			path = Model;
@@ -429,7 +426,6 @@
 				5107CFDC2560AB7900A7DD05 /* SignUpViewController.swift in Sources */,
 				51247B532560A0DA00CAA41B /* SceneDelegate.swift in Sources */,
 				51F2E204256C783E004471D7 /* AddFriendsViewController.swift in Sources */,
-				511BE755257B239300F30A08 /* UserTapePhoto.swift in Sources */,
 				51C318042576591E000AD65E /* UIImageView+SetRounded.swift in Sources */,
 				511BE77C257BC62800F30A08 /* EditProfileViewController.swift in Sources */,
 				511BE75B257B23B200F30A08 /* UserPhoto.swift in Sources */,
@@ -601,12 +597,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BAAACB465AEFDFDB5C440007 /* Pods-InstagrammPhoto.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = InstagrammPhoto/InstagrammPhotoDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CJGS93RU2;
 				INFOPLIST_FILE = "$(SRCROOT)/InstagrammPhoto/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -615,7 +611,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -623,12 +619,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C67594ECB505B5DA7335B350 /* Pods-InstagrammPhoto.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = InstagrammPhoto/InstagrammPhoto.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CJGS93RU2;
 				INFOPLIST_FILE = "$(SRCROOT)/InstagrammPhoto/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -637,7 +633,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

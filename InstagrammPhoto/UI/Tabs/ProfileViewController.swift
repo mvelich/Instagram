@@ -12,10 +12,11 @@ import FirebaseAuth
 import FirebaseStorage
 
 class ProfileViewController: UIViewController {
-    let db = Firestore.firestore()
-    let currentUserUid = Auth.auth().currentUser?.uid
-    let spinner = UIActivityIndicatorView(style: .large)
-    var imagesArray = [String]()
+//    remove all
+//    let db = Firestore.firestore()
+//    let currentUserUid = Auth.auth().currentUser?.uid
+//    let spinner = UIActivityIndicatorView(style: .large)
+   private var imagesArray = [URL]()
     
     @IBOutlet weak var photoGridCollectionView: UICollectionView!
     @IBOutlet weak var profileName: UILabel!
@@ -42,18 +43,6 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    func showSpinner() {
-        spinner.backgroundColor = UIColor(white: 0, alpha: 0.8)
-        spinner.color = .red
-        self.view.addSubview(spinner)
-        spinner.frame = self.view.frame
-        let delay = 4
-        spinner.startAnimating()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay)) {
-            self.spinner.stopAnimating()
-        }
-    }
-    
     @IBAction func editProfilePressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: "EditProfileViewController", sender: self)
     }
@@ -70,25 +59,63 @@ class ProfileViewController: UIViewController {
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(signInViewController)
     }
     
-    @IBAction func unwind( _ seg: UIStoryboardSegue) {
-        
+    @IBAction func unwind( _ seg: UIStoryboardSegue) { }
+    
+    //MARK: - Private methods
+    
+    private func showSpinner() {
+        spinner.backgroundColor = UIColor(white: 0, alpha: 0.8)
+        spinner.color = .red
+        self.view.addSubview(spinner)
+        spinner.frame = self.view.frame
+        let delay = 4
+        spinner.startAnimating()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay)) {
+            self.spinner.stopAnimating()
+        }
+    }
+    
+    private func setInitialUserData() {
+        db.collection("users").document(currentUserUid!).getDocument() { (document, err) in
+            if let err = err {
+                print("Error getting document: \(err)")
+            } else {
+                self.userStatus.text = (document?.get("user_status") as! String)
+                self.profileName.text = (document?.get("nick_name") as! String)
+                let url = URL(string: document?.get("profile_image") as! String)
+                self.profileImage.loadUsingUrl(url: url!)
+                
+            }
+        }
+    }
+    
+    private func updateProfilePhotos() {
+        db.collection("users").document(currentUserUid!).collection("photos").getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting document: \(err)")
+            } else {
+                self.imagesArray = querySnapshot?.documents.compactMap { URL(string: $0.get("image")) }
+                DispatchQueue.main.async {
+                    self.postNumberLabel.text = String(self.imagesArray.count)
+                    self.photoGridCollectionView.reloadData()
+                }
+            }
+        }
     }
 }
 
-extension ProfileViewController: UICollectionViewDataSource {
+extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imagesArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostThumbImageCell", for: indexPath) as! PostThumbImageCell
-        let url = URL(string: imagesArray[indexPath.item])
+        let url = imagesArray[indexPath.item]
         cell.photoImage.loadUsingUrl(url: url!)
         return cell
     }
-}
 
-extension ProfileViewController: UICollectionViewDelegateFlowLayout {
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        let columns: CGFloat = 3
 //        let spacing: CGFloat = 1.5
@@ -106,38 +133,5 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 2
-    }
-}
-
-extension ProfileViewController {
-    func setInitialUserData() {
-        db.collection("users").document(currentUserUid!).getDocument() { (document, err) in
-            if let err = err {
-                print("Error getting document: \(err)")
-            } else {
-                self.userStatus.text = (document?.get("user_status") as! String)
-                self.profileName.text = (document?.get("nick_name") as! String)
-                let url = URL(string: document?.get("profile_image") as! String)
-                self.profileImage.loadUsingUrl(url: url!)
-                
-            }
-        }
-    }
-    
-    func updateProfilePhotos() {
-        db.collection("users").document(currentUserUid!).collection("photos").getDocuments{ (querySnapshot, err) in
-            if let err = err {
-                print("Error getting document: \(err)")
-            } else {
-                self.imagesArray = []
-                for document in querySnapshot!.documents {
-                    self.imagesArray.append(document.get("image") as! String)
-                }
-                DispatchQueue.main.async {
-                    self.postNumberLabel.text = String(self.imagesArray.count)
-                    self.photoGridCollectionView.reloadData()
-                }
-            }
-        }
     }
 }

@@ -29,7 +29,7 @@ class AddPhotoViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard self.newImageView.image != nil else{
+        guard self.newImageView.image != nil else {
             dismiss(animated: true, completion: nil)
             return
         }
@@ -67,13 +67,10 @@ class AddPhotoViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
             self.openCamera()
         }))
-        
         alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
             self.openGallery()
         }))
-        
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        
         self.present(alert, animated: true, completion: nil)
     }
     

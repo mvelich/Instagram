@@ -10,7 +10,6 @@ import UIKit
 import FirebaseAuth
 
 class SignInViewController: UIViewController {
-    let instagramResponse = InstagramResponseParser()
     
     @IBOutlet weak var mainInstLogo: UIImageView!
     @IBOutlet weak var usernameField: UITextField!
@@ -21,34 +20,35 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        usernameField.addTarget(self, action: #selector(textFieldsIsNotEmpty),
-                                for: .editingChanged)
-        passwordField.addTarget(self, action: #selector(textFieldsIsNotEmpty),
-                                for: .editingChanged)
+        //ADD IN NEW METHOD
+        usernameField.addTarget(self, action: #selector(textFieldsIsNotEmpty), for: .editingChanged)
+        passwordField.addTarget(self, action: #selector(textFieldsIsNotEmpty), for: .editingChanged)
         
         usernameField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
         passwordField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
-        
+        //засетать в сториборде
         logInButton.isEnabled = false
         logInButton.alpha = 0.5
         
         usernameField?.delegate = self
         passwordField?.delegate = self
+        #if DEBUG
+        usernameField.text = "1"
+        passwordField.text = "1"
+        textFieldsIsNotEmpty(passwordField)
+        #endif
     }
     
+    // 2 actions
     @IBAction func userChoicePressed(_ sender: UIButton) {
         if sender.currentTitle == "Sign In" {
-            
             Auth.auth().signIn(withEmail: usernameField.text!, password: passwordField.text!) { (result, error) in
-                
                 if error != nil {
                     self.informLabel.text = "Name or password are incorrect!"
                     self.informLabel.textColor = .red
                 } else {
-                    
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let tabBarController = storyboard.instantiateViewController(identifier: "TabBarViewController")
-                    
                     (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(tabBarController)
                 }
             }
@@ -73,19 +73,14 @@ extension SignInViewController: UITextFieldDelegate {
     }
     
     @objc func textFieldsIsNotEmpty(_ textField: UITextField) {
-        
         textField.text = textField.text?.trimmingCharacters(in: .whitespaces)
         
-        guard
-            let name = usernameField.text, !name.isEmpty,
-            let password = passwordField.text, !password.isEmpty
-        else
-        {
+        if let name = usernameField.text, !name.isEmpty, let password = passwordField.text, !password.isEmpty {
             self.logInButton.isEnabled = false
             self.logInButton.alpha = 0.5
-            return
+        } else {
+            logInButton.isEnabled = true
+            logInButton.alpha = 1
         }
-        logInButton.isEnabled = true
-        logInButton.alpha = 1
     }
 }

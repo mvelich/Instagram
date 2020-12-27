@@ -13,11 +13,12 @@ import FirebaseAuth
 import FirebaseStorage
 
 class EditProfileViewController: UIViewController {
-    let db = Firestore.firestore()
-    let currentUserUid = Auth.auth().currentUser?.uid
-    let profileImagesStorageRef = Storage.storage().reference().child("profile_images")
-    var imagePicker = UIImagePickerController()
-    let imageName = UUID().uuidString
+    //use in methods
+//    let db = Firestore.firestore()
+//    let currentUserUid = Auth.auth().currentUser?.uid
+//    let profileImagesStorageRef = Storage.storage().reference().child("profile_images")
+//    var imagePicker = UIImagePickerController()
+//    let imageName = UUID().uuidString
     var currentProfileStatus: String?
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -34,13 +35,13 @@ class EditProfileViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let profileVc = segue.destination as! ProfileViewController
         
-        guard self.userStatusField.text != currentProfileStatus  || self.profileImageView.image != nil else {
+        guard self.userStatusField.text != currentProfileStatus || self.profileImageView.image != nil else {
             dismiss(animated: true, completion: nil)
             return
         }
         
-        if self.profileImageView.image != nil {
-            let data = self.profileImageView.image!.pngData()
+        if let profileImage = self.profileImageView.image {
+            let data = profileImage.pngData()
             let imageLocation = self.profileImagesStorageRef.child("\(self.imageName)")
             imageLocation.putData(data!, metadata: nil) { (_, error) in
                 
@@ -80,18 +81,14 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction func selectImagePressed(_ sender: UIButton) {
-        
         let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
             self.openCamera()
         }))
-        
         alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
             self.openGallery()
         }))
-        
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -108,7 +105,7 @@ class EditProfileViewController: UIViewController {
     }
     
     func openGallery() {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
             imagePicker.allowsEditing = true
             imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
             self.present(imagePicker, animated: true, completion: nil)
