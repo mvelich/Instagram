@@ -8,11 +8,8 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 
 class InstagramResponseParser {
-    
-    let databaseLogicHandler = DatabaseLogicHandler()
     
     func getInstagrammResponse(userNickName: String) {
         

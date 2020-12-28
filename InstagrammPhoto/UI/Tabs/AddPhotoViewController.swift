@@ -13,15 +13,10 @@ import FirebaseStorage
 
 class AddPhotoViewController: UIViewController {
     var imagePicker = UIImagePickerController()
-    let imageName = UUID().uuidString
-    let currentUserUid = Auth.auth().currentUser?.uid
-    let db = Firestore.firestore()
-    let profileImagesStorageRef = Storage.storage().reference()
     
     @IBOutlet weak var newImageView: UIImageView!
     @IBOutlet weak var locationNameField: UITextField!
     @IBOutlet weak var descriptionField: UITextField!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +31,7 @@ class AddPhotoViewController: UIViewController {
         
         let profileVc = segue.destination as! ProfileViewController
         let data = self.newImageView.image!.pngData()
-        let imageLocation = self.profileImagesStorageRef.child("\(self.imageName)")
+        let imageLocation = Storage.storage().reference().child("\(UUID().uuidString)")
         imageLocation.putData(data!, metadata: nil) { (_, error) in
             
             imageLocation.downloadURL { (url, error) in
@@ -45,7 +40,7 @@ class AddPhotoViewController: UIViewController {
                     return
                 }
                 
-                self.db.collection("users").document(self.currentUserUid!).collection("photos").addDocument(data: [
+                Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).collection("photos").addDocument(data: [
                     "image": "\(downloadURL)",
                     "location": "\(self.locationNameField.text ?? "")",
                     "description": "\(self.descriptionField.text ?? "")"
@@ -62,7 +57,6 @@ class AddPhotoViewController: UIViewController {
     }
     
     @IBAction func selectButtonPressed(_ sender: UIButton) {
-        
         let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
             self.openCamera()
@@ -108,7 +102,6 @@ extension AddPhotoViewController: UIImagePickerControllerDelegate, UINavigationC
     //MARK:UIImagePickerControllerDelegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[.editedImage] as? UIImage else { return }
         self.newImageView.image = image

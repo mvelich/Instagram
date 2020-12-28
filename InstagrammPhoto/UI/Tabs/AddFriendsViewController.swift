@@ -9,7 +9,6 @@
 import UIKit
 
 class AddFriendsViewController: UIViewController {
-    let databaseLogicHandler = DatabaseLogicHandler()
     
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
@@ -19,9 +18,8 @@ class AddFriendsViewController: UIViewController {
         searchField.delegate = self
     }
     
-    
     @IBAction func searchButtonPressed(_ sender: UIButton) {
-        // check if we have users in base with entering name, try to do it in realm time entering by char
+        
     }
 }
 

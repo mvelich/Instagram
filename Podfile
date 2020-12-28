@@ -6,12 +6,12 @@ target 'InstagrammPhoto' do
   use_frameworks!
 
   pod 'Alamofire', '~> 5.2'
-  pod 'SwiftyJSON'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'Firebase/Core'
   pod 'FirebaseFirestoreSwift'
   pod 'Firebase/Storage'
+  pod 'Kingfisher', '~> 5.0'
 
   target 'InstagrammPhotoTests' do
     inherit! :search_paths

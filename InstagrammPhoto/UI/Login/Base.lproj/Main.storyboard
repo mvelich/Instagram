@@ -49,7 +49,7 @@
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -59,7 +59,7 @@
                                 <color key="textColor" systemColor="systemBlueColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sM-Cl-X1q">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sM-Cl-X1q">
                                 <rect key="frame" x="16" y="603" width="382" height="44"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
@@ -75,7 +75,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="userChoicePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YNz-Ju-Uht"/>
+                                    <action selector="signInButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9MV-9o-7pa"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BoW-w0-0Td">
@@ -94,7 +94,7 @@
                                             <color key="titleColor" systemColor="systemBlueColor"/>
                                         </state>
                                         <connections>
-                                            <action selector="userChoicePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VYK-PA-ESK"/>
+                                            <action selector="signUpButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2xj-oK-5nm"/>
                                             <segue destination="JdF-Dn-3w0" kind="presentation" identifier="userRegistration" modalPresentationStyle="fullScreen" id="tXB-Cl-5tk"/>
                                         </connections>
                                     </button>
@@ -135,9 +135,9 @@
                     </view>
                     <connections>
                         <outlet property="informLabel" destination="hTO-hg-Nyo" id="kqC-cJ-Qoc"/>
-                        <outlet property="logInButton" destination="5sM-Cl-X1q" id="KYB-iM-jrJ"/>
                         <outlet property="mainInstLogo" destination="DVr-7I-DR0" id="Kwk-Kg-j0a"/>
                         <outlet property="passwordField" destination="wha-Y8-JbX" id="U6h-v0-WfT"/>
+                        <outlet property="signInButton" destination="5sM-Cl-X1q" id="pOY-wA-C6D"/>
                         <outlet property="signUpButton" destination="kFi-WN-2VG" id="Uxm-WT-8Ak"/>
                         <outlet property="usernameField" destination="jAx-E9-Kmb" id="QXu-Ns-FN6"/>
                     </connections>
@@ -180,7 +180,7 @@
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor ">
                                                 <color key="value" systemColor="tertiarySystemBackgroundColor"/>
@@ -225,7 +225,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Aw-LQ-RaN">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Aw-LQ-RaN">
                                 <rect key="frame" x="16" y="468" width="382" height="44"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>

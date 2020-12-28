@@ -31,9 +31,7 @@ extension TapeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-        
         let number = dataArray[indexPath.row]
         cell.textLabel?.text = number
         return cell

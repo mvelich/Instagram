@@ -13,12 +13,7 @@ import FirebaseAuth
 import FirebaseStorage
 
 class EditProfileViewController: UIViewController {
-    //use in methods
-//    let db = Firestore.firestore()
-//    let currentUserUid = Auth.auth().currentUser?.uid
-//    let profileImagesStorageRef = Storage.storage().reference().child("profile_images")
-//    var imagePicker = UIImagePickerController()
-//    let imageName = UUID().uuidString
+    var imagePicker = UIImagePickerController()
     var currentProfileStatus: String?
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -42,7 +37,7 @@ class EditProfileViewController: UIViewController {
         
         if let profileImage = self.profileImageView.image {
             let data = profileImage.pngData()
-            let imageLocation = self.profileImagesStorageRef.child("\(self.imageName)")
+            let imageLocation = Storage.storage().reference().child("profile_images").child("\(UUID().uuidString)")
             imageLocation.putData(data!, metadata: nil) { (_, error) in
                 
                 imageLocation.downloadURL { (url, error) in
@@ -51,7 +46,7 @@ class EditProfileViewController: UIViewController {
                         return
                     }
                     
-                    self.db.collection("users").document(self.currentUserUid!).updateData([
+                    Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).updateData([
                         "user_status": "\(self.userStatusField.text!)",
                         "profile_image": "\(downloadURL)"
                     ]) { err in
@@ -65,7 +60,7 @@ class EditProfileViewController: UIViewController {
                 }
             }
         } else {
-            self.db.collection("users").document(self.currentUserUid!).updateData([
+            Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).updateData([
                 "user_status": "\(self.userStatusField.text!)",
             ]) { err in
                 if let err = err {
@@ -76,7 +71,6 @@ class EditProfileViewController: UIViewController {
                 profileVc.setInitialUserData()
             }
         }
-        
         profileVc.showSpinner()
     }
     
@@ -130,7 +124,6 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
     //MARK:UIImagePickerControllerDelegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[.editedImage] as? UIImage else { return }
         self.profileImageView.image = image

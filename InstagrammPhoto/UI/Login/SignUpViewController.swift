@@ -11,7 +11,6 @@ import FirebaseAuth
 import Firebase
 
 class SignUpViewController: UIViewController {
-    let redBorder = UIColor.red
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -22,40 +21,20 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        usernameField.addTarget(self, action: #selector(textFieldsIsNotEmpty),
-                                for: .editingChanged)
-        passwordField.addTarget(self, action: #selector(textFieldsIsNotEmpty),
-                                for: .editingChanged)
-        repeatPasswordField.addTarget(self, action: #selector(textFieldsIsNotEmpty),
-                                      for: .editingChanged)
-        accountNickName.addTarget(self, action: #selector(textFieldsIsNotEmpty),
-                                  for: .editingChanged)
-        
-        usernameField.attributedPlaceholder = NSAttributedString(string: "Email*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
-        passwordField.attributedPlaceholder = NSAttributedString(string: "Password*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
-        repeatPasswordField.attributedPlaceholder = NSAttributedString(string: "Repeat Password*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
-        accountNickName.attributedPlaceholder = NSAttributedString(string: "Account nickname*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
-        
-        signUpButton.isEnabled = false
-        signUpButton.alpha = 0.5
+        addTargetToFields()
+        addPlaceholderFieldsConfig()
         
         usernameField?.delegate = self
         passwordField?.delegate = self
         repeatPasswordField?.delegate = self
         accountNickName?.delegate = self
-        
-        passwordField.autocorrectionType = .no
-        informMessage.isHidden = true
     }
-    
     
     @IBAction func backToLogin(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
-    
     @IBAction func registrationButtonPressed(_ sender: UIButton) {
-        
         guard usernameField.text?.isEmailValid() == true else {
             informMessage.isHidden = false
             informMessage.text = "Wrong email address!"
@@ -78,23 +57,17 @@ class SignUpViewController: UIViewController {
         }
         
         Auth.auth().createUser(withEmail: usernameField.text!, password: passwordField.text!) { (result, err) in
-            
-            
             if err != nil {
                 print("Error during user creation")
             } else {
-                
                 let db = Firestore.firestore()
-                
                 db.collection("users").addDocument(data: ["nick_name": self.accountNickName.text!, "uid": result!.user.uid]) { (error) in
-                    
                     if error != nil {
                         print("Eror during adding user data")
                     }
                 }
             }
         }
-        
         showRegistrationAlert()
     }
     
@@ -102,6 +75,24 @@ class SignUpViewController: UIViewController {
         let alert = UIAlertController(title: "Registration successfully completed", message: "Click Ok! button to proceed", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: {_ in self.dismiss(animated: true, completion: nil)}))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func addTargetToFields() {
+        usernameField.addTarget(self, action: #selector(textFieldsIsNotEmpty),
+                                for: .editingChanged)
+        passwordField.addTarget(self, action: #selector(textFieldsIsNotEmpty),
+                                for: .editingChanged)
+        repeatPasswordField.addTarget(self, action: #selector(textFieldsIsNotEmpty),
+                                      for: .editingChanged)
+        accountNickName.addTarget(self, action: #selector(textFieldsIsNotEmpty),
+                                  for: .editingChanged)
+    }
+    
+    func addPlaceholderFieldsConfig() {
+        usernameField.attributedPlaceholder = NSAttributedString(string: "Email*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+        passwordField.attributedPlaceholder = NSAttributedString(string: "Password*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+        repeatPasswordField.attributedPlaceholder = NSAttributedString(string: "Repeat Password*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+        accountNickName.attributedPlaceholder = NSAttributedString(string: "Account nickname*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
     }
 }
 
@@ -121,7 +112,6 @@ extension SignUpViewController: UITextFieldDelegate {
     }
     
     @objc func textFieldsIsNotEmpty(_ textField: UITextField) {
-        
         textField.text = textField.text?.trimmingCharacters(in: .whitespaces)
         
         guard
@@ -129,24 +119,12 @@ extension SignUpViewController: UITextFieldDelegate {
             let password = passwordField.text, !password.isEmpty,
             let repeatPassword = repeatPasswordField.text, !repeatPassword.isEmpty,
             let accountNickname = accountNickName.text, !accountNickname.isEmpty
-        else
-        {
+        else {
             self.signUpButton.isEnabled = false
             self.signUpButton.alpha = 0.5
             return
         }
         signUpButton.isEnabled = true
         signUpButton.alpha = 1
-    }
-    
-    func checkTextFieldIsEmpty() {
-        
-        if (usernameField.text != "") && (passwordField.text != "") && (repeatPasswordField.text != "") && (accountNickName.text != "") {
-            signUpButton.isEnabled = true
-            signUpButton.alpha = 1
-        } else {
-            signUpButton.isEnabled = false
-            signUpButton.alpha = 0.5
-        }
     }
 }
