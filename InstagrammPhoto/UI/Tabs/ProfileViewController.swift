@@ -108,7 +108,7 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostThumbImageCell", for: indexPath) as! PostThumbImageCell
         let url = imagesArray[indexPath.item]
-        cell.photoImage.loadUsingUrl(url: url)
+        cell.photoImage.kf.setImage(with: url)
         return cell
     }
     
