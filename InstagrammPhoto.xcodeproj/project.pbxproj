@@ -14,6 +14,8 @@
 		511BE77C257BC62800F30A08 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BE77B257BC62800F30A08 /* EditProfileViewController.swift */; };
 		511BE8352598A92A00F30A08 /* AddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BE8342598A92900F30A08 /* AddPhotoViewController.swift */; };
 		511BE83B2598C71900F30A08 /* UIImageView+LoadUsingUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BE83A2598C71800F30A08 /* UIImageView+LoadUsingUrl.swift */; };
+		51208E8E259BB82900BE016B /* FullScreenPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51208E8D259BB82900BE016B /* FullScreenPhotoViewController.swift */; };
+		51208E94259BD07E00BE016B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51208E93259BD07E00BE016B /* Images.xcassets */; };
 		51247B512560A0DA00CAA41B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51247B502560A0DA00CAA41B /* AppDelegate.swift */; };
 		51247B532560A0DA00CAA41B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51247B522560A0DA00CAA41B /* SceneDelegate.swift */; };
 		51247B582560A0DA00CAA41B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51247B562560A0DA00CAA41B /* Main.storyboard */; };
@@ -53,6 +55,8 @@
 		511BE77B257BC62800F30A08 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		511BE8342598A92900F30A08 /* AddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
 		511BE83A2598C71800F30A08 /* UIImageView+LoadUsingUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+LoadUsingUrl.swift"; sourceTree = "<group>"; };
+		51208E8D259BB82900BE016B /* FullScreenPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPhotoViewController.swift; sourceTree = "<group>"; };
+		51208E93259BD07E00BE016B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		51247B4D2560A0DA00CAA41B /* InstagrammPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagrammPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51247B502560A0DA00CAA41B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51247B522560A0DA00CAA41B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 				511BE77B257BC62800F30A08 /* EditProfileViewController.swift */,
 				51F2E203256C783E004471D7 /* AddFriendsViewController.swift */,
 				511BE8342598A92900F30A08 /* AddPhotoViewController.swift */,
+				51208E8D259BB82900BE016B /* FullScreenPhotoViewController.swift */,
 				2034DE222576D3E7004591ED /* Cells */,
 			);
 			path = Tabs;
@@ -156,6 +161,7 @@
 				51247B5E2560A0E300CAA41B /* Info.plist */,
 				51C317FE25751239000AD65E /* GoogleService-Info.plist */,
 				51247B5B2560A0E300CAA41B /* LaunchScreen.storyboard */,
+				51208E93259BD07E00BE016B /* Images.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -336,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51247B5D2560A0E300CAA41B /* LaunchScreen.storyboard in Resources */,
+				51208E94259BD07E00BE016B /* Images.xcassets in Resources */,
 				51C317FF25751239000AD65E /* GoogleService-Info.plist in Resources */,
 				51247B582560A0DA00CAA41B /* Main.storyboard in Resources */,
 			);
@@ -433,6 +440,7 @@
 				511BE74D257B21BD00F30A08 /* User.swift in Sources */,
 				511BE83B2598C71900F30A08 /* UIImageView+LoadUsingUrl.swift in Sources */,
 				51BAF8BB2565E0DC004EAAEE /* InstagramResponseParser.swift in Sources */,
+				51208E8E259BB82900BE016B /* FullScreenPhotoViewController.swift in Sources */,
 				51F2E206256C8191004471D7 /* PostThumbImageCell.swift in Sources */,
 				51BAF8B325640668004EAAEE /* ProfileViewController.swift in Sources */,
 				513C161B2560C12B00092875 /* DatabaseLogicHandler.swift in Sources */,

@@ -114,15 +114,11 @@ class EditProfileViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func doneButtonPressed(_ sender: UIButton) {
-        
-    }
+    @IBAction func doneButtonPressed(_ sender: UIButton) { }
 }
 
+// MARK: - UIImagePickerControllerDelegate
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    //MARK:UIImagePickerControllerDelegate
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[.editedImage] as? UIImage else { return }

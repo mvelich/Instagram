@@ -23,9 +23,8 @@ class TapeViewController: UIViewController {
     
 }
 
-extension TapeViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    // MARK: UITableViewDataSource
+// MARK: - UITableViewDataSource
+extension TapeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
     }
@@ -40,6 +39,9 @@ extension TapeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 700
     }
-    
-    // MARK: UITableViewDelegate
+}
+
+// MARK: - UITableViewDelegate
+extension TapeViewController: UITableViewDelegate {
+   
 }

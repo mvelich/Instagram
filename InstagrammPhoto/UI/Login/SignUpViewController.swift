@@ -60,8 +60,12 @@ class SignUpViewController: UIViewController {
             if err != nil {
                 print("Error during user creation")
             } else {
-                let db = Firestore.firestore()
-                db.collection("users").addDocument(data: ["nick_name": self.accountNickName.text!, "uid": result!.user.uid]) { (error) in
+                Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).setData([
+                    "nick_name": self.accountNickName.text!,
+                    "uid": result!.user.uid,
+                    "user_status": "",
+                    "profile_image": ""
+                ]) { (error) in
                     if error != nil {
                         print("Eror during adding user data")
                     }

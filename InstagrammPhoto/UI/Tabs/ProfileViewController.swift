@@ -33,9 +33,21 @@ class ProfileViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let editProfileVc = segue.destination as? EditProfileViewController {
-            if let status = userStatus.text {
-                editProfileVc.currentProfileStatus = status
+        if segue.identifier == "EditProfileViewController" {
+            if let editProfileVC = segue.destination as? EditProfileViewController {
+                if let status = userStatus.text {
+                    editProfileVC.currentProfileStatus = status
+                }
+            }
+        }
+        
+        if segue.identifier == "FullScreenPhotoViewController" {
+            if let fullScreenVC = segue.destination as? FullScreenPhotoViewController {
+                if let cell = sender as? UICollectionViewCell,
+                   let indexPath = self.photoGridCollectionView.indexPath(for: cell){
+                    let image = ImageCache.default.retrieveImageInMemoryCache(forKey: imagesArray[indexPath.item].absoluteString)
+                    fullScreenVC.fullScreenImage = image
+                }
             }
         }
     }
@@ -57,9 +69,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func unwind( _ seg: UIStoryboardSegue) { }
     
-    //MARK: - Internal methods
-    
-    internal func showSpinner() {
+    func showSpinner() {
         let spinner = UIActivityIndicatorView(style: .large)
         spinner.backgroundColor = UIColor(white: 0, alpha: 0.8)
         spinner.color = .red
@@ -72,7 +82,7 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    internal func setInitialUserData() {
+    func setInitialUserData() {
         Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).getDocument() { (document, err) in
             if let err = err {
                 print("Error getting document: \(err)")
@@ -85,7 +95,7 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    internal func updateProfilePhotos() {
+    func updateProfilePhotos() {
         Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).collection("photos").getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting document: \(err)")
@@ -100,7 +110,8 @@ class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+// MARK: - UICollectionViewDataSource
+extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imagesArray.count
     }
@@ -112,6 +123,13 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "FullScreenPhotoViewController", sender: self)
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 2
     }
@@ -120,3 +138,4 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
         return 2
     }
 }
+

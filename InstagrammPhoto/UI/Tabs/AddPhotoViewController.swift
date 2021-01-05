@@ -97,10 +97,8 @@ class AddPhotoViewController: UIViewController {
     }
 }
 
+//MARK: - UIImagePickerControllerDelegate
 extension AddPhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    //MARK:UIImagePickerControllerDelegate
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[.editedImage] as? UIImage else { return }

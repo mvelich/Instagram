@@ -9,7 +9,6 @@
 import UIKit
 
 class AddFriendsViewController: UIViewController {
-    
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
     
@@ -23,8 +22,8 @@ class AddFriendsViewController: UIViewController {
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension AddFriendsViewController: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
         return true
