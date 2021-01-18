@@ -13,6 +13,7 @@ import FirebaseAuth
 import FirebaseStorage
 
 class EditProfileViewController: UIViewController {
+    
     var imagePicker = UIImagePickerController()
     var currentProfileStatus: String?
     
@@ -71,7 +72,7 @@ class EditProfileViewController: UIViewController {
                 profileVc.setInitialUserData()
             }
         }
-        profileVc.showSpinner()
+        CommonFunctions.showSpinner(profileVc.view)
     }
     
     @IBAction func selectImagePressed(_ sender: UIButton) {

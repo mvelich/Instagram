@@ -60,14 +60,23 @@ class SignUpViewController: UIViewController {
             if err != nil {
                 print("Error during user creation")
             } else {
-                Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).setData([
-                    "nick_name": self.accountNickName.text!,
-                    "uid": result!.user.uid,
-                    "user_status": "",
-                    "profile_image": ""
-                ]) { (error) in
-                    if error != nil {
-                        print("Eror during adding user data")
+                let imageLocation = Storage.storage().reference().child("profile_images").child("default_profile_image.png")
+                
+                imageLocation.downloadURL { url, error in
+                    guard let downloadURL = url else {
+                        print("There is no download URL")
+                        return
+                    }
+                    
+                    Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).setData([
+                        "nick_name": self.accountNickName.text!,
+                        "uid": result!.user.uid,
+                        "user_status": "",
+                        "profile_image": "\(downloadURL)"
+                    ]) { (error) in
+                        if error != nil {
+                            print("Eror during adding user data")
+                        }
                     }
                 }
             }

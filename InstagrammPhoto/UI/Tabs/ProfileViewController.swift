@@ -13,6 +13,7 @@ import FirebaseStorage
 import Kingfisher
 
 class ProfileViewController: UIViewController {
+    
     private var imagesArray = [URL]()
     
     @IBOutlet weak var photoGridCollectionView: UICollectionView!
@@ -29,7 +30,7 @@ class ProfileViewController: UIViewController {
         profileImage.setRounded()
         setInitialUserData()
         updateProfilePhotos()
-        showSpinner()
+        CommonFunctions.showSpinner(self.view)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -69,28 +70,17 @@ class ProfileViewController: UIViewController {
     
     @IBAction func unwind( _ seg: UIStoryboardSegue) { }
     
-    func showSpinner() {
-        let spinner = UIActivityIndicatorView(style: .large)
-        spinner.backgroundColor = UIColor(white: 0, alpha: 0.8)
-        spinner.color = .red
-        self.view.addSubview(spinner)
-        spinner.frame = self.view.frame
-        let delay = 4
-        spinner.startAnimating()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay)) {
-            spinner.stopAnimating()
-        }
-    }
-    
     func setInitialUserData() {
         Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).getDocument() { (document, err) in
             if let err = err {
                 print("Error getting document: \(err)")
             } else {
-                self.userStatus.text = (document?.get("user_status") as! String)
-                self.profileName.text = (document?.get("nick_name") as! String)
-                let url = URL(string: document?.get("profile_image") as! String)
-                self.profileImage.kf.setImage(with: url)
+                DispatchQueue.main.async {
+                    self.userStatus.text = (document?.get("user_status") as! String)
+                    self.profileName.text = (document?.get("nick_name") as! String)
+                    let url = URL(string: document?.get("profile_image") as! String)
+                    self.profileImage.kf.setImage(with: url)
+                }
             }
         }
     }
@@ -101,6 +91,7 @@ class ProfileViewController: UIViewController {
                 print("Error getting document: \(err)")
             } else {
                 self.imagesArray = (querySnapshot?.documents.compactMap { URL(string: $0.get("image") as! String) })!
+                
                 DispatchQueue.main.async {
                     self.postNumberLabel.text = String(self.imagesArray.count)
                     self.photoGridCollectionView.reloadData()
@@ -118,7 +109,7 @@ extension ProfileViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostThumbImageCell", for: indexPath) as! PostThumbImageCell
-        let url = imagesArray[indexPath.item]
+        let url = imagesArray[indexPath.row]
         cell.photoImage.kf.setImage(with: url)
         return cell
     }

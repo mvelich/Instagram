@@ -6,10 +6,14 @@
 //  Copyright © 2020 Maksim Velich. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct User {
-    var followers: [String]
-    var following: [String]
-    var photos: [UserPhoto]
+    
+    var userName: String?
+    var profileImage: URL?
+    var userStatus: String?
+    var followers: String?
+    var following: String?
+    var photos: [UserPhoto]?
 }

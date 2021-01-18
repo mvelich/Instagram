@@ -12,6 +12,7 @@ import Firebase
 import FirebaseStorage
 
 class AddPhotoViewController: UIViewController {
+    
     var imagePicker = UIImagePickerController()
     
     @IBOutlet weak var newImageView: UIImageView!
@@ -43,7 +44,9 @@ class AddPhotoViewController: UIViewController {
                 Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).collection("photos").addDocument(data: [
                     "image": "\(downloadURL)",
                     "location": "\(self.locationNameField.text ?? "")",
-                    "description": "\(self.descriptionField.text ?? "")"
+                    "description": "\(self.descriptionField.text ?? "")",
+                    "likes": 0,
+                    "date": Date()
                 ]) { err in
                     if let err = err {
                         print("Error adding document: \(err)")
@@ -53,7 +56,7 @@ class AddPhotoViewController: UIViewController {
                 }
             }
         }
-        profileVc.showSpinner()
+        CommonFunctions.showSpinner(profileVc.view)
     }
     
     @IBAction func selectButtonPressed(_ sender: UIButton) {

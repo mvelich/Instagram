@@ -26,8 +26,8 @@ class SignInViewController: UIViewController {
         usernameField?.delegate = self
         passwordField?.delegate = self
         #if DEBUG
-        usernameField.text = "1"
-        passwordField.text = "1"
+        usernameField.text = "test@corevist.com"
+        passwordField.text = "123456"
         textFieldsIsNotEmpty(passwordField)
         #endif
     }

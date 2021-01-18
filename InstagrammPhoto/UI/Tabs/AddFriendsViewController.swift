@@ -9,6 +9,7 @@
 import UIKit
 
 class AddFriendsViewController: UIViewController {
+    
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
     

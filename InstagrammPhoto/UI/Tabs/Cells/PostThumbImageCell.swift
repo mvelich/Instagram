@@ -9,6 +9,7 @@
 import UIKit
 
 class PostThumbImageCell: UICollectionViewCell {
+    
     @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var widthCellConstraint: NSLayoutConstraint! {
         didSet {

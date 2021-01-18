@@ -9,6 +9,7 @@
 import UIKit
 
 class FullScreenPhotoViewController: UIViewController {
+    
     var fullScreenImage: UIImage?
     
     @IBOutlet weak var fullScreenImageView: UIImageView!

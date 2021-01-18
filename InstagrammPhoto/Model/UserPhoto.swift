@@ -6,11 +6,13 @@
 //  Copyright © 2020 Maksim Velich. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct UserPhoto {
-    var displayUrl: String
-    var likeNumber: String
-    var locationName: String
-    var photoDescription: String
+    
+    var image: URL?
+    var likes: Int?
+    var location: String?
+    var description: String?
+    var date: Date = Date()
 }
