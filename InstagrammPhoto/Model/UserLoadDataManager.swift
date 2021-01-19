@@ -43,9 +43,9 @@ class UserLoadDataManager {
                     photo.location = (document.get("location") as? String)
                     photo.description = (document.get("description") as? String)
                     photo.date = (document.get("date") as! Date)
-                    self.userPhotos.append(photo)
+                    userPhotos.append(photo)
                 }
-                self.user.photos = self.userPhotos
+                self.user.photos = userPhotos
             }
         }
     }

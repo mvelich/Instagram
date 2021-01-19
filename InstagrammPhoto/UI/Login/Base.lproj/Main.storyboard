@@ -140,10 +140,10 @@
                     <connections>
                         <outlet property="informLabel" destination="hTO-hg-Nyo" id="kqC-cJ-Qoc"/>
                         <outlet property="mainInstLogo" destination="DVr-7I-DR0" id="Kwk-Kg-j0a"/>
-                        <outlet property="passwordField" destination="wha-Y8-JbX" id="U6h-v0-WfT"/>
+                        <outlet property="passwordTextField" destination="wha-Y8-JbX" id="twB-2d-BrF"/>
                         <outlet property="signInButton" destination="5sM-Cl-X1q" id="pOY-wA-C6D"/>
                         <outlet property="signUpButton" destination="kFi-WN-2VG" id="Uxm-WT-8Ak"/>
-                        <outlet property="usernameField" destination="jAx-E9-Kmb" id="QXu-Ns-FN6"/>
+                        <outlet property="usernameTextField" destination="jAx-E9-Kmb" id="J9V-An-r3P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -324,12 +324,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="accountNickName" destination="i8l-tG-oAV" id="BMv-cD-ubo"/>
+                        <outlet property="accountNickNameTextField" destination="i8l-tG-oAV" id="MOf-Tr-Fdc"/>
                         <outlet property="informMessage" destination="fty-Oo-nr7" id="PVR-cx-5Yh"/>
-                        <outlet property="passwordField" destination="emO-ro-QXi" id="zEv-4n-TZW"/>
-                        <outlet property="repeatPasswordField" destination="77e-iK-Uq5" id="XTJ-Gg-jAc"/>
+                        <outlet property="passwordTextField" destination="emO-ro-QXi" id="Aha-n3-PXS"/>
+                        <outlet property="repeatPasswordTextField" destination="77e-iK-Uq5" id="lcC-ZJ-adz"/>
                         <outlet property="signUpButton" destination="8Aw-LQ-RaN" id="jXO-Ze-qaR"/>
-                        <outlet property="usernameField" destination="CCH-Uj-F7Q" id="lBU-Os-wQj"/>
+                        <outlet property="usernameTextField" destination="CCH-Uj-F7Q" id="XXR-Bn-BJc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jj8-0K-MDo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -46,9 +46,7 @@ class AddPhotoViewController: UIViewController {
                     "date": Date()
                 ]) { err in
                     if let err = err {
-                        print("Error adding document: \(err)")
-                    } else {
-                        profileVc.updateProfilePhotos()
+                        print("Error adding document: \(err.localizedDescription)")
                     }
                 }
             }

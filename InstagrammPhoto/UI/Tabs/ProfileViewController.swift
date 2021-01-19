@@ -91,7 +91,7 @@ class ProfileViewController: UIViewController {
     }
     
     func updateProfilePhotos() {
-        Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).collection("photos").getDocuments { (querySnapshot, err) in
+        Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).collection("photos").order(by: "date", descending: true).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting document: \(err)")
             } else {
