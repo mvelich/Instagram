@@ -25,7 +25,7 @@ class TapeViewController: UIViewController {
         tapeTableView.delegate = self
         setInitialPhotoTapeData()
         setInitialUserTapeData()
-        CommonFunctions.showSpinner(self.view)
+        self.view.showSpinner()
     }
     
     @IBAction func reloadTapePressed(_ sender: UIBarButtonItem) {
@@ -77,7 +77,7 @@ extension TapeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tapeTableView.dequeueReusableCell(withIdentifier: Constants.Cell.reusableTableCellIdentifier, for: indexPath) as! TapeTableViewCell
+        let cell = tapeTableView.dequeueReusableCell(withIdentifier: Constants.Cell.reusableTableCellIdentifier.rawValue, for: indexPath) as! TapeTableViewCell
         // photo data
         photoCellArray = photoCellArray.sorted(by: {
             $0.date.compare($1.date) == .orderedDescending

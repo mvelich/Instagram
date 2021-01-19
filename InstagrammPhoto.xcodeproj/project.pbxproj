@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20FCB50F25B76F9600C083E5 /* UIView+ShowSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FCB50E25B76F9600C083E5 /* UIView+ShowSpinner.swift */; };
 		5107CFDC2560AB7900A7DD05 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5107CFDB2560AB7900A7DD05 /* SignUpViewController.swift */; };
 		5112722E257124600010351D /* TapeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5112722D257124600010351D /* TapeTableViewCell.swift */; };
 		511BE74D257B21BD00F30A08 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BE74C257B21BC00F30A08 /* User.swift */; };
@@ -16,7 +17,6 @@
 		511BE83B2598C71900F30A08 /* UIImageView+LoadUsingUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BE83A2598C71800F30A08 /* UIImageView+LoadUsingUrl.swift */; };
 		51208E8E259BB82900BE016B /* FullScreenPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51208E8D259BB82900BE016B /* FullScreenPhotoViewController.swift */; };
 		51208E94259BD07E00BE016B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51208E93259BD07E00BE016B /* Images.xcassets */; };
-		51208EE625B35A8200BE016B /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51208EE525B35A8200BE016B /* CommonFunctions.swift */; };
 		51208EEA25B6D5F200BE016B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51208EE925B6D5EF00BE016B /* Constants.swift */; };
 		51247B512560A0DA00CAA41B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51247B502560A0DA00CAA41B /* AppDelegate.swift */; };
 		51247B532560A0DA00CAA41B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51247B522560A0DA00CAA41B /* SceneDelegate.swift */; };
@@ -49,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		20FCB50E25B76F9600C083E5 /* UIView+ShowSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ShowSpinner.swift"; sourceTree = "<group>"; };
 		2BB51F2A058ABEC3CF9F81D1 /* Pods_InstagrammPhotoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagrammPhotoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5107CFDB2560AB7900A7DD05 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		5112722D257124600010351D /* TapeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeTableViewCell.swift; sourceTree = "<group>"; };
@@ -59,7 +60,6 @@
 		511BE83A2598C71800F30A08 /* UIImageView+LoadUsingUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+LoadUsingUrl.swift"; sourceTree = "<group>"; };
 		51208E8D259BB82900BE016B /* FullScreenPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPhotoViewController.swift; sourceTree = "<group>"; };
 		51208E93259BD07E00BE016B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		51208EE525B35A8200BE016B /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 		51208EE925B6D5EF00BE016B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		51247B4D2560A0DA00CAA41B /* InstagrammPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagrammPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51247B502560A0DA00CAA41B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				51BAF8BA2565E0DC004EAAEE /* InstagramResponseParser.swift */,
-				51208EE525B35A8200BE016B /* CommonFunctions.swift */,
 				51208EE925B6D5EF00BE016B /* Constants.swift */,
 			);
 			path = Common;
@@ -248,6 +247,7 @@
 				51C318032576591E000AD65E /* UIImageView+SetRounded.swift */,
 				51C31807257659B7000AD65E /* String+IsValid.swift */,
 				511BE83A2598C71800F30A08 /* UIImageView+LoadUsingUrl.swift */,
+				20FCB50E25B76F9600C083E5 /* UIView+ShowSpinner.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -433,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				511BE8352598A92A00F30A08 /* AddPhotoViewController.swift in Sources */,
+				20FCB50F25B76F9600C083E5 /* UIView+ShowSpinner.swift in Sources */,
 				51208EEA25B6D5F200BE016B /* Constants.swift in Sources */,
 				513C161C2561F1FD00092875 /* SignInViewController.swift in Sources */,
 				51247B512560A0DA00CAA41B /* AppDelegate.swift in Sources */,
@@ -442,7 +443,6 @@
 				51F2E204256C783E004471D7 /* AddFriendsViewController.swift in Sources */,
 				51C318042576591E000AD65E /* UIImageView+SetRounded.swift in Sources */,
 				511BE77C257BC62800F30A08 /* EditProfileViewController.swift in Sources */,
-				51208EE625B35A8200BE016B /* CommonFunctions.swift in Sources */,
 				511BE75B257B23B200F30A08 /* UserPhoto.swift in Sources */,
 				51BAF8B12564064E004EAAEE /* TapeViewController.swift in Sources */,
 				511BE74D257B21BD00F30A08 /* User.swift in Sources */,

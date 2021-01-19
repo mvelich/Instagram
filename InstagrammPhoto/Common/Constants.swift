@@ -8,15 +8,15 @@
 
 struct Constants {
     
-    struct Segue {
-        static let signUpSegueIdentifier = "userRegistration"
-        static let fullScreenSegueIdentifier = "FullScreenPhotoViewController"
-        static let editProfileSegueIdentifier = "EditProfileViewController"
-        static let addPhotoSegueIdentifier = "AddPhotoViewController"
+    enum Segue: String {
+        case signUpSegueIdentifier = "userRegistration"
+        case fullScreenSegueIdentifier = "FullScreenPhotoViewController"
+        case editProfileSegueIdentifier = "EditProfileViewController"
+        case addPhotoSegueIdentifier = "AddPhotoViewController"
     }
     
-    struct Cell {
-        static let reusableTableCellIdentifier = "TapeTableViewCell"
-        static let reusableCollectionCellIdentifier = "PostThumbImageCell"
+    enum Cell: String {
+        case reusableTableCellIdentifier = "TapeTableViewCell"
+        case reusableCollectionCellIdentifier = "PostThumbImageCell"
     }
 }

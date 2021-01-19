@@ -36,10 +36,7 @@ class AddPhotoViewController: UIViewController {
         imageLocation.putData(data!, metadata: nil) { (_, error) in
             
             imageLocation.downloadURL { (url, error) in
-                guard let downloadURL = url else {
-                    print("There is no download URL")
-                    return
-                }
+                guard let downloadURL = url else { return }
                 
                 Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).collection("photos").addDocument(data: [
                     "image": "\(downloadURL)",
@@ -56,7 +53,7 @@ class AddPhotoViewController: UIViewController {
                 }
             }
         }
-        CommonFunctions.showSpinner(profileVc.view)
+        profileVc.view.showSpinner()
     }
     
     @IBAction func selectButtonPressed(_ sender: UIButton) {

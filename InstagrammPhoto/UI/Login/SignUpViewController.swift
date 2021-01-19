@@ -12,22 +12,43 @@ import Firebase
 
 class SignUpViewController: UIViewController {
     
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var repeatPasswordField: UITextField!
-    @IBOutlet weak var accountNickName: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField! {
+        didSet {
+            usernameTextField?.delegate = self
+            usernameTextField.addTarget(self, action: #selector(textFieldsIsNotEmpty), for: .editingChanged)
+            usernameTextField.attributedPlaceholder = NSAttributedString(
+                string: "Email*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+        }
+    }
+    @IBOutlet weak var passwordTextField: UITextField! {
+        didSet {
+            passwordTextField?.delegate = self
+            passwordTextField.addTarget(self, action: #selector(textFieldsIsNotEmpty), for: .editingChanged)
+            passwordTextField.attributedPlaceholder = NSAttributedString(
+                string: "Password*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+        }
+    }
+    @IBOutlet weak var repeatPasswordTextField: UITextField! {
+        didSet {
+            repeatPasswordTextField?.delegate = self
+            repeatPasswordTextField.addTarget(self, action: #selector(textFieldsIsNotEmpty), for: .editingChanged)
+            repeatPasswordTextField.attributedPlaceholder = NSAttributedString(
+                string: "Repeat Password*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+        }
+    }
+    @IBOutlet weak var accountNickNameTextField: UITextField! {
+        didSet {
+            accountNickNameTextField?.delegate = self
+            accountNickNameTextField.addTarget(self, action: #selector(textFieldsIsNotEmpty), for: .editingChanged)
+            accountNickNameTextField.attributedPlaceholder = NSAttributedString(
+                string: "Account nickname*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+        }
+    }
     @IBOutlet weak var informMessage: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addTargetToFields()
-        addPlaceholderFieldsConfig()
-        
-        usernameField?.delegate = self
-        passwordField?.delegate = self
-        repeatPasswordField?.delegate = self
-        accountNickName?.delegate = self
     }
     
     @IBAction func backToLogin(_ sender: Any) {
@@ -35,28 +56,28 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func registrationButtonPressed(_ sender: UIButton) {
-        guard usernameField.text?.isEmailValid() == true else {
+        guard usernameTextField.text?.isEmailValid() == true else {
             informMessage.isHidden = false
             informMessage.text = "Wrong email address!"
             informMessage.textColor = .red
             return
         }
         
-        guard passwordField.text?.isPasswordValid() == true else {
+        guard passwordTextField.text?.isPasswordValid() == true else {
             informMessage.isHidden = false
             informMessage.text = "Password should contains min 6 symbols"
             informMessage.textColor = .red
             return
         }
         
-        guard passwordField.text == repeatPasswordField.text else {
+        guard passwordTextField.text == repeatPasswordTextField.text else {
             informMessage.isHidden = false
             informMessage.text = "Passwords don't matched!"
             informMessage.textColor = .red
             return
         }
         
-        Auth.auth().createUser(withEmail: usernameField.text!, password: passwordField.text!) { (result, err) in
+        Auth.auth().createUser(withEmail: usernameTextField.text!, password: passwordTextField.text!) { (result, err) in
             if err != nil {
                 print("Error during user creation")
             } else {
@@ -69,7 +90,7 @@ class SignUpViewController: UIViewController {
                     }
                     
                     Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).setData([
-                        "nick_name": self.accountNickName.text!,
+                        "nick_name": self.accountNickNameTextField.text!,
                         "uid": result!.user.uid,
                         "user_status": "",
                         "profile_image": "\(downloadURL)"
@@ -89,24 +110,6 @@ class SignUpViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: {_ in self.dismiss(animated: true, completion: nil)}))
         self.present(alert, animated: true, completion: nil)
     }
-    
-    func addTargetToFields() {
-        usernameField.addTarget(self, action: #selector(textFieldsIsNotEmpty),
-                                for: .editingChanged)
-        passwordField.addTarget(self, action: #selector(textFieldsIsNotEmpty),
-                                for: .editingChanged)
-        repeatPasswordField.addTarget(self, action: #selector(textFieldsIsNotEmpty),
-                                      for: .editingChanged)
-        accountNickName.addTarget(self, action: #selector(textFieldsIsNotEmpty),
-                                  for: .editingChanged)
-    }
-    
-    func addPlaceholderFieldsConfig() {
-        usernameField.attributedPlaceholder = NSAttributedString(string: "Email*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
-        passwordField.attributedPlaceholder = NSAttributedString(string: "Password*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
-        repeatPasswordField.attributedPlaceholder = NSAttributedString(string: "Repeat Password*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
-        accountNickName.attributedPlaceholder = NSAttributedString(string: "Account nickname*", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
-    }
 }
 
 extension SignUpViewController: UITextFieldDelegate {
@@ -117,7 +120,7 @@ extension SignUpViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textField.text == "" {
+        if textField.text?.isEmpty == true {
             signUpButton.isEnabled = false
             signUpButton.alpha = 0.5
         }
@@ -128,10 +131,10 @@ extension SignUpViewController: UITextFieldDelegate {
         textField.text = textField.text?.trimmingCharacters(in: .whitespaces)
         
         guard
-            let name = usernameField.text, !name.isEmpty,
-            let password = passwordField.text, !password.isEmpty,
-            let repeatPassword = repeatPasswordField.text, !repeatPassword.isEmpty,
-            let accountNickname = accountNickName.text, !accountNickname.isEmpty
+            let name = usernameTextField.text, !name.isEmpty,
+            let password = passwordTextField.text, !password.isEmpty,
+            let repeatPassword = repeatPasswordTextField.text, !repeatPassword.isEmpty,
+            let accountNickname = accountNickNameTextField.text, !accountNickname.isEmpty
         else {
             self.signUpButton.isEnabled = false
             self.signUpButton.alpha = 0.5

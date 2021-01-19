@@ -72,7 +72,7 @@ class EditProfileViewController: UIViewController {
                 profileVc.setInitialUserData()
             }
         }
-        CommonFunctions.showSpinner(profileVc.view)
+        profileVc.view.showSpinner()
     }
     
     @IBAction func selectImagePressed(_ sender: UIButton) {

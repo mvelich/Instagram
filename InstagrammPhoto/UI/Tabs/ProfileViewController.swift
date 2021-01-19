@@ -30,11 +30,11 @@ class ProfileViewController: UIViewController {
         profileImage.setRounded()
         setInitialUserData()
         updateProfilePhotos()
-        CommonFunctions.showSpinner(self.view)
+        self.view.showSpinner()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.Segue.editProfileSegueIdentifier {
+        if segue.identifier == Constants.Segue.editProfileSegueIdentifier.rawValue {
             if let editProfileVC = segue.destination as? EditProfileViewController {
                 if let status = userStatus.text {
                     editProfileVC.currentProfileStatus = status
@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController {
             }
         }
         
-        if segue.identifier == Constants.Segue.fullScreenSegueIdentifier {
+        if segue.identifier == Constants.Segue.fullScreenSegueIdentifier.rawValue {
             if let fullScreenVC = segue.destination as? FullScreenPhotoViewController {
                 if let cell = sender as? UICollectionViewCell,
                    let indexPath = self.photoGridCollectionView.indexPath(for: cell){
@@ -54,11 +54,11 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func editProfilePressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: Constants.Segue.editProfileSegueIdentifier, sender: self)
+        self.performSegue(withIdentifier: Constants.Segue.editProfileSegueIdentifier.rawValue, sender: self)
     }
     
     @IBAction func addPhotoPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: Constants.Segue.addPhotoSegueIdentifier, sender: self)
+        self.performSegue(withIdentifier: Constants.Segue.addPhotoSegueIdentifier.rawValue, sender: self)
     }
     
     @IBAction func logOutPressed(_ sender: UIButton) {
@@ -113,14 +113,15 @@ extension ProfileViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cell.reusableCollectionCellIdentifier, for: indexPath) as! PostThumbImageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cell.reusableCollectionCellIdentifier.rawValue,
+                                                      for: indexPath) as! PostThumbImageCell
         let url = imagesArray[indexPath.row]
         cell.photoImage.kf.setImage(with: url)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: Constants.Segue.fullScreenSegueIdentifier, sender: self)
+        performSegue(withIdentifier: Constants.Segue.fullScreenSegueIdentifier.rawValue, sender: self)
     }
 }
 
