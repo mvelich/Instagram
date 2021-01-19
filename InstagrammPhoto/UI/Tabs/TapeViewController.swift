@@ -32,7 +32,6 @@ class TapeViewController: UIViewController {
         setInitialPhotoTapeData()
     }
     
-    
     func setInitialUserTapeData() {
         Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).getDocument() { (document, err) in
             if let err = err {
@@ -78,7 +77,7 @@ extension TapeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tapeTableView.dequeueReusableCell(withIdentifier: "TapeTableViewCell", for: indexPath) as! TapeTableViewCell
+        let cell = tapeTableView.dequeueReusableCell(withIdentifier: Constants.Cell.reusableTableCellIdentifier, for: indexPath) as! TapeTableViewCell
         // photo data
         photoCellArray = photoCellArray.sorted(by: {
             $0.date.compare($1.date) == .orderedDescending

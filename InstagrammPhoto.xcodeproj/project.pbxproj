@@ -17,6 +17,7 @@
 		51208E8E259BB82900BE016B /* FullScreenPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51208E8D259BB82900BE016B /* FullScreenPhotoViewController.swift */; };
 		51208E94259BD07E00BE016B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51208E93259BD07E00BE016B /* Images.xcassets */; };
 		51208EE625B35A8200BE016B /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51208EE525B35A8200BE016B /* CommonFunctions.swift */; };
+		51208EEA25B6D5F200BE016B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51208EE925B6D5EF00BE016B /* Constants.swift */; };
 		51247B512560A0DA00CAA41B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51247B502560A0DA00CAA41B /* AppDelegate.swift */; };
 		51247B532560A0DA00CAA41B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51247B522560A0DA00CAA41B /* SceneDelegate.swift */; };
 		51247B582560A0DA00CAA41B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51247B562560A0DA00CAA41B /* Main.storyboard */; };
@@ -59,6 +60,7 @@
 		51208E8D259BB82900BE016B /* FullScreenPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPhotoViewController.swift; sourceTree = "<group>"; };
 		51208E93259BD07E00BE016B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		51208EE525B35A8200BE016B /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
+		51208EE925B6D5EF00BE016B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		51247B4D2560A0DA00CAA41B /* InstagrammPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagrammPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51247B502560A0DA00CAA41B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51247B522560A0DA00CAA41B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				51BAF8BA2565E0DC004EAAEE /* InstagramResponseParser.swift */,
 				51208EE525B35A8200BE016B /* CommonFunctions.swift */,
+				51208EE925B6D5EF00BE016B /* Constants.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				511BE8352598A92A00F30A08 /* AddPhotoViewController.swift in Sources */,
+				51208EEA25B6D5F200BE016B /* Constants.swift in Sources */,
 				513C161C2561F1FD00092875 /* SignInViewController.swift in Sources */,
 				51247B512560A0DA00CAA41B /* AppDelegate.swift in Sources */,
 				51BAF8B7256410D9004EAAEE /* TabBarViewController.swift in Sources */,

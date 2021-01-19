@@ -34,7 +34,7 @@ class ProfileViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "EditProfileViewController" {
+        if segue.identifier == Constants.Segue.editProfileSegueIdentifier {
             if let editProfileVC = segue.destination as? EditProfileViewController {
                 if let status = userStatus.text {
                     editProfileVC.currentProfileStatus = status
@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController {
             }
         }
         
-        if segue.identifier == "FullScreenPhotoViewController" {
+        if segue.identifier == Constants.Segue.fullScreenSegueIdentifier {
             if let fullScreenVC = segue.destination as? FullScreenPhotoViewController {
                 if let cell = sender as? UICollectionViewCell,
                    let indexPath = self.photoGridCollectionView.indexPath(for: cell){
@@ -54,18 +54,23 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func editProfilePressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "EditProfileViewController", sender: self)
+        self.performSegue(withIdentifier: Constants.Segue.editProfileSegueIdentifier, sender: self)
     }
     
     @IBAction func addPhotoPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "AddPhotoViewController", sender: self)
+        self.performSegue(withIdentifier: Constants.Segue.addPhotoSegueIdentifier, sender: self)
     }
     
     @IBAction func logOutPressed(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let signInViewController = storyboard.instantiateViewController(identifier: "SignInViewController")
-        
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(signInViewController)
+        do {
+            try Auth.auth().signOut()
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let signInViewController = storyboard.instantiateViewController(identifier: "SignInViewController")
+            
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(signInViewController)
+        } catch let signOutError as NSError {
+          print ("Error signing out: %@", signOutError)
+        }
     }
     
     @IBAction func unwind( _ seg: UIStoryboardSegue) { }
@@ -108,14 +113,14 @@ extension ProfileViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostThumbImageCell", for: indexPath) as! PostThumbImageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cell.reusableCollectionCellIdentifier, for: indexPath) as! PostThumbImageCell
         let url = imagesArray[indexPath.row]
         cell.photoImage.kf.setImage(with: url)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "FullScreenPhotoViewController", sender: self)
+        performSegue(withIdentifier: Constants.Segue.fullScreenSegueIdentifier, sender: self)
     }
 }
 

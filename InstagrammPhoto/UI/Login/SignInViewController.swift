@@ -46,7 +46,7 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "userRegistration", sender: self)
+        performSegue(withIdentifier: Constants.Segue.signUpSegueIdentifier, sender: self)
     }
     
     func addTargetToFields() {
