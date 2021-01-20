@@ -6,7 +6,6 @@
 //  Copyright © 2020 Maksim Velich. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Firebase
 import FirebaseAuth
