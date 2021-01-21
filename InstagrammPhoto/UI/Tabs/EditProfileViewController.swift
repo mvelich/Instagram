@@ -35,10 +35,12 @@ class EditProfileViewController: UIViewController {
             return
         }
         
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        
         if let profileImage = self.profileImageView.image {
-            let data = profileImage.pngData()
+            guard let data = profileImage.pngData() else { return }
             let imageLocation = Storage.storage().reference().child("profile_images").child("\(UUID().uuidString)")
-            imageLocation.putData(data!, metadata: nil) { (_, error) in
+            imageLocation.putData(data, metadata: nil) { (_, error) in
                 
                 imageLocation.downloadURL { (url, error) in
                     guard let downloadURL = url else {
@@ -46,8 +48,8 @@ class EditProfileViewController: UIViewController {
                         return
                     }
                     
-                    Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).updateData([
-                        "user_status": "\(self.userStatusField.text!)",
+                    Firestore.firestore().collection("users").document(currentUserUid).updateData([
+                        "user_status": "\(self.userStatusField.text ?? "")",
                         "profile_image": "\(downloadURL)"
                     ]) { err in
                         if let err = err {
@@ -60,8 +62,8 @@ class EditProfileViewController: UIViewController {
                 }
             }
         } else {
-            Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).updateData([
-                "user_status": "\(self.userStatusField.text!)",
+            Firestore.firestore().collection("users").document(currentUserUid).updateData([
+                "user_status": "\(self.userStatusField.text ?? "")",
             ]) { err in
                 if let err = err {
                     print("Error updating document: \(err)")

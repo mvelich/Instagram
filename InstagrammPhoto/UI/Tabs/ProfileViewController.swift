@@ -76,7 +76,8 @@ class ProfileViewController: UIViewController {
     @IBAction func unwind( _ seg: UIStoryboardSegue) { }
     
     func setInitialUserData() {
-        Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).getDocument() { (document, err) in
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(currentUserUid).getDocument() { (document, err) in
             if let err = err {
                 print("Error getting document: \(err)")
             } else {
@@ -91,7 +92,8 @@ class ProfileViewController: UIViewController {
     }
     
     func updateProfilePhotos() {
-        Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).collection("photos").order(by: "date", descending: true).addSnapshotListener { (querySnapshot, err) in
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(currentUserUid).collection("photos").order(by: "date", descending: true).addSnapshotListener { (querySnapshot, err) in
             if let err = err {
                 print("Error getting document: \(err)")
             } else {

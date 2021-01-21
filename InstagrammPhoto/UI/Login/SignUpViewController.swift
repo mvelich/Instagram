@@ -77,10 +77,11 @@ class SignUpViewController: UIViewController {
             return
         }
         
-        Auth.auth().createUser(withEmail: usernameTextField.text!, password: passwordTextField.text!) { (result, err) in
+        guard let userName = usernameTextField.text, let password = passwordTextField.text else { return }
+        Auth.auth().createUser(withEmail: userName, password: password) { (result, err) in
             if err != nil {
                 print("Error during user creation")
-            } else {
+            } else if let result = result {
                 let imageLocation = Storage.storage().reference().child("profile_images").child("default_profile_image.png")
                 
                 imageLocation.downloadURL { url, error in
@@ -89,9 +90,10 @@ class SignUpViewController: UIViewController {
                         return
                     }
                     
-                    Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).setData([
-                        "nick_name": self.accountNickNameTextField.text!,
-                        "uid": result!.user.uid,
+                    guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+                    Firestore.firestore().collection("users").document(currentUserUid).setData([
+                        "nick_name": self.accountNickNameTextField.text ?? "default name",
+                        "uid": result.user.uid,
                         "user_status": "",
                         "profile_image": "\(downloadURL)"
                     ]) { (error) in
@@ -100,6 +102,8 @@ class SignUpViewController: UIViewController {
                         }
                     }
                 }
+            } else {
+                return
             }
         }
         showRegistrationAlert()

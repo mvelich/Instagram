@@ -861,7 +861,7 @@
                                     <outlet property="delegate" destination="lzR-i9-m7e" id="kAI-aw-bQT"/>
                                 </connections>
                             </collectionView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="251" translatesAutoresizingMaskIntoConstraints="NO" id="XSm-Tb-7Ks">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="251" translatesAutoresizingMaskIntoConstraints="NO" id="XSm-Tb-7Ks">
                                 <rect key="frame" x="16" y="195.66666666666666" width="382" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kB-UG-Jxg">
@@ -874,8 +874,8 @@
                                         <rect key="frame" x="336" y="0.0" width="46" height="30"/>
                                         <color key="backgroundColor" systemColor="systemRedColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="46" id="YIE-23-pv6"/>
-                                            <constraint firstAttribute="height" constant="30" id="h3U-l2-pOT"/>
+                                            <constraint firstAttribute="width" constant="46" id="BmE-c0-30c"/>
+                                            <constraint firstAttribute="height" constant="30" id="KBe-WM-EuP"/>
                                         </constraints>
                                         <state key="normal" title="Add">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

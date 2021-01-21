@@ -30,14 +30,15 @@ class AddPhotoViewController: UIViewController {
         }
         
         let profileVc = segue.destination as! ProfileViewController
-        let data = self.newImageView.image!.pngData()
+        guard let data = self.newImageView.image?.pngData() else { return }
         let imageLocation = Storage.storage().reference().child("\(UUID().uuidString)")
-        imageLocation.putData(data!, metadata: nil) { (_, error) in
+        imageLocation.putData(data, metadata: nil) { (_, error) in
             
             imageLocation.downloadURL { (url, error) in
                 guard let downloadURL = url else { return }
                 
-                Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).collection("photos").addDocument(data: [
+                guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+                Firestore.firestore().collection("users").document(currentUserUid).collection("photos").addDocument(data: [
                     "image": "\(downloadURL)",
                     "location": "\(self.locationNameField.text ?? "")",
                     "description": "\(self.descriptionField.text ?? "")",

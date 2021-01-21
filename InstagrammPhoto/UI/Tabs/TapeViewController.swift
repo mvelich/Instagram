@@ -30,10 +30,13 @@ class TapeViewController: UIViewController {
     
     @IBAction func reloadTapePressed(_ sender: UIBarButtonItem) {
         setInitialPhotoTapeData()
+        let indexPath = IndexPath(row: 0, section: 0)
+        tapeTableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
     func setInitialUserTapeData() {
-        Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).getDocument() { (document, err) in
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(currentUserUid).getDocument() { (document, err) in
             if let err = err {
                 print("Error getting document: \(err)")
             } else {
@@ -47,14 +50,16 @@ class TapeViewController: UIViewController {
     }
     
     func setInitialPhotoTapeData() {
-        Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).collection("photos").getDocuments { (querySnapshot, err) in
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(currentUserUid).collection("photos").getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting document: \(err)")
             } else {
                 self.photoCellArray.removeAll()
-                for document in querySnapshot!.documents {
+                guard let dataSnapShot = querySnapshot?.documents else { return }
+                for document in dataSnapShot {
                     var photo = UserPhoto()
-                    photo.image = URL(string: (document.get("image") as? String)!)
+                    photo.image = URL(string: document.get("image") as! String)
                     photo.likes = (document.get("likes") as? Int)
                     photo.location = (document.get("location") as? String)
                     photo.description = (document.get("description") as? String)
@@ -85,7 +90,7 @@ extension TapeViewController: UITableViewDataSource {
         let photoCellObject = photoCellArray[indexPath.row]
         let url = photoCellObject.image
         cell.tapeImgae.kf.setImage(with: url)
-        cell.likeLabel.text = String(photoCellObject.likes!)
+        cell.likeLabel.text = String(photoCellObject.likes ?? 0)
         cell.place.text = photoCellObject.location
         cell.imageDescription.text = photoCellObject.description
         // user data
