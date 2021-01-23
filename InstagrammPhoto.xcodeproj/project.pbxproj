@@ -10,6 +10,8 @@
 		20FCB50F25B76F9600C083E5 /* UIView+ShowSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FCB50E25B76F9600C083E5 /* UIView+ShowSpinner.swift */; };
 		5107CFDC2560AB7900A7DD05 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5107CFDB2560AB7900A7DD05 /* SignUpViewController.swift */; };
 		5112722E257124600010351D /* TapeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5112722D257124600010351D /* TapeTableViewCell.swift */; };
+		511B285025BB5C5400D88A2B /* LeftAlignmentFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511B284F25BB5C5400D88A2B /* LeftAlignmentFlowLayout.swift */; };
+		511B285425BC046300D88A2B /* UITableView+ScrollToTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511B285325BC046300D88A2B /* UITableView+ScrollToTop.swift */; };
 		511BE74D257B21BD00F30A08 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BE74C257B21BC00F30A08 /* User.swift */; };
 		511BE75B257B23B200F30A08 /* UserPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BE75A257B23B200F30A08 /* UserPhoto.swift */; };
 		511BE77C257BC62800F30A08 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BE77B257BC62800F30A08 /* EditProfileViewController.swift */; };
@@ -55,6 +57,8 @@
 		20FCB50E25B76F9600C083E5 /* UIView+ShowSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ShowSpinner.swift"; sourceTree = "<group>"; };
 		5107CFDB2560AB7900A7DD05 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		5112722D257124600010351D /* TapeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeTableViewCell.swift; sourceTree = "<group>"; };
+		511B284F25BB5C5400D88A2B /* LeftAlignmentFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignmentFlowLayout.swift; sourceTree = "<group>"; };
+		511B285325BC046300D88A2B /* UITableView+ScrollToTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ScrollToTop.swift"; sourceTree = "<group>"; };
 		511BE74C257B21BC00F30A08 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		511BE75A257B23B200F30A08 /* UserPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhoto.swift; sourceTree = "<group>"; };
 		511BE77B257BC62800F30A08 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -237,6 +241,8 @@
 				51C31807257659B7000AD65E /* String+IsValid.swift */,
 				511BE83A2598C71800F30A08 /* UIImageView+LoadUsingUrl.swift */,
 				20FCB50E25B76F9600C083E5 /* UIView+ShowSpinner.swift */,
+				511B284F25BB5C5400D88A2B /* LeftAlignmentFlowLayout.swift */,
+				511B285325BC046300D88A2B /* UITableView+ScrollToTop.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -356,9 +362,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				511BE8352598A92A00F30A08 /* AddPhotoViewController.swift in Sources */,
+				511B285425BC046300D88A2B /* UITableView+ScrollToTop.swift in Sources */,
 				20FCB50F25B76F9600C083E5 /* UIView+ShowSpinner.swift in Sources */,
 				51208EEA25B6D5F200BE016B /* Constants.swift in Sources */,
 				513C161C2561F1FD00092875 /* SignInViewController.swift in Sources */,
+				511B285025BB5C5400D88A2B /* LeftAlignmentFlowLayout.swift in Sources */,
 				51247B512560A0DA00CAA41B /* AppDelegate.swift in Sources */,
 				51BAF8B7256410D9004EAAEE /* TabBarViewController.swift in Sources */,
 				5107CFDC2560AB7900A7DD05 /* SignUpViewController.swift in Sources */,

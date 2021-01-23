@@ -17,6 +17,12 @@ class TapeViewController: UIViewController {
     private var photoCellArray = [UserPhoto]()
     private var userData = User()
     
+    @IBOutlet weak var instLogoBarButtonItem: UIBarButtonItem! {
+        didSet {
+            instLogoBarButtonItem.imageInsets = UIEdgeInsets(top: 0, left: -75, bottom: 0, right: 0); // TODO - fix left alignment according to all screens
+        }
+    }
+    
     @IBOutlet weak var tapeTableView: UITableView!
     
     override func viewDidLoad() {
@@ -30,8 +36,7 @@ class TapeViewController: UIViewController {
     
     @IBAction func reloadTapePressed(_ sender: UIBarButtonItem) {
         setInitialPhotoTapeData()
-        let indexPath = IndexPath(row: 0, section: 0)
-        tapeTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        tapeTableView.scrollToTop(animated: true)
     }
     
     func setInitialUserTapeData() {
@@ -99,10 +104,6 @@ extension TapeViewController: UITableViewDataSource {
         let urlProfileImage = userData.profileImage
         cell.userProfileImage.kf.setImage(with: urlProfileImage)
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 700
     }
 }
 

@@ -30,6 +30,7 @@ class ProfileViewController: UIViewController {
         profileImage.setRounded()
         setInitialUserData()
         updateProfilePhotos()
+        photoGridCollectionView.collectionViewLayout = LeftAlignmentFlowLayout(minimumInteritemSpacing: 2, minimumLineSpacing: 2)
         self.view.showSpinner()
     }
     

@@ -350,7 +350,7 @@
                                 <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem id="Hzp-XX-GOy">
-                                        <barButtonItem key="leftBarButtonItem" image="inst_logo" id="RtE-NQ-BkE">
+                                        <barButtonItem key="leftBarButtonItem" image="inst_logo" id="zFv-c1-He3">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" image="circles.hexagonpath.fill" catalog="system" id="PqE-eu-RWC">
@@ -561,6 +561,7 @@
                     </tabBarItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="instLogoBarButtonItem" destination="zFv-c1-He3" id="dGF-p6-0DE"/>
                         <outlet property="tapeTableView" destination="Heq-zw-0fP" id="guO-GQ-T0n"/>
                     </connections>
                 </viewController>
@@ -861,11 +862,11 @@
                                     <outlet property="delegate" destination="lzR-i9-m7e" id="kAI-aw-bQT"/>
                                 </connections>
                             </collectionView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="251" translatesAutoresizingMaskIntoConstraints="NO" id="XSm-Tb-7Ks">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XSm-Tb-7Ks">
                                 <rect key="frame" x="16" y="195.66666666666666" width="382" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kB-UG-Jxg">
-                                        <rect key="frame" x="0.0" y="0.0" width="85" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" text="user status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kB-UG-Jxg">
+                                        <rect key="frame" x="0.0" y="0.0" width="326" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -874,8 +875,8 @@
                                         <rect key="frame" x="336" y="0.0" width="46" height="30"/>
                                         <color key="backgroundColor" systemColor="systemRedColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="46" id="BmE-c0-30c"/>
-                                            <constraint firstAttribute="height" constant="30" id="KBe-WM-EuP"/>
+                                            <constraint firstAttribute="height" constant="30" id="eDh-GR-POT"/>
+                                            <constraint firstAttribute="width" constant="46" id="rP4-aQ-bWo"/>
                                         </constraints>
                                         <state key="normal" title="Add">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -893,7 +894,6 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="9kB-UG-Jxg" firstAttribute="leading" secondItem="XSm-Tb-7Ks" secondAttribute="leading" id="8MJ-Cx-IoN"/>
-                                    <constraint firstAttribute="trailing" secondItem="VzS-Xs-Qq1" secondAttribute="trailing" id="SwE-cX-7S3"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EmV-jM-Pif">
