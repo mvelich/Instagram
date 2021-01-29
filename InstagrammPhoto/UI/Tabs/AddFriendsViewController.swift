@@ -12,32 +12,36 @@ import Kingfisher
 
 class AddFriendsViewController: UIViewController {
     
+    private let searchController = UISearchController(searchResultsController: nil)
     private var usersArray = [User]()
+    private var filteredUsers = [User]()
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
     
-    @IBOutlet weak var searchField: UITextField!
-    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchFriendTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchField.delegate = self
+        settingsUpSearchBar()
         searchFriendTableView.dataSource = self
         searchFriendTableView.delegate = self
         fetchAllUsers()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-    }
-    
-    @IBAction func searchButtonPressed(_ sender: UIButton) {
-        
+    private func settingsUpSearchBar() {
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.definesPresentationContext = true
+        searchController.searchBar.autocapitalizationType = .none
+        searchController.searchBar.returnKeyType = .done
+        searchController.searchBar.searchTextField.textColor = .white
     }
     
     private func fetchAllUsers() {
@@ -62,26 +66,35 @@ class AddFriendsViewController: UIViewController {
 }
 
 // MARK: - UITextFieldDelegate
-extension AddFriendsViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.endEditing(true)
-        return true
+extension AddFriendsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        return true
+    private func filterContentForSearchText(_ searchText: String) {
+        filteredUsers = usersArray.filter{ ($0.userName?.contains(searchText))! } // forced unwrap
+        searchFriendTableView.reloadData()
     }
 }
 
 // MARK: - UITableViewDataSource
 extension AddFriendsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return usersArray.count
+        if isFiltering {
+            return filteredUsers.count
+        } else {
+            return usersArray.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.reusableTableFriendSearchCellIdentifier.rawValue, for: indexPath) as! FriendSearchTableViewCell
-        let user = usersArray[indexPath.row]
+        var user = User()
+        if isFiltering {
+            user = filteredUsers[indexPath.row]
+        } else {
+            user = usersArray[indexPath.row]
+        }
         cell.userNameLabel.text = user.userName
         let url = user.profileImage
         cell.profileImageView.kf.setImage(with: url)
@@ -92,11 +105,17 @@ extension AddFriendsViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension AddFriendsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let user = usersArray[indexPath.row]
+        let user: User
+        if isFiltering {
+            user = filteredUsers[indexPath.row]
+        } else {
+            user = usersArray[indexPath.row]
+        }
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         if let uniqUserProfileVC = mainStoryboard.instantiateViewController(withIdentifier: Constants.Segue.uniqUserProfileIdentifier.rawValue) as? UniqUserProfileViewController {
             uniqUserProfileVC.userName = user.userName
             uniqUserProfileVC.userUID = user.uid
+            uniqUserProfileVC.profileImage = user.profileImage
             self.navigationController?.pushViewController(uniqUserProfileVC, animated: true)
         }
     }

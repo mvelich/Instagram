@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 class UniqUserProfileViewController: UIViewController {
     
     var userName: String?
     var userUID: String?
+    var profileImage: URL?
     
     @IBOutlet weak var uniqUserProfileImage: UIImageView!
     @IBOutlet weak var followUserButton: UIButton!
@@ -26,6 +28,7 @@ class UniqUserProfileViewController: UIViewController {
         navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.title = userName
         uniqUserProfileImage.setRounded()
+        uniqUserProfileImage.kf.setImage(with: profileImage)
     }
     
     func setInitialUserData() { }
