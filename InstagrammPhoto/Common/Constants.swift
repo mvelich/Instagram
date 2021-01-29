@@ -13,10 +13,12 @@ struct Constants {
         case fullScreenSegueIdentifier = "FullScreenPhotoViewController"
         case editProfileSegueIdentifier = "EditProfileViewController"
         case addPhotoSegueIdentifier = "AddPhotoViewController"
+        case uniqUserProfileIdentifier = "UniqUserProfileViewController"
     }
     
     enum Cell: String {
         case reusableTableCellIdentifier = "TapeTableViewCell"
         case reusableCollectionCellIdentifier = "PostThumbImageCell"
+        case reusableTableFriendSearchCellIdentifier = "FriendSearchTableViewCell"
     }
 }

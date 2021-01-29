@@ -27,6 +27,9 @@
 		51247B682560A0E400CAA41B /* InstagrammPhotoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51247B672560A0E400CAA41B /* InstagrammPhotoTests.swift */; };
 		513C161B2560C12B00092875 /* UserLoadDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513C161A2560C12B00092875 /* UserLoadDataManager.swift */; };
 		513C161C2561F1FD00092875 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51247B542560A0DA00CAA41B /* SignInViewController.swift */; };
+		517ECED925C2081000CC10CE /* UIButton+AddGreyBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517ECED825C2081000CC10CE /* UIButton+AddGreyBorder.swift */; };
+		5187ADC125BD86C8000A711B /* FriendSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5187ADC025BD86C8000A711B /* FriendSearchTableViewCell.swift */; };
+		5187ADC525C06BA7000A711B /* UniqUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5187ADC425C06BA7000A711B /* UniqUserProfileViewController.swift */; };
 		51BAF8B12564064E004EAAEE /* TapeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BAF8B02564064E004EAAEE /* TapeViewController.swift */; };
 		51BAF8B325640668004EAAEE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BAF8B225640668004EAAEE /* ProfileViewController.swift */; };
 		51BAF8B7256410D9004EAAEE /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BAF8B6256410D9004EAAEE /* TabBarViewController.swift */; };
@@ -78,6 +81,9 @@
 		51247B672560A0E400CAA41B /* InstagrammPhotoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagrammPhotoTests.swift; sourceTree = "<group>"; };
 		51247B692560A0E400CAA41B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		513C161A2560C12B00092875 /* UserLoadDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoadDataManager.swift; sourceTree = "<group>"; };
+		517ECED825C2081000CC10CE /* UIButton+AddGreyBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+AddGreyBorder.swift"; sourceTree = "<group>"; };
+		5187ADC025BD86C8000A711B /* FriendSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchTableViewCell.swift; sourceTree = "<group>"; };
+		5187ADC425C06BA7000A711B /* UniqUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqUserProfileViewController.swift; sourceTree = "<group>"; };
 		51BAF8B02564064E004EAAEE /* TapeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeViewController.swift; sourceTree = "<group>"; };
 		51BAF8B225640668004EAAEE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		51BAF8B6256410D9004EAAEE /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -129,9 +135,10 @@
 				51BAF8B02564064E004EAAEE /* TapeViewController.swift */,
 				51BAF8B225640668004EAAEE /* ProfileViewController.swift */,
 				511BE77B257BC62800F30A08 /* EditProfileViewController.swift */,
-				51F2E203256C783E004471D7 /* AddFriendsViewController.swift */,
 				511BE8342598A92900F30A08 /* AddPhotoViewController.swift */,
 				51208E8D259BB82900BE016B /* FullScreenPhotoViewController.swift */,
+				51F2E203256C783E004471D7 /* AddFriendsViewController.swift */,
+				5187ADC425C06BA7000A711B /* UniqUserProfileViewController.swift */,
 				2034DE222576D3E7004591ED /* Cells */,
 			);
 			path = Tabs;
@@ -142,6 +149,7 @@
 			children = (
 				51F2E205256C8191004471D7 /* PostThumbImageCell.swift */,
 				5112722D257124600010351D /* TapeTableViewCell.swift */,
+				5187ADC025BD86C8000A711B /* FriendSearchTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -243,6 +251,7 @@
 				20FCB50E25B76F9600C083E5 /* UIView+ShowSpinner.swift */,
 				511B284F25BB5C5400D88A2B /* LeftAlignmentFlowLayout.swift */,
 				511B285325BC046300D88A2B /* UITableView+ScrollToTop.swift */,
+				517ECED825C2081000CC10CE /* UIButton+AddGreyBorder.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -363,6 +372,7 @@
 			files = (
 				511BE8352598A92A00F30A08 /* AddPhotoViewController.swift in Sources */,
 				511B285425BC046300D88A2B /* UITableView+ScrollToTop.swift in Sources */,
+				5187ADC525C06BA7000A711B /* UniqUserProfileViewController.swift in Sources */,
 				20FCB50F25B76F9600C083E5 /* UIView+ShowSpinner.swift in Sources */,
 				51208EEA25B6D5F200BE016B /* Constants.swift in Sources */,
 				513C161C2561F1FD00092875 /* SignInViewController.swift in Sources */,
@@ -371,6 +381,7 @@
 				51BAF8B7256410D9004EAAEE /* TabBarViewController.swift in Sources */,
 				5107CFDC2560AB7900A7DD05 /* SignUpViewController.swift in Sources */,
 				51247B532560A0DA00CAA41B /* SceneDelegate.swift in Sources */,
+				5187ADC125BD86C8000A711B /* FriendSearchTableViewCell.swift in Sources */,
 				51F2E204256C783E004471D7 /* AddFriendsViewController.swift in Sources */,
 				51C318042576591E000AD65E /* UIImageView+SetRounded.swift in Sources */,
 				511BE77C257BC62800F30A08 /* EditProfileViewController.swift in Sources */,
@@ -385,6 +396,7 @@
 				513C161B2560C12B00092875 /* UserLoadDataManager.swift in Sources */,
 				51C31808257659B7000AD65E /* String+IsValid.swift in Sources */,
 				5112722E257124600010351D /* TapeTableViewCell.swift in Sources */,
+				517ECED925C2081000CC10CE /* UIButton+AddGreyBorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

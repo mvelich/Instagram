@@ -15,5 +15,6 @@ struct User {
     var userStatus: String?
     var followers: String?
     var following: String?
+    var uid: String?
     var photos: [UserPhoto]?
 }

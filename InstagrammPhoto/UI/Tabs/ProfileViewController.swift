@@ -22,6 +22,17 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var postNumberLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var editProfileButton: UIButton! {
+        didSet {
+            editProfileButton.addGreyBorder()
+        }
+    }
+    @IBOutlet weak var addNewPhotoButton: UIButton! {
+        didSet {
+            addNewPhotoButton.addGreyBorder()
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
