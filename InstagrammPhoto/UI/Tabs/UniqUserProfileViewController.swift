@@ -63,6 +63,26 @@ class UniqUserProfileViewController: UIViewController {
             }
         }
     }
+    
+    func imageTapped(image: UIImage){
+        let newImageView = UIImageView(image: image)
+        newImageView.frame = UIScreen.main.bounds
+        newImageView.backgroundColor = .black
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(self.dismissFullscreenImage(_ :)))
+        swipe.direction = .down
+        newImageView.addGestureRecognizer(swipe)
+        self.view.addSubview(newImageView)
+        self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    @objc func dismissFullscreenImage(_ sender: UISwipeGestureRecognizer) {
+        sender.view?.removeFromSuperview()
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+    }
 }
 
 //MARK: - UICollectionViewDataSource
@@ -77,6 +97,12 @@ extension UniqUserProfileViewController: UICollectionViewDataSource {
         let url = imagesArray[indexPath.row]
         cell.photoImageView.kf.setImage(with: url)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! FriendPhotoCollectionViewCell
+        guard let image = cell.photoImageView.image else { return }
+        self.imageTapped(image: image)
     }
 }
 
