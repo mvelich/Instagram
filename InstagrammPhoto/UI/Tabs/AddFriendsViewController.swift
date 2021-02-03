@@ -27,14 +27,25 @@ class AddFriendsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.extendedLayoutIncludesOpaqueBars = true
         settingsUpSearchBar()
         searchFriendTableView.dataSource = self
         searchFriendTableView.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         fetchAllUsers()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.view.setNeedsLayout()
+        navigationController?.view.layoutIfNeeded()
+    }
+    
     private func settingsUpSearchBar() {
-        navigationItem.searchController = searchController
+        navigationItem.titleView = searchController.searchBar
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -42,19 +53,23 @@ class AddFriendsViewController: UIViewController {
         searchController.searchBar.autocapitalizationType = .none
         searchController.searchBar.returnKeyType = .done
         searchController.searchBar.searchTextField.textColor = .white
+        searchController.hidesNavigationBarDuringPresentation = false
     }
     
     private func fetchAllUsers() {
-        Firestore.firestore().collection("users").getDocuments{ (querySnapshot, err) in
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").whereField("uid", isNotEqualTo: currentUserUid).getDocuments{ (querySnapshot, err) in
             if let err = err {
                 print("Error getting document: \(err)")
             } else {
                 guard let dataSnapShot = querySnapshot?.documents else { return }
+                self.usersArray.removeAll()
                 for document in dataSnapShot {
                     var user = User()
                     user.profileImage = URL(string: document.get("profile_image") as! String)
                     user.userName = (document.get("nick_name") as! String)
                     user.uid = (document.get("uid") as! String)
+                    user.userStatus = (document.get("user_status") as! String)
                     self.usersArray.append(user)
                 }
                 DispatchQueue.main.async {
@@ -116,6 +131,7 @@ extension AddFriendsViewController: UITableViewDelegate {
             uniqUserProfileVC.userName = user.userName
             uniqUserProfileVC.userUID = user.uid
             uniqUserProfileVC.profileImage = user.profileImage
+            uniqUserProfileVC.userStatus = user.userStatus
             self.navigationController?.pushViewController(uniqUserProfileVC, animated: true)
         }
     }

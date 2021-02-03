@@ -20,5 +20,6 @@ struct Constants {
         case reusableTableCellIdentifier = "TapeTableViewCell"
         case reusableCollectionCellIdentifier = "PostThumbImageCell"
         case reusableTableFriendSearchCellIdentifier = "FriendSearchTableViewCell"
+        case reusableCollectionFriendPhotoCellIdentifier = "FriendPhotoImageCell"
     }
 }

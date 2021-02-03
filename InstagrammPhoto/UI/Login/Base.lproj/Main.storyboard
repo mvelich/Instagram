@@ -852,7 +852,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="PostThumbImageCell" id="r2A-4K-zNJ" customClass="PostThumbImageCell" customModule="InstagrammPhoto" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="PostThumbImageCell" id="r2A-4K-zNJ" customClass="ProfileCollectionViewCell" customModule="InstagrammPhoto" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="138" height="138"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="uAj-r0-7Qq">
@@ -966,7 +966,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rBb-cy-nyi">
-                                <rect key="frame" x="16" y="86" width="382" height="492"/>
+                                <rect key="frame" x="0.0" y="86" width="414" height="492"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWo-i7-jh3">
                                 <rect key="frame" x="16" y="16" width="30" height="30"/>
@@ -984,8 +984,8 @@
                         <viewLayoutGuide key="safeArea" id="YKe-Sq-Hi3"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="YKe-Sq-Hi3" firstAttribute="trailing" secondItem="rBb-cy-nyi" secondAttribute="trailing" constant="16" id="D5g-Lh-PJR"/>
-                            <constraint firstItem="rBb-cy-nyi" firstAttribute="leading" secondItem="YKe-Sq-Hi3" secondAttribute="leading" constant="16" id="Iya-Q8-aXd"/>
+                            <constraint firstItem="YKe-Sq-Hi3" firstAttribute="trailing" secondItem="rBb-cy-nyi" secondAttribute="trailing" id="D5g-Lh-PJR"/>
+                            <constraint firstItem="rBb-cy-nyi" firstAttribute="leading" secondItem="YKe-Sq-Hi3" secondAttribute="leading" id="Iya-Q8-aXd"/>
                             <constraint firstItem="AWo-i7-jh3" firstAttribute="leading" secondItem="YKe-Sq-Hi3" secondAttribute="leading" constant="16" id="Scg-b0-jtV"/>
                             <constraint firstItem="rBb-cy-nyi" firstAttribute="top" secondItem="AWo-i7-jh3" secondAttribute="bottom" constant="40" id="bhe-yE-vOx"/>
                             <constraint firstItem="YKe-Sq-Hi3" firstAttribute="bottom" secondItem="rBb-cy-nyi" secondAttribute="bottom" constant="230" id="mna-sg-UM0"/>
@@ -1107,7 +1107,7 @@
             </objects>
             <point key="canvasLocation" x="794" y="-656"/>
         </scene>
-        <!--Search users-->
+        <!--Add Friends View Controller-->
         <scene sceneID="o60-rT-RRB">
             <objects>
                 <viewController id="FIH-xT-6J9" customClass="AddFriendsViewController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
@@ -1182,7 +1182,7 @@
                             <constraint firstItem="BnT-Q7-b0H" firstAttribute="leading" secondItem="wNv-sz-4ee" secondAttribute="leading" id="Zfy-nq-bGS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Search users" id="yzp-ZT-B5m"/>
+                    <navigationItem key="navigationItem" id="yzp-ZT-B5m"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchFriendTableView" destination="BnT-Q7-b0H" id="GxN-C0-vHD"/>
@@ -1316,18 +1316,18 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="dDQ-5I-Y7f">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FriendPhotoImageCell" id="dDQ-5I-Y7f" customClass="FriendPhotoCollectionViewCell" customModule="InstagrammPhoto" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="138" height="138"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Vdg-rd-Mmz">
                                             <rect key="frame" x="0.0" y="0.0" width="138" height="138"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oz9-Ad-tSo">
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oz9-Ad-tSo">
                                                     <rect key="frame" x="0.0" y="0.0" width="138" height="138"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="oz9-Ad-tSo" secondAttribute="height" multiplier="1:1" id="dMc-v8-yig"/>
-                                                        <constraint firstAttribute="height" constant="138" id="imd-ga-5Lf"/>
+                                                        <constraint firstAttribute="width" constant="138" id="UIE-aO-aP9"/>
+                                                        <constraint firstAttribute="width" secondItem="oz9-Ad-tSo" secondAttribute="height" multiplier="1:1" id="oHJ-gc-wdz"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
@@ -1339,6 +1339,10 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="138" height="138"/>
+                                        <connections>
+                                            <outlet property="photoImageView" destination="oz9-Ad-tSo" id="IK0-I0-QbY"/>
+                                            <outlet property="widthCellConstraint" destination="UIE-aO-aP9" id="DNX-uv-IIx"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -1411,8 +1415,13 @@
                     <navigationItem key="navigationItem" title="Nickname" largeTitleDisplayMode="never" id="s3B-0R-q5P"/>
                     <connections>
                         <outlet property="followUserButton" destination="c05-hc-G4s" id="KH8-ma-NA8"/>
+                        <outlet property="followersNumberLabel" destination="dUb-kT-0GA" id="xEX-Ld-tHs"/>
+                        <outlet property="followingNumberLabel" destination="3vj-Ct-2Ob" id="XbU-0t-XTF"/>
                         <outlet property="messageButton" destination="9Dw-04-mTd" id="Sah-YX-Pat"/>
+                        <outlet property="photoGridCollectionView" destination="H8Q-fr-sKI" id="MEL-vW-bn0"/>
+                        <outlet property="postNumberLabel" destination="tfQ-u2-e4I" id="5wP-Qf-yOp"/>
                         <outlet property="uniqUserProfileImage" destination="LT0-nL-QBB" id="UAM-JM-M6N"/>
+                        <outlet property="userStatusLabel" destination="ed7-RM-aCK" id="Qai-8w-JNX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bGL-wl-IhM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

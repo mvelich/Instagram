@@ -37,13 +37,14 @@
 		51C317FF25751239000AD65E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51C317FE25751239000AD65E /* GoogleService-Info.plist */; };
 		51C318042576591E000AD65E /* UIImageView+SetRounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C318032576591E000AD65E /* UIImageView+SetRounded.swift */; };
 		51C31808257659B7000AD65E /* String+IsValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C31807257659B7000AD65E /* String+IsValid.swift */; };
+		51DEF3A325C7368100D26C01 /* FriendPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DEF3A225C7368000D26C01 /* FriendPhotoCollectionViewCell.swift */; };
 		51E246FE25B862E200129C59 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 51E246FD25B862E200129C59 /* FirebaseAuth */; };
 		51E2470025B862E200129C59 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 51E246FF25B862E200129C59 /* FirebaseFirestore */; };
 		51E2470225B862E200129C59 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 51E2470125B862E200129C59 /* FirebaseStorage */; };
 		51E2470725B863FC00129C59 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 51E2470625B863FC00129C59 /* Kingfisher */; };
 		51E2470C25B864B200129C59 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 51E2470B25B864B200129C59 /* Alamofire */; };
 		51F2E204256C783E004471D7 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F2E203256C783E004471D7 /* AddFriendsViewController.swift */; };
-		51F2E206256C8191004471D7 /* PostThumbImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F2E205256C8191004471D7 /* PostThumbImageCell.swift */; };
+		51F2E206256C8191004471D7 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F2E205256C8191004471D7 /* ProfileCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,8 +92,9 @@
 		51C317FE25751239000AD65E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		51C318032576591E000AD65E /* UIImageView+SetRounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+SetRounded.swift"; sourceTree = "<group>"; };
 		51C31807257659B7000AD65E /* String+IsValid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+IsValid.swift"; sourceTree = "<group>"; };
+		51DEF3A225C7368000D26C01 /* FriendPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		51F2E203256C783E004471D7 /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
-		51F2E205256C8191004471D7 /* PostThumbImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostThumbImageCell.swift; sourceTree = "<group>"; };
+		51F2E205256C8191004471D7 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,9 +149,10 @@
 		2034DE222576D3E7004591ED /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				51F2E205256C8191004471D7 /* PostThumbImageCell.swift */,
+				51F2E205256C8191004471D7 /* ProfileCollectionViewCell.swift */,
 				5112722D257124600010351D /* TapeTableViewCell.swift */,
 				5187ADC025BD86C8000A711B /* FriendSearchTableViewCell.swift */,
+				51DEF3A225C7368000D26C01 /* FriendPhotoCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -391,8 +394,9 @@
 				511BE83B2598C71900F30A08 /* UIImageView+LoadUsingUrl.swift in Sources */,
 				51BAF8BB2565E0DC004EAAEE /* InstagramResponseParser.swift in Sources */,
 				51208E8E259BB82900BE016B /* FullScreenPhotoViewController.swift in Sources */,
-				51F2E206256C8191004471D7 /* PostThumbImageCell.swift in Sources */,
+				51F2E206256C8191004471D7 /* ProfileCollectionViewCell.swift in Sources */,
 				51BAF8B325640668004EAAEE /* ProfileViewController.swift in Sources */,
+				51DEF3A325C7368100D26C01 /* FriendPhotoCollectionViewCell.swift in Sources */,
 				513C161B2560C12B00092875 /* UserLoadDataManager.swift in Sources */,
 				51C31808257659B7000AD65E /* String+IsValid.swift in Sources */,
 				5112722E257124600010351D /* TapeTableViewCell.swift in Sources */,
