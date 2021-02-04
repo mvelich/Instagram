@@ -33,7 +33,6 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         photoGridCollectionView.dataSource = self
@@ -45,32 +44,33 @@ class ProfileViewController: UIViewController {
         self.view.showSpinner()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.Segue.editProfileSegueIdentifier.rawValue {
-            if let editProfileVC = segue.destination as? EditProfileViewController {
-                if let status = userStatus.text {
-                    editProfileVC.currentProfileStatus = status
-                }
-            }
-        }
-        
-        if segue.identifier == Constants.Segue.fullScreenSegueIdentifier.rawValue {
-            if let fullScreenVC = segue.destination as? FullScreenPhotoViewController {
-                if let cell = sender as? UICollectionViewCell,
-                   let indexPath = self.photoGridCollectionView.indexPath(for: cell){
-                    let image = ImageCache.default.retrieveImageInMemoryCache(forKey: imagesArray[indexPath.item].absoluteString)
-                    fullScreenVC.fullScreenImage = image
-                }
-            }
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     @IBAction func editProfilePressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: Constants.Segue.editProfileSegueIdentifier.rawValue, sender: self)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let editProfileVC = storyboard.instantiateViewController(identifier: Constants.Segue.editProfileSegueIdentifier.rawValue) as? EditProfileViewController else { return }
+        editProfileVC.currentProfileStatus = userStatus.text
+        editProfileVC.callback = { [weak self] in
+            self?.setInitialUserData()
+        }
+        navigationController?.pushViewController(editProfileVC, animated: true)
     }
     
     @IBAction func addPhotoPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: Constants.Segue.addPhotoSegueIdentifier.rawValue, sender: self)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let addPhotoVC = storyboard.instantiateViewController(identifier: Constants.Segue.addPhotoSegueIdentifier.rawValue) as? AddPhotoViewController else { return }
+        addPhotoVC.callback = { [weak self] in
+            self?.setInitialUserData()
+        }
+        navigationController?.pushViewController(addPhotoVC, animated: true)
     }
     
     @IBAction func logOutPressed(_ sender: UIButton) {
@@ -81,11 +81,9 @@ class ProfileViewController: UIViewController {
             
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(signInViewController)
         } catch let signOutError as NSError {
-          print ("Error signing out: %@", signOutError)
+            print ("Error signing out: %@", signOutError)
         }
     }
-    
-    @IBAction func unwind( _ seg: UIStoryboardSegue) { }
     
     func setInitialUserData() {
         guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
@@ -135,7 +133,11 @@ extension ProfileViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: Constants.Segue.fullScreenSegueIdentifier.rawValue, sender: self)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let fullScreenPhotoVC = storyboard.instantiateViewController(identifier: Constants.Segue.fullScreenSegueIdentifier.rawValue) as? FullScreenPhotoViewController else { return }
+        let image = ImageCache.default.retrieveImageInMemoryCache(forKey: imagesArray[indexPath.item].absoluteString)
+        fullScreenPhotoVC.fullScreenImage = image
+        navigationController?.pushViewController(fullScreenPhotoVC, animated: true)
     }
 }
 

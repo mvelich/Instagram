@@ -568,28 +568,16 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jbl-zT-PnS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2782.608695652174" y="120.53571428571428"/>
+            <point key="canvasLocation" x="2730" y="675"/>
         </scene>
-        <!--Add Photo View Controller-->
+        <!--New post-->
         <scene sceneID="6fm-sf-V5g">
             <objects>
-                <viewController id="qAR-Bz-LxK" customClass="AddPhotoViewController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddPhotoViewController" id="qAR-Bz-LxK" customClass="AddPhotoViewController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0xR-aA-PxK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SgD-j4-tuy">
-                                <rect key="frame" x="344" y="20" width="50" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="Done">
-                                    <color key="titleColor" systemColor="systemBlueColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="doneButtonPressed:" destination="PSO-46-WMK" eventType="touchUpInside" id="XlW-QN-P8x"/>
-                                    <segue destination="U78-Ln-myj" kind="unwind" unwindAction="unwind:" id="5Cn-d5-GCN"/>
-                                </connections>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pgY-Jp-eFc">
                                 <rect key="frame" x="148" y="256" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -651,22 +639,24 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1z-9e-0Ha">
-                                <rect key="frame" x="24" y="20" width="60" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelButtonPressed:" destination="qAR-Bz-LxK" eventType="touchUpInside" id="EEg-MW-4ay"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0OQ-fo-Bq9"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" id="9Ri-dP-6pS"/>
+                    <navigationItem key="navigationItem" title="New post" id="9Ri-dP-6pS">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="isp-Da-4pu">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="qAR-Bz-LxK" id="EBP-f5-pO5"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="yke-mi-0Yb">
+                            <color key="tintColor" systemColor="systemBlueColor"/>
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="qAR-Bz-LxK" id="rhZ-CR-5Wq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="descriptionField" destination="Sli-B9-Iqe" id="JXx-Rt-68x"/>
                         <outlet property="locationNameField" destination="HMB-Zj-9yp" id="Q74-jl-hcA"/>
@@ -674,33 +664,32 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6g-rX-TaC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="U78-Ln-myj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2728.985507246377" y="-2252.0089285714284"/>
+            <point key="canvasLocation" x="4761" y="-1636"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="ndk-ws-RY9">
             <objects>
                 <viewController storyboardIdentifier="ProfileViewController" id="lzR-i9-m7e" customClass="ProfileViewController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xee-iJ-4wH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="account name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7jc-f8-uYm">
-                                <rect key="frame" x="16" y="44" width="382" height="24"/>
+                                <rect key="frame" x="16" y="0.0" width="382" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_profile_image" translatesAutoresizingMaskIntoConstraints="NO" id="uLV-FF-vL3">
-                                <rect key="frame" x="16" y="96" width="80" height="80"/>
+                                <rect key="frame" x="16" y="52" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="K2M-8n-Xzd"/>
                                     <constraint firstAttribute="width" secondItem="uLV-FF-vL3" secondAttribute="height" multiplier="1:1" id="S50-V5-9DD"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="b0l-0q-Nar">
-                                <rect key="frame" x="173" y="108.66666666666669" width="225" height="55"/>
+                                <rect key="frame" x="173" y="64.666666666666657" width="225" height="55"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hGV-l1-O5S">
                                         <rect key="frame" x="0.0" y="0.0" width="65" height="50"/>
@@ -712,7 +701,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Posts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YBM-mT-bql">
-                                                <rect key="frame" x="4" y="32.999999999999986" width="57" height="12"/>
+                                                <rect key="frame" x="4" y="33" width="57" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -743,7 +732,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Followers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEb-nV-stB">
-                                                <rect key="frame" x="4" y="32.999999999999986" width="57" height="12"/>
+                                                <rect key="frame" x="4" y="33" width="57" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -774,7 +763,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rjz-bA-wHu">
-                                                <rect key="frame" x="4" y="32.999999999999986" width="57" height="12"/>
+                                                <rect key="frame" x="4" y="33" width="57" height="12"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -798,7 +787,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="JTk-eS-gLY">
-                                <rect key="frame" x="16" y="244.33333333333337" width="382" height="30"/>
+                                <rect key="frame" x="16" y="200.33333333333331" width="382" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35C-hD-85O">
                                         <rect key="frame" x="0.0" y="0.0" width="186" height="30"/>
@@ -816,8 +805,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="editProfilePressed:" destination="lzR-i9-m7e" eventType="touchUpInside" id="bks-Qi-On8"/>
-                                            <segue destination="PSO-46-WMK" kind="show" identifier="EditProfileViewController" id="ljt-IN-Sqz"/>
+                                            <action selector="editProfilePressed:" destination="lzR-i9-m7e" eventType="touchUpInside" id="vdx-Bz-55P"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Awc-Pb-zOe">
@@ -837,13 +825,12 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="addPhotoPressed:" destination="lzR-i9-m7e" eventType="touchUpInside" id="vab-Nw-96k"/>
-                                            <segue destination="qAR-Bz-LxK" kind="show" identifier="AddPhotoViewController" id="cYI-v3-pcj"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hd8-iN-zGO">
-                                <rect key="frame" x="0.0" y="328.33333333333326" width="414" height="484.66666666666674"/>
+                                <rect key="frame" x="0.0" y="284.33333333333326" width="414" height="440.66666666666674"/>
                                 <color key="backgroundColor" systemColor="darkTextColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="s0j-6q-sl1">
                                     <size key="itemSize" width="138" height="138"/>
@@ -879,7 +866,6 @@
                                         <connections>
                                             <outlet property="photoImage" destination="LLZ-Bs-L41" id="MCJ-AP-2Ss"/>
                                             <outlet property="widthCellConstraint" destination="Jpk-Om-bpU" id="2a2-yi-Iou"/>
-                                            <segue destination="o6f-ln-HYP" kind="show" identifier="FullScreenPhotoViewController" id="Bwk-wC-e9b"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -889,7 +875,7 @@
                                 </connections>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XSm-Tb-7Ks">
-                                <rect key="frame" x="16" y="198" width="382" height="20.333333333333343"/>
+                                <rect key="frame" x="16" y="154" width="382" height="20.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" text="user status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kB-UG-Jxg">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="20.333333333333332"/>
@@ -903,7 +889,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EmV-jM-Pif">
-                                <rect key="frame" x="339" y="39.666666666666664" width="59" height="32.999999999999993"/>
+                                <rect key="frame" x="339" y="-4.3333333333333286" width="59" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <state key="normal" title="Log out">
                                     <color key="titleColor" systemColor="systemBlueColor"/>
@@ -939,9 +925,7 @@
                             <constraint firstItem="4C3-Rk-DNf" firstAttribute="trailing" secondItem="XSm-Tb-7Ks" secondAttribute="trailing" constant="16" id="yze-ph-fRM"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="person.circle" catalog="system" id="xUl-ak-Cse">
-                        <color key="badgeColor" systemColor="darkTextColor"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="iDv-4q-eHO"/>
                     <connections>
                         <outlet property="addNewPhotoButton" destination="Awc-Pb-zOe" id="J0i-MA-TWF"/>
                         <outlet property="editProfileButton" destination="35C-hD-85O" id="UFr-rN-uey"/>
@@ -951,45 +935,34 @@
                         <outlet property="profileImage" destination="uLV-FF-vL3" id="JUA-L2-qoC"/>
                         <outlet property="profileName" destination="7jc-f8-uYm" id="eXE-84-Dzb"/>
                         <outlet property="userStatus" destination="9kB-UG-Jxg" id="0sw-Q2-GLf"/>
+                        <segue destination="PSO-46-WMK" kind="show" id="uyn-ex-uEc"/>
+                        <segue destination="qAR-Bz-LxK" kind="show" id="w6R-og-qtB"/>
+                        <segue destination="o6f-ln-HYP" kind="show" id="87u-xL-ZSA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HHJ-D4-WKX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2730.434782608696" y="-1495.3125"/>
+            <point key="canvasLocation" x="3640.579710144928" y="-1495.3125"/>
         </scene>
         <!--Full Screen Photo View Controller-->
         <scene sceneID="vg2-al-tbn">
             <objects>
-                <viewController id="o6f-ln-HYP" customClass="FullScreenPhotoViewController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FullScreenPhotoViewController" id="o6f-ln-HYP" customClass="FullScreenPhotoViewController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kuo-Mf-KQ9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rBb-cy-nyi">
-                                <rect key="frame" x="0.0" y="86" width="414" height="492"/>
+                                <rect key="frame" x="0.0" y="85" width="414" height="410"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWo-i7-jh3">
-                                <rect key="frame" x="16" y="16" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="B7R-ay-j6G"/>
-                                    <constraint firstAttribute="width" secondItem="AWo-i7-jh3" secondAttribute="height" multiplier="1:1" id="gz9-Nx-6eA"/>
-                                </constraints>
-                                <state key="normal" image="back_icon"/>
-                                <connections>
-                                    <action selector="backToLogin:" destination="JdF-Dn-3w0" eventType="touchUpInside" id="7Tw-rw-Fjo"/>
-                                    <action selector="backToProfile:" destination="o6f-ln-HYP" eventType="touchUpInside" id="30E-sr-p0v"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YKe-Sq-Hi3"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YKe-Sq-Hi3" firstAttribute="trailing" secondItem="rBb-cy-nyi" secondAttribute="trailing" id="D5g-Lh-PJR"/>
                             <constraint firstItem="rBb-cy-nyi" firstAttribute="leading" secondItem="YKe-Sq-Hi3" secondAttribute="leading" id="Iya-Q8-aXd"/>
-                            <constraint firstItem="AWo-i7-jh3" firstAttribute="leading" secondItem="YKe-Sq-Hi3" secondAttribute="leading" constant="16" id="Scg-b0-jtV"/>
-                            <constraint firstItem="rBb-cy-nyi" firstAttribute="top" secondItem="AWo-i7-jh3" secondAttribute="bottom" constant="40" id="bhe-yE-vOx"/>
+                            <constraint firstItem="rBb-cy-nyi" firstAttribute="top" secondItem="YKe-Sq-Hi3" secondAttribute="top" constant="85" id="PTK-16-uYG"/>
                             <constraint firstItem="YKe-Sq-Hi3" firstAttribute="bottom" secondItem="rBb-cy-nyi" secondAttribute="bottom" constant="230" id="mna-sg-UM0"/>
-                            <constraint firstItem="AWo-i7-jh3" firstAttribute="top" secondItem="YKe-Sq-Hi3" secondAttribute="top" constant="16" id="obd-8I-VwK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ZjG-Xe-lbZ"/>
@@ -999,14 +972,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cX-H5-pEI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3851" y="-1394"/>
+            <point key="canvasLocation" x="4760.8695652173919" y="-975"/>
         </scene>
-        <!--Edit Profile View Controller-->
+        <!--Edit Profile-->
         <scene sceneID="mXn-ks-27r">
             <objects>
                 <viewController storyboardIdentifier="EditProfileViewController" id="PSO-46-WMK" customClass="EditProfileViewController" customModule="InstagrammPhoto" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gtP-U0-Y7s">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User status" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3II-8w-cQM">
@@ -1041,17 +1014,6 @@
                                 <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LD3-NG-arG">
-                                <rect key="frame" x="25" y="20" width="60" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelButtonPressed:" destination="PSO-46-WMK" eventType="touchUpInside" id="rPj-GQ-whu"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IxD-ua-dGw">
                                 <rect key="frame" x="296" y="339" width="44" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1060,33 +1022,34 @@
                                     <action selector="selectImagePressed:" destination="PSO-46-WMK" eventType="touchUpInside" id="TJm-qX-dIS"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0GC-2Z-TWj">
-                                <rect key="frame" x="344" y="20" width="50" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="Done">
-                                    <color key="titleColor" systemColor="systemBlueColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="doneButtonPressed:" destination="PSO-46-WMK" eventType="touchUpInside" id="Bwr-nK-jPe"/>
-                                    <segue destination="bkZ-0o-4Fa" kind="unwind" unwindAction="unwind:" id="Y9N-65-kUH"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sMG-fe-Ma0"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" id="CHx-ZE-dXk"/>
+                    <navigationItem key="navigationItem" title="Edit Profile" id="CHx-ZE-dXk">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="viv-8s-PxR">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="PSO-46-WMK" id="AYl-yg-9Dy"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="2Lx-1l-A9v">
+                            <color key="tintColor" systemColor="systemBlueColor"/>
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="PSO-46-WMK" id="5co-0H-2Tj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="doneButton" destination="0GC-2Z-TWj" id="f3l-I6-S22"/>
+                        <outlet property="cancelBarButtonItem" destination="viv-8s-PxR" id="aKP-vj-7i1"/>
+                        <outlet property="doneBarButtonItem" destination="2Lx-1l-A9v" id="uJa-Qm-Nlu"/>
                         <outlet property="profileImageView" destination="4XP-GO-vQ5" id="vKu-da-J2o"/>
                         <outlet property="userStatusField" destination="3II-8w-cQM" id="aeZ-R3-0Xh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IzP-D6-W60" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="bkZ-0o-4Fa" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3851" y="-2208"/>
+            <point key="canvasLocation" x="4761" y="-2323"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="Grx-dG-kps">
@@ -1100,7 +1063,7 @@
                     <connections>
                         <segue destination="FBF-33-mUT" kind="relationship" relationship="viewControllers" id="ZIv-cR-xwE"/>
                         <segue destination="VPi-eW-ybm" kind="relationship" relationship="viewControllers" id="FkB-fc-vpy"/>
-                        <segue destination="lzR-i9-m7e" kind="relationship" relationship="viewControllers" id="Uwp-V3-PIt"/>
+                        <segue destination="FMT-TG-emD" kind="relationship" relationship="viewControllers" id="Uwp-V3-PIt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3JK-ay-pYq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1191,7 +1154,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="50i-ae-ekA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3640.579710144928" y="-656.25"/>
+            <point key="canvasLocation" x="3641" y="-271"/>
         </scene>
         <!--Nickname-->
         <scene sceneID="DrC-xi-bz2">
@@ -1426,7 +1389,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bGL-wl-IhM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4498.5507246376819" y="-656.25"/>
+            <point key="canvasLocation" x="4496" y="-271"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9vW-1D-FRW">
@@ -1456,7 +1419,33 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q1H-Me-i5N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2730.434782608696" y="-656.25"/>
+            <point key="canvasLocation" x="2729" y="-271"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zn3-I7-0hM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FMT-TG-emD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="person.circle" catalog="system" id="xUl-ak-Cse">
+                        <color key="badgeColor" systemColor="darkTextColor"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="uNd-EY-G2T">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lzR-i9-m7e" kind="relationship" relationship="rootViewController" id="5cI-lZ-itf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qMm-Vi-Zgf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2622" y="-1495"/>
         </scene>
     </scenes>
     <resources>

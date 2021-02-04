@@ -15,10 +15,13 @@ class EditProfileViewController: UIViewController {
     
     var imagePicker = UIImagePickerController()
     var currentProfileStatus: String?
+    var callback: (() -> ())?
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userStatusField: UITextField!
-    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var doneBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var cancelBarButtonItem: UIBarButtonItem!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +30,11 @@ class EditProfileViewController: UIViewController {
         profileImageView.setRounded()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let profileVc = segue.destination as! ProfileViewController
-        
+    @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         guard self.userStatusField.text != currentProfileStatus || self.profileImageView.image != nil else {
             dismiss(animated: true, completion: nil)
             return
@@ -57,7 +62,7 @@ class EditProfileViewController: UIViewController {
                         } else {
                             print("Document successfully updated!")
                         }
-                        profileVc.setInitialUserData()
+                        self.callback?()
                     }
                 }
             }
@@ -70,10 +75,11 @@ class EditProfileViewController: UIViewController {
                 } else {
                     print("Document successfully updated!")
                 }
-                profileVc.setInitialUserData()
+                self.callback?()
             }
         }
-        profileVc.view.showSpinner()
+        self.navigationController?.popViewController(animated: true)
+        // profileVc.view.showSpinner() - try to make spinner instead of done button
     }
     
     @IBAction func selectImagePressed(_ sender: UIButton) {
@@ -112,11 +118,6 @@ class EditProfileViewController: UIViewController {
         }
     }
     
-    @IBAction func cancelButtonPressed(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func doneButtonPressed(_ sender: UIButton) { }
 }
 
 // MARK: - UIImagePickerControllerDelegate
