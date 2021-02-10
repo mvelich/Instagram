@@ -38,6 +38,7 @@
 		51C318042576591E000AD65E /* UIImageView+SetRounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C318032576591E000AD65E /* UIImageView+SetRounded.swift */; };
 		51C31808257659B7000AD65E /* String+IsValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C31807257659B7000AD65E /* String+IsValid.swift */; };
 		51DEF3A325C7368100D26C01 /* FriendPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DEF3A225C7368000D26C01 /* FriendPhotoCollectionViewCell.swift */; };
+		51DEF3AF25D46CD500D26C01 /* UINavigationItem+ShowActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DEF3AE25D46CD400D26C01 /* UINavigationItem+ShowActivityIndicator.swift */; };
 		51E246FE25B862E200129C59 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 51E246FD25B862E200129C59 /* FirebaseAuth */; };
 		51E2470025B862E200129C59 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 51E246FF25B862E200129C59 /* FirebaseFirestore */; };
 		51E2470225B862E200129C59 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 51E2470125B862E200129C59 /* FirebaseStorage */; };
@@ -93,6 +94,7 @@
 		51C318032576591E000AD65E /* UIImageView+SetRounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+SetRounded.swift"; sourceTree = "<group>"; };
 		51C31807257659B7000AD65E /* String+IsValid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+IsValid.swift"; sourceTree = "<group>"; };
 		51DEF3A225C7368000D26C01 /* FriendPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		51DEF3AE25D46CD400D26C01 /* UINavigationItem+ShowActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+ShowActivityIndicator.swift"; sourceTree = "<group>"; };
 		51F2E203256C783E004471D7 /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		51F2E205256C8191004471D7 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -255,6 +257,7 @@
 				511B284F25BB5C5400D88A2B /* LeftAlignmentFlowLayout.swift */,
 				511B285325BC046300D88A2B /* UITableView+ScrollToTop.swift */,
 				517ECED825C2081000CC10CE /* UIButton+AddGreyBorder.swift */,
+				51DEF3AE25D46CD400D26C01 /* UINavigationItem+ShowActivityIndicator.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51DEF3AF25D46CD500D26C01 /* UINavigationItem+ShowActivityIndicator.swift in Sources */,
 				511BE8352598A92A00F30A08 /* AddPhotoViewController.swift in Sources */,
 				511B285425BC046300D88A2B /* UITableView+ScrollToTop.swift in Sources */,
 				5187ADC525C06BA7000A711B /* UniqUserProfileViewController.swift in Sources */,

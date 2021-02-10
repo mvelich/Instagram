@@ -56,38 +56,10 @@ class AddPhotoViewController: UIViewController {
                 }
             }
         }
-        // profileVc.view.showSpinner() - add spinner to done button
-        navigationController?.popViewController(animated: true)
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard self.newImageView.image != nil else {
-            dismiss(animated: true, completion: nil)
-            return
-        }
         
-        let profileVc = segue.destination as! ProfileViewController
-        guard let data = self.newImageView.image?.pngData() else { return }
-        let imageLocation = Storage.storage().reference().child("\(UUID().uuidString)")
-        imageLocation.putData(data, metadata: nil) { (_, error) in
-            
-            imageLocation.downloadURL { (url, error) in
-                guard let downloadURL = url else { return }
-                
-                guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
-                Firestore.firestore().collection("users").document(currentUserUid).collection("photos").addDocument(data: [
-                    "image": "\(downloadURL)",
-                    "location": "\(self.locationNameField.text ?? "")",
-                    "description": "\(self.descriptionField.text ?? "")",
-                    "likes": 0,
-                    "date": Date()
-                ]) { err in
-                    if let err = err {
-                        print("Error adding document: \(err.localizedDescription)")
-                    }
-                }
-            }
+        navigationItem.showRightButtonActivityIndicator {
+            self.navigationController?.popViewController(animated: true)
         }
-        profileVc.view.showSpinner()
     }
     
     @IBAction func selectButtonPressed(_ sender: UIButton) {

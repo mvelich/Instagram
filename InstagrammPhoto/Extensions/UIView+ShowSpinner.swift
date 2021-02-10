@@ -11,9 +11,9 @@ import UIKit
 extension UIView {
     
     func showSpinner() {
-        let spinner = UIActivityIndicatorView(style: .large)
+        let spinner = UIActivityIndicatorView(style: .medium)
         spinner.backgroundColor = UIColor(white: 0, alpha: 0.8)
-        spinner.color = .red
+        spinner.color = .white
         self.addSubview(spinner)
         spinner.frame = self.frame
         let delay = 4

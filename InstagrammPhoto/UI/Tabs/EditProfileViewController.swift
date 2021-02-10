@@ -36,7 +36,7 @@ class EditProfileViewController: UIViewController {
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         guard self.userStatusField.text != currentProfileStatus || self.profileImageView.image != nil else {
-            dismiss(animated: true, completion: nil)
+            navigationController?.popViewController(animated: true)
             return
         }
         
@@ -78,8 +78,10 @@ class EditProfileViewController: UIViewController {
                 self.callback?()
             }
         }
-        self.navigationController?.popViewController(animated: true)
-        // profileVc.view.showSpinner() - try to make spinner instead of done button
+        
+        navigationItem.showRightButtonActivityIndicator {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func selectImagePressed(_ sender: UIButton) {
@@ -117,7 +119,6 @@ class EditProfileViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
 }
 
 // MARK: - UIImagePickerControllerDelegate

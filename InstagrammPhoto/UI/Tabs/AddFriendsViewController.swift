@@ -134,5 +134,6 @@ extension AddFriendsViewController: UITableViewDelegate {
             uniqUserProfileVC.userStatus = user.userStatus
             self.navigationController?.pushViewController(uniqUserProfileVC, animated: true)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
