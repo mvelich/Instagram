@@ -15,12 +15,10 @@ import FirebaseStorage
 class UserLoadDataManager {
     
     var user = User()
-    private var userPhotos = [UserPhoto()]
-    private let db = Firestore.firestore()
-    private let currentUserUid = Auth.auth().currentUser?.uid    
     
     func fetchUserAccountData() {
-        db.collection("users").document(currentUserUid!).getDocument() { (document, err) in
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(currentUserUid).getDocument() { (document, err) in
             if let err = err {
                 print("Error getting document: \(err)")
             } else {
@@ -32,7 +30,9 @@ class UserLoadDataManager {
     }
     
     func getUserPhotos() {
-        db.collection("users").document(currentUserUid!).collection("photos").getDocuments { [self] (querySnapshot, err) in
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        var userPhotos = [UserPhoto()]
+        Firestore.firestore().collection("users").document(currentUserUid).collection("photos").getDocuments { [self] (querySnapshot, err) in
             if let err = err {
                 print("Error getting document: \(err)")
             } else {
@@ -43,9 +43,9 @@ class UserLoadDataManager {
                     photo.location = (document.get("location") as? String)
                     photo.description = (document.get("description") as? String)
                     photo.date = (document.get("date") as! Date)
-                    self.userPhotos.append(photo)
+                    userPhotos.append(photo)
                 }
-                self.user.photos = self.userPhotos
+                self.user.photos = userPhotos
             }
         }
     }

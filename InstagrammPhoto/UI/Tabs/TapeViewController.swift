@@ -17,6 +17,12 @@ class TapeViewController: UIViewController {
     private var photoCellArray = [UserPhoto]()
     private var userData = User()
     
+    @IBOutlet weak var instLogoBarButtonItem: UIBarButtonItem! {
+        didSet {
+            instLogoBarButtonItem.imageInsets = UIEdgeInsets(top: 0, left: -75, bottom: 0, right: 0); // TODO - fix left alignment according to all screens
+        }
+    }
+    
     @IBOutlet weak var tapeTableView: UITableView!
     
     override func viewDidLoad() {
@@ -25,15 +31,17 @@ class TapeViewController: UIViewController {
         tapeTableView.delegate = self
         setInitialPhotoTapeData()
         setInitialUserTapeData()
-        CommonFunctions.showSpinner(self.view)
+        self.view.showSpinner()
     }
     
     @IBAction func reloadTapePressed(_ sender: UIBarButtonItem) {
         setInitialPhotoTapeData()
+        tapeTableView.scrollToTop(animated: true)
     }
     
     func setInitialUserTapeData() {
-        Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).getDocument() { (document, err) in
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(currentUserUid).getDocument() { (document, err) in
             if let err = err {
                 print("Error getting document: \(err)")
             } else {
@@ -47,14 +55,16 @@ class TapeViewController: UIViewController {
     }
     
     func setInitialPhotoTapeData() {
-        Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).collection("photos").getDocuments { (querySnapshot, err) in
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(currentUserUid).collection("photos").getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting document: \(err)")
             } else {
                 self.photoCellArray.removeAll()
-                for document in querySnapshot!.documents {
+                guard let dataSnapShot = querySnapshot?.documents else { return }
+                for document in dataSnapShot {
                     var photo = UserPhoto()
-                    photo.image = URL(string: (document.get("image") as? String)!)
+                    photo.image = URL(string: document.get("image") as! String)
                     photo.likes = (document.get("likes") as? Int)
                     photo.location = (document.get("location") as? String)
                     photo.description = (document.get("description") as? String)
@@ -77,7 +87,7 @@ extension TapeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tapeTableView.dequeueReusableCell(withIdentifier: Constants.Cell.reusableTableCellIdentifier, for: indexPath) as! TapeTableViewCell
+        let cell = tapeTableView.dequeueReusableCell(withIdentifier: Constants.Cell.reusableTableCellIdentifier.rawValue, for: indexPath) as! TapeTableViewCell
         // photo data
         photoCellArray = photoCellArray.sorted(by: {
             $0.date.compare($1.date) == .orderedDescending
@@ -85,7 +95,7 @@ extension TapeViewController: UITableViewDataSource {
         let photoCellObject = photoCellArray[indexPath.row]
         let url = photoCellObject.image
         cell.tapeImgae.kf.setImage(with: url)
-        cell.likeLabel.text = String(photoCellObject.likes!)
+        cell.likeLabel.text = String(photoCellObject.likes ?? 0)
         cell.place.text = photoCellObject.location
         cell.imageDescription.text = photoCellObject.description
         // user data
@@ -94,10 +104,6 @@ extension TapeViewController: UITableViewDataSource {
         let urlProfileImage = userData.profileImage
         cell.userProfileImage.kf.setImage(with: urlProfileImage)
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 700
     }
 }
 

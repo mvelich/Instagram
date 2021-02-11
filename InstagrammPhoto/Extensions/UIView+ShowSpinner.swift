@@ -1,21 +1,21 @@
 //
-//  CommonFunctions.swift
+//  UIView+ShowSpinner.swift
 //  InstagrammPhoto
 //
-//  Created by Maksim Velich on 16.01.21.
+//  Created by Alex Rybchinsky on 19.01.21.
 //  Copyright © 2021 Maksim Velich. All rights reserved.
 //
 
 import UIKit
 
-class CommonFunctions {
+extension UIView {
     
-    static func showSpinner(_ view: UIView) {
-        let spinner = UIActivityIndicatorView(style: .large)
+    func showSpinner() {
+        let spinner = UIActivityIndicatorView(style: .medium)
         spinner.backgroundColor = UIColor(white: 0, alpha: 0.8)
-        spinner.color = .red
-        view.addSubview(spinner)
-        spinner.frame = view.frame
+        spinner.color = .white
+        self.addSubview(spinner)
+        spinner.frame = self.frame
         let delay = 4
         spinner.startAnimating()
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay)) {

@@ -18,8 +18,4 @@ class FullScreenPhotoViewController: UIViewController {
         super.viewDidLoad()
         fullScreenImageView.image = fullScreenImage
     }
-    
-    @IBAction func backToProfile(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
 }

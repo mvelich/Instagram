@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PostThumbImageCell: UICollectionViewCell {
+class ProfileCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var widthCellConstraint: NSLayoutConstraint! {

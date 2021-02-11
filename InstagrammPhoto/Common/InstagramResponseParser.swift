@@ -12,19 +12,15 @@ import Alamofire
 class InstagramResponseParser {
     
     func getInstagrammResponse(userNickName: String) {
-        
         AF.request("https://www.instagram.com/\(userNickName)/?__a=1").responseJSON { response in
-            
+            guard let responseData = response.data else { return }
             switch (response.result) {
             case .success( _):
-                
                 do {
-                    let json = try JSONDecoder().decode(RawServerResponse.Root.self, from: response.data!)
-                    
+                    let json = try JSONDecoder().decode(RawServerResponse.Root.self, from: responseData)
                 } catch let error as NSError {
                     print("Failed to load: \(error.localizedDescription)")
                 }
-                
             case .failure(let error):
                 print("Request error: \(error.localizedDescription)")
             }

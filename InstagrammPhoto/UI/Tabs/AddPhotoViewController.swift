@@ -6,7 +6,6 @@
 //  Copyright © 2020 Maksim Velich. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Firebase
 import FirebaseStorage
@@ -14,6 +13,7 @@ import FirebaseStorage
 class AddPhotoViewController: UIViewController {
     
     var imagePicker = UIImagePickerController()
+    var callback: (() -> ())?
     
     @IBOutlet weak var newImageView: UIImageView!
     @IBOutlet weak var locationNameField: UITextField!
@@ -24,24 +24,26 @@ class AddPhotoViewController: UIViewController {
         imagePicker.delegate = self
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         guard self.newImageView.image != nil else {
-            dismiss(animated: true, completion: nil)
+            navigationController?.popViewController(animated: true)
             return
         }
         
-        let profileVc = segue.destination as! ProfileViewController
-        let data = self.newImageView.image!.pngData()
+        guard let data = self.newImageView.image?.pngData() else { return }
         let imageLocation = Storage.storage().reference().child("\(UUID().uuidString)")
-        imageLocation.putData(data!, metadata: nil) { (_, error) in
+        imageLocation.putData(data, metadata: nil) { (_, error) in
             
             imageLocation.downloadURL { (url, error) in
-                guard let downloadURL = url else {
-                    print("There is no download URL")
-                    return
-                }
+                guard let downloadURL = url else { return }
                 
-                Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).collection("photos").addDocument(data: [
+                guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+                Firestore.firestore().collection("users").document(currentUserUid).collection("photos").addDocument(data: [
                     "image": "\(downloadURL)",
                     "location": "\(self.locationNameField.text ?? "")",
                     "description": "\(self.descriptionField.text ?? "")",
@@ -49,14 +51,15 @@ class AddPhotoViewController: UIViewController {
                     "date": Date()
                 ]) { err in
                     if let err = err {
-                        print("Error adding document: \(err)")
-                    } else {
-                        profileVc.updateProfilePhotos()
+                        print("Error adding document: \(err.localizedDescription)")
                     }
                 }
             }
         }
-        CommonFunctions.showSpinner(profileVc.view)
+        
+        navigationItem.showRightButtonActivityIndicator {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func selectButtonPressed(_ sender: UIButton) {
@@ -69,10 +72,6 @@ class AddPhotoViewController: UIViewController {
         }))
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    @IBAction func cancelButtonPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
     }
     
     func openCamera() {

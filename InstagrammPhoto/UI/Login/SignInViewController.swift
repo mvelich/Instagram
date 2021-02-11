@@ -12,28 +12,39 @@ import FirebaseAuth
 class SignInViewController: UIViewController {
     
     @IBOutlet weak var mainInstLogo: UIImageView!
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField! {
+        didSet {
+            usernameTextField?.delegate = self
+            usernameTextField.addTarget(self, action: #selector(textFieldsIsNotEmpty), for: .editingChanged)
+            usernameTextField.attributedPlaceholder = NSAttributedString(
+                string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+        }
+    }
+    @IBOutlet weak var passwordTextField: UITextField! {
+        didSet {
+            passwordTextField?.delegate = self
+            passwordTextField.addTarget(self, action: #selector(textFieldsIsNotEmpty), for: .editingChanged)
+            passwordTextField.attributedPlaceholder = NSAttributedString(
+                string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+        }
+    }
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var informLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addTargetToFields()
-        addPlaceholderFieldsConfig()
-        
-        usernameField?.delegate = self
-        passwordField?.delegate = self
+       
         #if DEBUG
-        usernameField.text = "test@corevist.com"
-        passwordField.text = "123456"
-        textFieldsIsNotEmpty(passwordField)
+        usernameTextField.text = "test@corevist.com"
+        passwordTextField.text = "123456"
+        textFieldsIsNotEmpty(passwordTextField)
         #endif
     }
     
     @IBAction func signInButtonPressed(_ sender: UIButton) {
-        Auth.auth().signIn(withEmail: usernameField.text!, password: passwordField.text!) { (result, error) in
+        guard let userName = usernameTextField.text, let password = passwordTextField.text else { return }
+        Auth.auth().signIn(withEmail: userName, password: password) { (result, error) in
             if error != nil {
                 self.informLabel.text = "Name or password are incorrect!"
                 self.informLabel.textColor = .red
@@ -46,17 +57,7 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: Constants.Segue.signUpSegueIdentifier, sender: self)
-    }
-    
-    func addTargetToFields() {
-        usernameField.addTarget(self, action: #selector(textFieldsIsNotEmpty), for: .editingChanged)
-        passwordField.addTarget(self, action: #selector(textFieldsIsNotEmpty), for: .editingChanged)
-    }
-    
-    func addPlaceholderFieldsConfig() {
-        usernameField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
-        passwordField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+        performSegue(withIdentifier: Constants.Segue.signUpSegueIdentifier.rawValue, sender: self)
     }
 }
 
@@ -67,7 +68,7 @@ extension SignInViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textField.text == "" {
+        if textField.text?.isEmpty == true {
             signInButton.isEnabled = false
             signInButton.alpha = 0.5
         }
@@ -78,8 +79,8 @@ extension SignInViewController: UITextFieldDelegate {
         textField.text = textField.text?.trimmingCharacters(in: .whitespaces)
         
         guard
-            let name = usernameField.text, !name.isEmpty,
-            let password = passwordField.text, !password.isEmpty
+            let name = usernameTextField.text, !name.isEmpty,
+            let password = passwordTextField.text, !password.isEmpty
         else {
             self.signInButton.isEnabled = false
             self.signInButton.alpha = 0.5

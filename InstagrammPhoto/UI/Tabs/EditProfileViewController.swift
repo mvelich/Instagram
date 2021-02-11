@@ -6,7 +6,6 @@
 //  Copyright © 2020 Maksim Velich. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Firebase
 import FirebaseAuth
@@ -16,10 +15,13 @@ class EditProfileViewController: UIViewController {
     
     var imagePicker = UIImagePickerController()
     var currentProfileStatus: String?
+    var callback: (() -> ())?
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userStatusField: UITextField!
-    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var doneBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var cancelBarButtonItem: UIBarButtonItem!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,18 +30,22 @@ class EditProfileViewController: UIViewController {
         profileImageView.setRounded()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let profileVc = segue.destination as! ProfileViewController
-        
+    @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         guard self.userStatusField.text != currentProfileStatus || self.profileImageView.image != nil else {
-            dismiss(animated: true, completion: nil)
+            navigationController?.popViewController(animated: true)
             return
         }
         
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        
         if let profileImage = self.profileImageView.image {
-            let data = profileImage.pngData()
+            guard let data = profileImage.pngData() else { return }
             let imageLocation = Storage.storage().reference().child("profile_images").child("\(UUID().uuidString)")
-            imageLocation.putData(data!, metadata: nil) { (_, error) in
+            imageLocation.putData(data, metadata: nil) { (_, error) in
                 
                 imageLocation.downloadURL { (url, error) in
                     guard let downloadURL = url else {
@@ -47,8 +53,8 @@ class EditProfileViewController: UIViewController {
                         return
                     }
                     
-                    Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).updateData([
-                        "user_status": "\(self.userStatusField.text!)",
+                    Firestore.firestore().collection("users").document(currentUserUid).updateData([
+                        "user_status": "\(self.userStatusField.text ?? "")",
                         "profile_image": "\(downloadURL)"
                     ]) { err in
                         if let err = err {
@@ -56,23 +62,26 @@ class EditProfileViewController: UIViewController {
                         } else {
                             print("Document successfully updated!")
                         }
-                        profileVc.setInitialUserData()
+                        self.callback?()
                     }
                 }
             }
         } else {
-            Firestore.firestore().collection("users").document(Auth.auth().currentUser!.uid).updateData([
-                "user_status": "\(self.userStatusField.text!)",
+            Firestore.firestore().collection("users").document(currentUserUid).updateData([
+                "user_status": "\(self.userStatusField.text ?? "")",
             ]) { err in
                 if let err = err {
                     print("Error updating document: \(err)")
                 } else {
                     print("Document successfully updated!")
                 }
-                profileVc.setInitialUserData()
+                self.callback?()
             }
         }
-        CommonFunctions.showSpinner(profileVc.view)
+        
+        navigationItem.showRightButtonActivityIndicator {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func selectImagePressed(_ sender: UIButton) {
@@ -110,12 +119,6 @@ class EditProfileViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
-    @IBAction func cancelButtonPressed(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func doneButtonPressed(_ sender: UIButton) { }
 }
 
 // MARK: - UIImagePickerControllerDelegate
