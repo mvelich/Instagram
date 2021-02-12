@@ -43,7 +43,7 @@ class EditProfileViewController: UIViewController {
         guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
         
         if let profileImage = self.profileImageView.image {
-            guard let data = profileImage.pngData() else { return }
+            guard let data = profileImage.jpegData(compressionQuality: 0.5) else { return }
             let imageLocation = Storage.storage().reference().child("profile_images").child("\(UUID().uuidString)")
             imageLocation.putData(data, metadata: nil) { (_, error) in
                 

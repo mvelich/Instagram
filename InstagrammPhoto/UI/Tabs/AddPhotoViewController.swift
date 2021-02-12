@@ -35,7 +35,7 @@ class AddPhotoViewController: UIViewController {
             return
         }
         
-        guard let data = self.newImageView.image?.pngData() else { return }
+        guard let data = self.newImageView.image?.jpegData(compressionQuality: 0.5) else { return }
         let imageLocation = Storage.storage().reference().child("\(UUID().uuidString)")
         imageLocation.putData(data, metadata: nil) { (_, error) in
             
