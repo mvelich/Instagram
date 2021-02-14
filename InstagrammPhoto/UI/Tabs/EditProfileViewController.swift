@@ -11,23 +11,40 @@ import Firebase
 import FirebaseAuth
 import FirebaseStorage
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: UITableViewController {
     
     var imagePicker = UIImagePickerController()
     var currentProfileStatus: String?
+    var currentProfileImage: UIImage?
     var callback: (() -> ())?
     
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var userStatusField: UITextField!
-    @IBOutlet weak var doneBarButtonItem: UIBarButtonItem!
-    @IBOutlet weak var cancelBarButtonItem: UIBarButtonItem!
-    
+    @IBOutlet weak var profileImageView: UIImageView! {
+        didSet {
+            profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileImageViewTapped)))
+        }
+    }
+    @IBOutlet weak var userStatusTextField: UITextField! {
+        didSet {
+            userStatusTextField?.delegate = self
+            userStatusTextField.attributedPlaceholder = NSAttributedString(
+                string: "Status", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+        }
+    }
+    @IBOutlet weak var userNameTextField: UITextField! {
+        didSet {
+            userNameTextField?.delegate = self
+            userNameTextField.attributedPlaceholder = NSAttributedString(
+                string: "Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userStatusField.text = currentProfileStatus
+        userStatusTextField.text = currentProfileStatus
+        profileImageView.image = currentProfileImage
         imagePicker.delegate = self
         profileImageView.setRounded()
+        tableView.tableFooterView = UIView()
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
@@ -35,7 +52,7 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-        guard self.userStatusField.text != currentProfileStatus || self.profileImageView.image != nil else {
+        guard self.userStatusTextField.text != currentProfileStatus || self.profileImageView.image != currentProfileImage else {
             navigationController?.popViewController(animated: true)
             return
         }
@@ -54,7 +71,7 @@ class EditProfileViewController: UIViewController {
                     }
                     
                     Firestore.firestore().collection("users").document(currentUserUid).updateData([
-                        "user_status": "\(self.userStatusField.text ?? "")",
+                        "user_status": "\(self.userStatusTextField.text ?? "")",
                         "profile_image": "\(downloadURL)"
                     ]) { err in
                         if let err = err {
@@ -68,7 +85,7 @@ class EditProfileViewController: UIViewController {
             }
         } else {
             Firestore.firestore().collection("users").document(currentUserUid).updateData([
-                "user_status": "\(self.userStatusField.text ?? "")",
+                "user_status": "\(self.userStatusTextField.text ?? "")",
             ]) { err in
                 if let err = err {
                     print("Error updating document: \(err)")
@@ -84,7 +101,15 @@ class EditProfileViewController: UIViewController {
         }
     }
     
+    @objc private func profileImageViewTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        showAlertController()
+    }
+    
     @IBAction func selectImagePressed(_ sender: UIButton) {
+        showAlertController()
+    }
+    
+    func showAlertController() {
         let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
             self.openCamera()
@@ -127,5 +152,13 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[.editedImage] as? UIImage else { return }
         self.profileImageView.image = image
+    }
+}
+
+//MARK: - UITextFieldDelegate
+extension EditProfileViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

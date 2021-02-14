@@ -58,6 +58,7 @@ class ProfileViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let editProfileVC = storyboard.instantiateViewController(identifier: Constants.Segue.editProfileSegueIdentifier.rawValue) as? EditProfileViewController else { return }
         editProfileVC.currentProfileStatus = userStatus.text
+        editProfileVC.currentProfileImage = profileImage.image
         editProfileVC.callback = { [weak self] in
             self?.setInitialUserData()
         }
