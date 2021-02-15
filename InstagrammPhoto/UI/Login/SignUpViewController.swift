@@ -78,35 +78,50 @@ class SignUpViewController: UIViewController {
         }
         
         guard let userName = usernameTextField.text, let password = passwordTextField.text else { return }
-        Auth.auth().createUser(withEmail: userName, password: password) { (result, err) in
-            if err != nil {
-                print("Error during user creation")
-            } else if let result = result {
-                let imageLocation = Storage.storage().reference().child("profile_images").child("default_profile_image.png")
-                
-                imageLocation.downloadURL { url, error in
-                    guard let downloadURL = url else {
-                        print("There is no download URL")
-                        return
-                    }
-                    
-                    guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
-                    Firestore.firestore().collection("users").document(currentUserUid).setData([
-                        "nick_name": self.accountNickNameTextField.text ?? "default name",
-                        "uid": result.user.uid,
-                        "user_status": "",
-                        "profile_image": "\(downloadURL)"
-                    ]) { (error) in
-                        if error != nil {
-                            print("Eror during adding user data")
+        guard let accountNickname = accountNickNameTextField.text else { return }
+    
+        Firestore.firestore().collection("users").whereField("nick_name", isEqualTo: accountNickname).getDocuments { (querysnapshot, error) in
+            if error != nil {
+                print("Error getting documents")
+            } else {
+                if let document = querysnapshot?.documents, !document.isEmpty {
+                    self.informMessage.isHidden = false
+                    self.informMessage.text = "Nickname is already in use!"
+                    self.informMessage.textColor = .red
+                    return
+                } else {
+                    Auth.auth().createUser(withEmail: userName, password: password) { (result, err) in
+                        if err != nil {
+                            print("Error during user creation")
+                        } else if let result = result {
+                            let imageLocation = Storage.storage().reference().child("profile_images").child("default_profile_image.png")
+                            
+                            imageLocation.downloadURL { url, error in
+                                guard let downloadURL = url else {
+                                    print("There is no download URL")
+                                    return
+                                }
+                                
+                                guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+                                Firestore.firestore().collection("users").document(currentUserUid).setData([
+                                    "nick_name": self.accountNickNameTextField.text ?? "default name",
+                                    "uid": result.user.uid,
+                                    "user_status": "",
+                                    "profile_image": "\(downloadURL)"
+                                ]) { (error) in
+                                    if error != nil {
+                                        print("Eror during adding user data")
+                                    }
+                                }
+                            }
+                        } else {
+                            return
                         }
                     }
+                    self.showRegistrationAlert()
                 }
-            } else {
-                return
             }
         }
-        showRegistrationAlert()
     }
     
     func showRegistrationAlert() {
