@@ -15,4 +15,5 @@ struct UserPhoto {
     var location: String?
     var description: String?
     var date: Date = Date()
+    var uid: String?
 }

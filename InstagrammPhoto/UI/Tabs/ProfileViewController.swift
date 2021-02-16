@@ -14,7 +14,7 @@ import Kingfisher
 
 class ProfileViewController: UIViewController {
     
-    private var imagesArray = [URL]()
+    private var photoCellArray = [UserPhoto]()
     
     @IBOutlet weak var photoGridCollectionView: UICollectionView!
     @IBOutlet weak var profileName: UILabel!
@@ -68,9 +68,6 @@ class ProfileViewController: UIViewController {
     @IBAction func addPhotoPressed(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let addPhotoVC = storyboard.instantiateViewController(identifier: Constants.Segue.addPhotoSegueIdentifier.rawValue) as? AddPhotoViewController else { return }
-        addPhotoVC.callback = { [weak self] in
-            self?.setInitialUserData()
-        }
         navigationController?.pushViewController(addPhotoVC, animated: true)
     }
     
@@ -108,10 +105,22 @@ class ProfileViewController: UIViewController {
             if let err = err {
                 print("Error getting document: \(err)")
             } else {
-                self.imagesArray = (querySnapshot?.documents.compactMap { URL(string: $0.get("image") as! String) })!
+                self.photoCellArray.removeAll()
+                guard let dataSnapShot = querySnapshot?.documents else { return }
+                for document in dataSnapShot {
+                    var photo = UserPhoto()
+                    photo.image = URL(string: document.get("image") as! String)
+                    photo.likes = (document.get("likes") as? Int)
+                    photo.location = (document.get("location") as? String)
+                    photo.description = (document.get("description") as? String)
+                    let timestamp = document.get("date") as! Timestamp
+                    photo.date = timestamp.dateValue()
+                    photo.uid = (document.get("uid") as? String)
+                    self.photoCellArray.append(photo)
+                }
                 
                 DispatchQueue.main.async {
-                    self.postNumberLabel.text = String(self.imagesArray.count)
+                    self.postNumberLabel.text = String(self.photoCellArray.count)
                     self.photoGridCollectionView.reloadData()
                 }
             }
@@ -122,13 +131,13 @@ class ProfileViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imagesArray.count
+        return photoCellArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cell.reusableCollectionCellIdentifier.rawValue,
                                                       for: indexPath) as! ProfileCollectionViewCell
-        let url = imagesArray[indexPath.row]
+        let url = photoCellArray[indexPath.row].image
         cell.photoImage.kf.setImage(with: url)
         return cell
     }
@@ -136,8 +145,11 @@ extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let fullScreenPhotoVC = storyboard.instantiateViewController(identifier: Constants.Segue.fullScreenSegueIdentifier.rawValue) as? FullScreenPhotoViewController else { return }
-        let image = ImageCache.default.retrieveImageInMemoryCache(forKey: imagesArray[indexPath.item].absoluteString)
-        fullScreenPhotoVC.fullScreenImage = image
+        
+        guard let pickedImageUrl = photoCellArray[indexPath.item].image else { return }
+        let cachedImage = ImageCache.default.retrieveImageInMemoryCache(forKey: pickedImageUrl.absoluteString)
+        fullScreenPhotoVC.fullScreenImage = cachedImage
+        fullScreenPhotoVC.imageUID = photoCellArray[indexPath.item].uid
         navigationController?.pushViewController(fullScreenPhotoVC, animated: true)
     }
 }

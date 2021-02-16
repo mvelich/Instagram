@@ -13,7 +13,6 @@ import FirebaseStorage
 class AddPhotoViewController: UITableViewController {
     
     let imagePicker = UIImagePickerController()
-    var callback: (() -> ())?
     
     @IBOutlet weak var doneBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var newImageView: UIImageView!
@@ -44,19 +43,21 @@ class AddPhotoViewController: UITableViewController {
         }
         
         guard let data = self.newImageView.image?.jpegData(compressionQuality: 0.5) else { return }
-        let imageLocation = Storage.storage().reference().child("\(UUID().uuidString)")
+        let photoUID = UUID().uuidString
+        let imageLocation = Storage.storage().reference().child("\(photoUID)")
         imageLocation.putData(data, metadata: nil) { (_, error) in
             
             imageLocation.downloadURL { (url, error) in
                 guard let downloadURL = url else { return }
                 
                 guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
-                Firestore.firestore().collection("users").document(currentUserUid).collection("photos").addDocument(data: [
+                Firestore.firestore().collection("users").document(currentUserUid).collection("photos").document(photoUID).setData([
                     "image": "\(downloadURL)",
                     "location": "\(self.locationNameLabel.text ?? "")",
                     "description": "\(self.descriptionField.text ?? "")",
                     "likes": 0,
-                    "date": Date()
+                    "date": Date(),
+                    "uid": photoUID
                 ]) { err in
                     if let err = err {
                         print("Error adding document: \(err.localizedDescription)")

@@ -1023,7 +1023,20 @@
                             <constraint firstItem="YKe-Sq-Hi3" firstAttribute="bottom" secondItem="rBb-cy-nyi" secondAttribute="bottom" constant="230" id="mna-sg-UM0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ZjG-Xe-lbZ"/>
+                    <navigationItem key="navigationItem" id="ZjG-Xe-lbZ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Sfq-aF-VQL">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="closeFullScreenPhotoPressed" destination="o6f-ln-HYP" id="wgc-eT-eqf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="ume-tK-ASY">
+                            <color key="tintColor" systemColor="systemRedColor"/>
+                            <connections>
+                                <action selector="deletePhotoPressed" destination="o6f-ln-HYP" id="N7y-aW-rOR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="fullScreenImageView" destination="rBb-cy-nyi" id="NgG-1y-Erx"/>
                     </connections>
@@ -1644,6 +1657,9 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
