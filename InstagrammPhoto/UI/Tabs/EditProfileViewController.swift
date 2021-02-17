@@ -102,23 +102,31 @@ class EditProfileViewController: UITableViewController {
     }
     
     @objc private func profileImageViewTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        showAlertController()
+        self.showAlert(title: "Select Image", message: nil, alertStyle: .actionSheet, actionTitles: ["Camera", "Gallery", "Cancel"], actionStyles: [.default, .default, .cancel], actions: [
+            {_ in
+                self.openCamera()
+            },
+            {_ in
+                self.openGallery()
+            },
+            {_ in
+                return
+            }
+        ])
     }
     
     @IBAction func selectImagePressed(_ sender: UIButton) {
-        showAlertController()
-    }
-    
-    func showAlertController() {
-        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-            self.openCamera()
-        }))
-        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-            self.openGallery()
-        }))
-        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        self.showAlert(title: "Select Image", message: nil, alertStyle: .actionSheet, actionTitles: ["Camera", "Gallery", "Cancel"], actionStyles: [.default, .default, .cancel], actions: [
+            {_ in
+                self.openCamera()
+            },
+            {_ in
+                self.openGallery()
+            },
+            {_ in
+                return
+            }
+        ])
     }
     
     func openCamera() {
@@ -127,9 +135,7 @@ class EditProfileViewController: UITableViewController {
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         } else {
-            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            self.showAlert(title: "Warning!", message: "Run on real device or give permission", alertStyle: .alert, actionTitles: ["Ok!"], actionStyles: [.default], actions: [{_ in return }])
         }
     }
     
@@ -139,9 +145,7 @@ class EditProfileViewController: UITableViewController {
             imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
             self.present(imagePicker, animated: true, completion: nil)
         } else {
-            let alert  = UIAlertController(title: "Warning", message: "You don't have permission to access gallery.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            self.showAlert(title: "Warning!", message: "You don't have permission to access gallery", alertStyle: .alert, actionTitles: ["Ok!"], actionStyles: [.default], actions: [{_ in return }])
         }
     }
 }

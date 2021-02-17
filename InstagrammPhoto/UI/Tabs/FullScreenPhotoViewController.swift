@@ -26,16 +26,14 @@ class FullScreenPhotoViewController: UIViewController {
     }
     
     @IBAction func deletePhotoPressed() {
-        showDeletionAlert()
-    }
-    
-    func showDeletionAlert() {
-        let alert = UIAlertController(title: "Are you sure?", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: { _ in
-            self.deletePhoto()
-        }))
-        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        self.showAlert(title: "Are you sure?", message: nil, alertStyle: .alert, actionTitles: ["Delete", "Cancel"], actionStyles: [.default, .cancel], actions: [
+            {_ in
+                self.deletePhoto()
+            },
+            {_ in
+               return
+            }
+        ])
     }
     
     func deletePhoto() {

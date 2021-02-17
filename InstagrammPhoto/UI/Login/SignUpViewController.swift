@@ -79,7 +79,7 @@ class SignUpViewController: UIViewController {
         
         guard let userName = usernameTextField.text, let password = passwordTextField.text else { return }
         guard let accountNickname = accountNickNameTextField.text else { return }
-    
+        
         Firestore.firestore().collection("users").whereField("nick_name", isEqualTo: accountNickname).getDocuments { (querysnapshot, error) in
             if error != nil {
                 print("Error getting documents")
@@ -118,16 +118,14 @@ class SignUpViewController: UIViewController {
                             return
                         }
                     }
-                    self.showRegistrationAlert()
+                    self.showAlert(title: "Registration successfully completed", message: "Click Ok! button to proceed", alertStyle: .alert, actionTitles: ["Ok!"], actionStyles: [.default], actions: [
+                        {_ in
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    ])
                 }
             }
         }
-    }
-    
-    func showRegistrationAlert() {
-        let alert = UIAlertController(title: "Registration successfully completed", message: "Click Ok! button to proceed", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: {_ in self.dismiss(animated: true, completion: nil)}))
-        self.present(alert, animated: true, completion: nil)
     }
 }
 
