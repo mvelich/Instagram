@@ -47,6 +47,7 @@
 		51F1EBC325DAF51300236530 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 51F1EBC225DAF51300236530 /* FirebaseCrashlytics */; };
 		51F1EBDA25DAFD6800236530 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 51F1EBD925DAFD6800236530 /* FirebaseAnalytics */; };
 		51F1EBE625DD585200236530 /* UIViewController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F1EBE525DD585200236530 /* UIViewController+ShowAlert.swift */; };
+		51F1EBEA25DD96D700236530 /* UIViewController+PresentPhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F1EBE925DD96D700236530 /* UIViewController+PresentPhotoPicker.swift */; };
 		51F2E204256C783E004471D7 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F2E203256C783E004471D7 /* AddFriendsViewController.swift */; };
 		51F2E206256C8191004471D7 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F2E205256C8191004471D7 /* ProfileCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -99,6 +100,7 @@
 		51DEF3A225C7368000D26C01 /* FriendPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		51DEF3AE25D46CD400D26C01 /* UINavigationItem+ShowActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+ShowActivityIndicator.swift"; sourceTree = "<group>"; };
 		51F1EBE525DD585200236530 /* UIViewController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowAlert.swift"; sourceTree = "<group>"; };
+		51F1EBE925DD96D700236530 /* UIViewController+PresentPhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PresentPhotoPicker.swift"; sourceTree = "<group>"; };
 		51F2E203256C783E004471D7 /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		51F2E205256C8191004471D7 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -266,6 +268,7 @@
 				517ECED825C2081000CC10CE /* UIButton+AddGreyBorder.swift */,
 				51DEF3AE25D46CD400D26C01 /* UINavigationItem+ShowActivityIndicator.swift */,
 				51F1EBE525DD585200236530 /* UIViewController+ShowAlert.swift */,
+				51F1EBE925DD96D700236530 /* UIViewController+PresentPhotoPicker.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				511BE77C257BC62800F30A08 /* EditProfileViewController.swift in Sources */,
 				511BE75B257B23B200F30A08 /* UserPhoto.swift in Sources */,
 				51BAF8B12564064E004EAAEE /* TapeViewController.swift in Sources */,
+				51F1EBEA25DD96D700236530 /* UIViewController+PresentPhotoPicker.swift in Sources */,
 				511BE74D257B21BD00F30A08 /* User.swift in Sources */,
 				511BE83B2598C71900F30A08 /* UIImageView+LoadUsingUrl.swift in Sources */,
 				51F1EBE625DD585200236530 /* UIViewController+ShowAlert.swift in Sources */,

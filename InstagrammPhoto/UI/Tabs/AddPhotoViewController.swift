@@ -70,26 +70,6 @@ class AddPhotoViewController: UITableViewController {
             self.navigationController?.popViewController(animated: true)
         }
     }
-    
-    func openCamera() {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
-            imagePicker.sourceType = UIImagePickerController.SourceType.camera
-            imagePicker.allowsEditing = false
-            self.present(imagePicker, animated: true, completion: nil)
-        } else {
-            self.showAlert(title: "Warning!", message: "Run on real device or give permission", alertStyle: .alert, actionTitles: ["Ok!"], actionStyles: [.default], actions: [{_ in return }])
-        }
-    }
-    
-    func openGallery() {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
-            imagePicker.allowsEditing = true
-            imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-            self.present(imagePicker, animated: true, completion: nil)
-        } else {
-            self.showAlert(title: "Warning!", message: "You don't have permission to access gallery", alertStyle: .alert, actionTitles: ["Ok!"], actionStyles: [.default], actions: [{_ in return }])
-        }
-    }
 }
 
 //MARK: - UIImagePickerControllerDelegate
@@ -115,10 +95,10 @@ extension AddPhotoViewController {
         if indexPath.row == 0 {
             self.showAlert(title: "Select Image", message: nil, alertStyle: .actionSheet, actionTitles: ["Camera", "Gallery", "Cancel"], actionStyles: [.default, .default, .cancel], actions: [
                 {_ in
-                    self.openCamera()
+                    self.presentPhotoPicker(imagePicker: self.imagePicker, sourceType: .camera)
                 },
                 {_ in
-                    self.openGallery()
+                    self.presentPhotoPicker(imagePicker: self.imagePicker, sourceType: .photoLibrary)
                 },
                 {_ in
                     return
