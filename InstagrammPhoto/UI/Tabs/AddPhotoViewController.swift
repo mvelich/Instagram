@@ -31,6 +31,12 @@ class AddPhotoViewController: UITableViewController {
         tableView.tableFooterView = UIView()
     }
     
+    @IBAction func unwind(_ sender: UIStoryboardSegue) {
+        if let senderVC = sender.source as? MapViewController {
+            locationNameLabel.text = senderVC.locationLabel.text
+        }
+    }
+    
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
@@ -50,11 +56,14 @@ class AddPhotoViewController: UITableViewController {
             imageLocation.downloadURL { (url, error) in
                 guard let downloadURL = url else { return }
                 
+                guard let photoDescription = self.descriptionField.text else { return }
+                guard let photoLocation = self.locationNameLabel.text else { return }
+                let rightPhotoLocation = photoLocation != "Add location" ? photoLocation : ""
                 guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
                 Firestore.firestore().collection("users").document(currentUserUid).collection("photos").document(photoUID).setData([
                     "image": "\(downloadURL)",
-                    "location": "\(self.locationNameLabel.text ?? "")",
-                    "description": "\(self.descriptionField.text ?? "")",
+                    "location": "\(rightPhotoLocation)",
+                    "description": "\(photoDescription)",
                     "likes": 0,
                     "date": Date(),
                     "uid": photoUID

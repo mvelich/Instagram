@@ -87,7 +87,7 @@ extension AddFriendsViewController: UISearchResultsUpdating {
     }
     
     private func filterContentForSearchText(_ searchText: String) {
-        filteredUsers = usersArray.filter{ ($0.userName?.contains(searchText))! } // forced unwrap
+        filteredUsers = usersArray.filter{ ($0.userName?.contains(searchText))! }
         searchFriendTableView.reloadData()
     }
 }

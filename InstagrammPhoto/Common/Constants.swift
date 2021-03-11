@@ -14,6 +14,7 @@ struct Constants {
         case editProfileSegueIdentifier = "EditProfileViewController"
         case addPhotoSegueIdentifier = "AddPhotoViewController"
         case uniqUserProfileIdentifier = "UniqUserProfileViewController"
+        case mapViewSegueIdentifier = "MapViewController"
     }
     
     enum Cell: String {

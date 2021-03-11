@@ -37,6 +37,7 @@
 		51C317FF25751239000AD65E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51C317FE25751239000AD65E /* GoogleService-Info.plist */; };
 		51C318042576591E000AD65E /* UIImageView+SetRounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C318032576591E000AD65E /* UIImageView+SetRounded.swift */; };
 		51C31808257659B7000AD65E /* String+IsValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C31807257659B7000AD65E /* String+IsValid.swift */; };
+		51D9663925FA888F001F1BB5 /* UIButton+SetRounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D9663825FA888F001F1BB5 /* UIButton+SetRounded.swift */; };
 		51DEF3A325C7368100D26C01 /* FriendPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DEF3A225C7368000D26C01 /* FriendPhotoCollectionViewCell.swift */; };
 		51DEF3AF25D46CD500D26C01 /* UINavigationItem+ShowActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DEF3AE25D46CD400D26C01 /* UINavigationItem+ShowActivityIndicator.swift */; };
 		51E246FE25B862E200129C59 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 51E246FD25B862E200129C59 /* FirebaseAuth */; };
@@ -48,6 +49,7 @@
 		51F1EBDA25DAFD6800236530 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 51F1EBD925DAFD6800236530 /* FirebaseAnalytics */; };
 		51F1EBE625DD585200236530 /* UIViewController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F1EBE525DD585200236530 /* UIViewController+ShowAlert.swift */; };
 		51F1EBEA25DD96D700236530 /* UIViewController+PresentPhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F1EBE925DD96D700236530 /* UIViewController+PresentPhotoPicker.swift */; };
+		51F1EBF025DDA3B400236530 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F1EBEF25DDA3B400236530 /* MapViewController.swift */; };
 		51F2E204256C783E004471D7 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F2E203256C783E004471D7 /* AddFriendsViewController.swift */; };
 		51F2E206256C8191004471D7 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F2E205256C8191004471D7 /* ProfileCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -97,10 +99,12 @@
 		51C317FE25751239000AD65E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		51C318032576591E000AD65E /* UIImageView+SetRounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+SetRounded.swift"; sourceTree = "<group>"; };
 		51C31807257659B7000AD65E /* String+IsValid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+IsValid.swift"; sourceTree = "<group>"; };
+		51D9663825FA888F001F1BB5 /* UIButton+SetRounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SetRounded.swift"; sourceTree = "<group>"; };
 		51DEF3A225C7368000D26C01 /* FriendPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		51DEF3AE25D46CD400D26C01 /* UINavigationItem+ShowActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+ShowActivityIndicator.swift"; sourceTree = "<group>"; };
 		51F1EBE525DD585200236530 /* UIViewController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowAlert.swift"; sourceTree = "<group>"; };
 		51F1EBE925DD96D700236530 /* UIViewController+PresentPhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PresentPhotoPicker.swift"; sourceTree = "<group>"; };
+		51F1EBEF25DDA3B400236530 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		51F2E203256C783E004471D7 /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		51F2E205256C8191004471D7 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +152,7 @@
 				51BAF8B225640668004EAAEE /* ProfileViewController.swift */,
 				511BE77B257BC62800F30A08 /* EditProfileViewController.swift */,
 				511BE8342598A92900F30A08 /* AddPhotoViewController.swift */,
+				51F1EBEF25DDA3B400236530 /* MapViewController.swift */,
 				51208E8D259BB82900BE016B /* FullScreenPhotoViewController.swift */,
 				51F2E203256C783E004471D7 /* AddFriendsViewController.swift */,
 				5187ADC425C06BA7000A711B /* UniqUserProfileViewController.swift */,
@@ -269,6 +274,7 @@
 				51DEF3AE25D46CD400D26C01 /* UINavigationItem+ShowActivityIndicator.swift */,
 				51F1EBE525DD585200236530 /* UIViewController+ShowAlert.swift */,
 				51F1EBE925DD96D700236530 /* UIViewController+PresentPhotoPicker.swift */,
+				51D9663825FA888F001F1BB5 /* UIButton+SetRounded.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -335,7 +341,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Maksim Velich";
 				TargetAttributes = {
 					51247B4C2560A0DA00CAA41B = {
@@ -411,7 +417,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%Build/*}SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#\"${BUILD_DIR%Build/*}SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -426,6 +432,7 @@
 				5187ADC525C06BA7000A711B /* UniqUserProfileViewController.swift in Sources */,
 				20FCB50F25B76F9600C083E5 /* UIView+ShowSpinner.swift in Sources */,
 				51208EEA25B6D5F200BE016B /* Constants.swift in Sources */,
+				51D9663925FA888F001F1BB5 /* UIButton+SetRounded.swift in Sources */,
 				513C161C2561F1FD00092875 /* SignInViewController.swift in Sources */,
 				511B285025BB5C5400D88A2B /* LeftAlignmentFlowLayout.swift in Sources */,
 				51247B512560A0DA00CAA41B /* AppDelegate.swift in Sources */,
@@ -435,6 +442,7 @@
 				5187ADC125BD86C8000A711B /* FriendSearchTableViewCell.swift in Sources */,
 				51F2E204256C783E004471D7 /* AddFriendsViewController.swift in Sources */,
 				51C318042576591E000AD65E /* UIImageView+SetRounded.swift in Sources */,
+				51F1EBF025DDA3B400236530 /* MapViewController.swift in Sources */,
 				511BE77C257BC62800F30A08 /* EditProfileViewController.swift in Sources */,
 				511BE75B257B23B200F30A08 /* UserPhoto.swift in Sources */,
 				51BAF8B12564064E004EAAEE /* TapeViewController.swift in Sources */,
@@ -518,6 +526,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -578,6 +587,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -609,7 +619,7 @@
 		51247B6D2560A0E400CAA41B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = InstagrammPhoto/InstagrammPhotoDebug.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -631,7 +641,7 @@
 		51247B6E2560A0E400CAA41B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = InstagrammPhoto/InstagrammPhoto.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CJGS93RU2;
@@ -731,7 +741,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = exactVersion;
-				version = 7.4.0;
+				version = 7.8.0;
 			};
 		};
 		51E2470525B863FC00129C59 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {

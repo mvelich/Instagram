@@ -42,6 +42,23 @@ class UniqUserProfileViewController: UIViewController {
         photoGridCollectionView.collectionViewLayout = LeftAlignmentFlowLayout(minimumInteritemSpacing: 2, minimumLineSpacing: 2)
     }
     
+    @IBAction func followButtonPressed(_ sender: UIButton) {
+        self.showAlert(title: "Feature will be added in next releases!", message: "Click Ok! to close popup", alertStyle: .alert, actionTitles: ["Ok!"], actionStyles: [.default], actions: [
+            {_ in
+                self.dismiss(animated: true, completion: nil)
+            }
+        ])
+    }
+    
+    @IBAction func messageButtonPressed(_ sender: UIButton) {
+        self.showAlert(title: "Feature will be added in next releases!", message: "Click Ok! to close popup", alertStyle: .alert, actionTitles: ["Ok!"], actionStyles: [.default], actions: [
+            {_ in
+                self.dismiss(animated: true, completion: nil)
+            }
+        ])
+    }
+    
+    
     func setInitialUserData() {
         navigationItem.title = userName
         userStatusLabel.text = userStatus

@@ -29,12 +29,13 @@ class TapeViewController: UIViewController {
         super.viewDidLoad()
         tapeTableView.dataSource = self
         tapeTableView.delegate = self
-        setInitialPhotoTapeData()
         setInitialUserTapeData()
+        setInitialPhotoTapeData()
         self.view.showSpinner()
     }
     
     @IBAction func reloadTapePressed(_ sender: UIBarButtonItem) {
+        setInitialUserTapeData()
         setInitialPhotoTapeData()
         tapeTableView.scrollToTop(animated: true)
     }
